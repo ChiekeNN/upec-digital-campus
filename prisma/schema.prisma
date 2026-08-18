@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Contact form messages
+model Enquiry {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String?
+  message   String
+  createdAt DateTime @default(now())
+}
+
+// Applications (Expression of Interest + Full Application)
+model Application {
+  id              String   @id @default(cuid())
+  reference       String   @unique
+  applicationType String   // "eoi" or "full"
+  name            String
+  email           String
+  phone           String?
+  programme       String
+  location        String?
+  qualification   String?
+  applicantType   String?
+  documentName    String?
+  message         String?
+  status          String   @default("Submitted")
+  createdAt       DateTime @default(now())
+}
+
+// Users (for later account system)
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         String   @default("student") // student, admin, finance, lecturer
+  verified     Boolean  @default(false)
+  createdAt    DateTime @default(now())
+}
