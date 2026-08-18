@@ -55,18 +55,21 @@ const mandate = [
 
 const leadership = [
   {
-    name: "Director's Profile",
-    role: "Director, UPEC",
-    note: "To be updated by UPEC",
+    name: "Dr Henry O. Wobo, B.Sc, M.Sc, ACA, ACTI, PhD",
+    role: "Director",
+    image: "/director.jpeg",
+    note: "University of Port Harcourt Entrepreneurial Centre",
   },
   {
     name: "Deputy Director",
     role: "Deputy Director, UPEC",
+    image: "",
     note: "To be updated by UPEC",
   },
   {
     name: "Programme Coordinator",
     role: "Academic & Programmes",
+    image: "",
     note: "To be updated by UPEC",
   },
 ];
@@ -254,8 +257,8 @@ export default function AboutPage() {
               The people behind UPEC.
             </h2>
             <p className="mt-5 text-base leading-8 text-slate-600">
-              Official leadership profiles and photographs will be published
-              here once provided by UPEC.
+              Meet the leadership driving entrepreneurship and innovation at
+              UPEC.
             </p>
           </div>
 
@@ -263,20 +266,36 @@ export default function AboutPage() {
             {leadership.map((person) => (
               <div
                 key={person.role}
-                className="rounded-3xl border border-slate-100 bg-white p-7 text-center"
+                className="overflow-hidden rounded-3xl border border-slate-100 bg-white text-center shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
               >
-                <div className="mx-auto grid h-24 w-24 place-items-center rounded-full bg-[#e3f2ff] text-3xl font-black text-[#003b73]">
-                  {person.name.charAt(0)}
+                {person.image ? (
+                  <div className="relative aspect-square w-full overflow-hidden border-b-4 border-[#003b73] bg-[#e3f2ff]">
+                    <Image
+                      src={person.image}
+                      alt={person.name}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover object-top"
+                    />
+                  </div>
+                ) : (
+                  <div className="grid aspect-square w-full place-items-center border-b-4 border-[#003b73] bg-[#e3f2ff] text-6xl font-black text-[#003b73]">
+                    {person.name.charAt(0)}
+                  </div>
+                )}
+                <div className="p-6">
+                  <h3 className="text-base font-black leading-6 text-[#003b73]">
+                    {person.name}
+                  </h3>
+                  <p className="mt-2 text-sm font-semibold text-[#0070c9]">
+                    {person.role}
+                  </p>
+                  {person.note && (
+                    <p className="mt-3 text-xs font-semibold uppercase tracking-wide text-slate-400">
+                      {person.note}
+                    </p>
+                  )}
                 </div>
-                <h3 className="mt-5 text-lg font-black text-[#003b73]">
-                  {person.name}
-                </h3>
-                <p className="mt-1 text-sm font-semibold text-[#0070c9]">
-                  {person.role}
-                </p>
-                <p className="mt-3 text-xs font-semibold uppercase tracking-wide text-slate-400">
-                  {person.note}
-                </p>
               </div>
             ))}
           </div>

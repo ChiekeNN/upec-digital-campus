@@ -41,7 +41,7 @@ export const programmes = [
     description:
       "Build practical digital-business skills, sell online, understand customer acquisition and grow an enterprise with confidence.",
     image:
-      "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1674027392857-9aed6e8ecab9?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     outcomes: [
       "Understand digital business models and online markets",
       "Set up and manage an e-commerce presence",
@@ -67,7 +67,7 @@ export const programmes = [
     description:
       "Learn how to manage cash flow, keep proper business records, price products and make informed financial decisions.",
     image:
-      "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1664575602276-acd073f104c1?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     outcomes: [
       "Keep accurate and simple business records",
       "Understand cash flow and profit",
@@ -93,7 +93,7 @@ export const programmes = [
     description:
       "Turn agricultural opportunities into sustainable ventures through practical planning, market research and business strategy.",
     image:
-      "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1600150806193-cf869bcfee05?q=80&w=1331&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     outcomes: [
       "Identify viable agribusiness opportunities",
       "Conduct simple market research",
@@ -119,7 +119,7 @@ export const programmes = [
     description:
       "Use artificial intelligence and digital tools to improve productivity, marketing, research and business operations.",
     image:
-      "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1115&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     outcomes: [
       "Use AI tools to save time and improve output",
       "Apply digital tools to marketing and research",

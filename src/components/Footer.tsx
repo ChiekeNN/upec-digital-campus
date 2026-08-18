@@ -51,14 +51,16 @@ export default function Footer() {
         <div className="grid gap-12 lg:grid-cols-[1.25fr_0.8fr_0.8fr_1fr]">
           <div>
             <div className="flex items-center gap-3">
-              <div className="grid h-12 w-12 place-items-center rounded-xl bg-white text-base font-black text-[#003b73]">
-                U
-              </div>
+              <img
+                src="/uniport-logo.png"
+                alt="UNIPORT UPEC Logo"
+                className="h-11 w-11 object-contain"
+              />
 
               <div>
                 <p className="font-bold">{siteConfig.shortName}</p>
                 <p className="text-xs text-blue-200">
-                  University of Port Harcourt
+                  University of Port Harcourt Entrepreneurial Centre
                 </p>
               </div>
             </div>

@@ -114,7 +114,7 @@ export default function IncubationPage() {
 
           <div className="relative min-h-[360px] overflow-hidden rounded-[2rem] border border-white/15 shadow-2xl">
             <Image
-              src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1400&q=85"
+              src="https://images.unsplash.com/photo-1633114127451-558041183c3b?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="Entrepreneurs collaborating on a startup idea"
               fill
               priority

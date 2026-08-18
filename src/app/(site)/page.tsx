@@ -94,7 +94,7 @@ export default function Home() {
           <div className="relative mx-auto w-full max-w-xl">
             <div className="relative min-h-[460px] overflow-hidden rounded-[2rem] border border-white/15 bg-white/10 p-3 shadow-2xl backdrop-blur-sm">
               <Image
-                src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1400&q=90"
+                src="https://images.unsplash.com/photo-1653565685060-e15e492a7fda?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="Young professionals collaborating during an entrepreneurship training session"
                 fill
                 priority
@@ -153,7 +153,7 @@ export default function Home() {
         <div className="mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-2 lg:items-center">
           <div className="relative min-h-[430px] overflow-hidden rounded-[2rem] bg-slate-200 shadow-xl">
             <Image
-              src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1400&q=85"
+              src="https://images.unsplash.com/photo-1739292774739-ee38cd9a5735?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="Students collaborating during a learning session"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
@@ -487,7 +487,7 @@ export default function Home() {
 
           <div className="relative min-h-[520px] overflow-hidden rounded-[2rem] bg-[#003b73]">
             <Image
-              src="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1400&q=85"
+              src="https://images.unsplash.com/photo-1653565685009-8ccebd8ecec1?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="Entrepreneurs discussing ideas in a collaborative workspace"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"

@@ -40,16 +40,18 @@ export default function Header() {
             className="flex items-center gap-3"
             onClick={closeMenu}
           >
-            <div className="grid h-11 w-11 place-items-center rounded-xl bg-[#003b73] text-sm font-black tracking-tight text-white shadow-lg shadow-blue-900/20">
-              U
-            </div>
+            <img
+              src="/uniport-logo.png"
+              alt="UNIPORT UPEC Logo"
+              className="h-11 w-11 object-contain"
+            />
 
-            <div>
-              <p className="text-sm font-extrabold tracking-tight text-[#003b73]">
-                {siteConfig.shortName}
+            <div className="leading-tight">
+              <p className="whitespace-nowrap text-center text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-500">
+                University of Port Harcourt
               </p>
-              <p className="max-w-44 text-[10px] font-semibold uppercase leading-tight tracking-[0.13em] text-slate-500">
-                UNIPORT Entrepreneurial Centre
+              <p className="whitespace-nowrap text-center text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-500">
+                Entrepreneurial Centre
               </p>
             </div>
           </Link>
