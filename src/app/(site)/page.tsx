@@ -121,13 +121,6 @@ export default function Home() {
                 </div>
               </div>
             </div>
-
-            <div className="absolute -bottom-7 -left-3 rounded-2xl border border-slate-100 bg-white p-4 text-[#003b73] shadow-xl sm:-left-10">
-              <p className="text-2xl font-black">100%</p>
-              <p className="text-xs font-bold text-slate-500">
-                UPEC-focused learning journey
-              </p>
-            </div>
           </div>
         </div>
       </section>
