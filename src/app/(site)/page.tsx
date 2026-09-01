@@ -18,7 +18,12 @@ import {
   Users,
 } from "lucide-react";
 
-import { events, programmes, successStories } from "@/data/site";
+import {
+  events,
+  programmes,
+  successStories,
+  postgraduateInfo,
+} from "@/data/site";
 
 const impactStats = [
   { value: "10,000+", label: "Future-ready learners to serve" },
@@ -208,6 +213,50 @@ export default function Home() {
               Learn More About UPEC
               <ArrowRight size={18} />
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* POSTGRADUATE HIGHLIGHT */}
+      <section className="bg-white pt-20 sm:pt-28">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+          <div className="relative overflow-hidden rounded-[2.5rem] bg-[#003b73] p-10 text-white sm:p-14">
+            <div className="relative z-10 max-w-2xl">
+              <span className="inline-flex items-center gap-2 rounded-full bg-[#f7b733] px-4 py-2 text-xs font-black uppercase tracking-[0.13em] text-[#003b73]">
+                🎓 {postgraduateInfo.session}
+              </span>
+              <h2 className="mt-6 text-3xl font-black leading-tight tracking-tight sm:text-4xl">
+                Postgraduate Programmes in Entrepreneurship
+              </h2>
+              <p className="mt-5 text-base leading-8 text-blue-100">
+                Applications are now open for the Master of Science (M.Sc) and
+                Postgraduate Diploma (PGD) in Entrepreneurship at the University
+                of Port Harcourt Entrepreneurial Centre.
+              </p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <Link
+                  href="/programmes"
+                  className="btn-primary bg-[#f7b733] text-[#003b73] hover:bg-white"
+                >
+                  View Requirements
+                  <ArrowRight size={18} />
+                </Link>
+                <a
+                  href={postgraduateInfo.onlineLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-outline"
+                >
+                  Register Online
+                  <ArrowUpRight size={18} />
+                </a>
+              </div>
+            </div>
+
+            <GraduationCap
+              className="absolute -right-6 -bottom-6 text-white/5"
+              size={220}
+            />
           </div>
         </div>
       </section>
