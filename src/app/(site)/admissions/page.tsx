@@ -172,7 +172,7 @@ export default function AdmissionsPage() {
                 <ArrowRight size={18} />
               </Link>
             </div>
-         
+          </div>
         </div>
       </section>
 
