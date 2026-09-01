@@ -3,17 +3,25 @@ import Link from "next/link";
 import {
   ArrowRight,
   BadgeCheck,
+  Building2,
+  Calendar,
+  CheckCircle2,
   Clock,
+  CreditCard,
   GraduationCap,
   Layers,
   MonitorPlay,
 } from "lucide-react";
-import { programmes } from "@/data/site";
+import {
+  programmes,
+  postgraduateProgrammes,
+  postgraduateInfo,
+} from "@/data/site";
 
 export const metadata = {
   title: "Programmes | University of Port Harcourt Entrepreneurial Centre",
   description:
-    "Explore UPEC's professional, vocational, executive and enterprise programmes designed for practical learning and measurable outcomes.",
+    "Explore UPEC's professional, vocational, executive, postgraduate and enterprise programmes designed for practical learning and measurable outcomes.",
 };
 
 const highlights = [
@@ -29,8 +37,8 @@ const highlights = [
   },
   {
     icon: GraduationCap,
-    title: "Certificates",
-    text: "Earn certificates for eligible completed programmes.",
+    title: "Certificates & Degrees",
+    text: "Earn certificates and postgraduate qualifications.",
   },
 ];
 
@@ -50,8 +58,9 @@ export default function ProgrammesPage() {
           </h1>
 
           <p className="mt-6 max-w-2xl text-base leading-8 text-blue-100 sm:text-lg">
-            Professional, vocational, executive and enterprise programmes built
-            for practical learning, real skills and measurable outcomes.
+            Professional, vocational, executive, postgraduate and enterprise
+            programmes built for practical learning, real skills and measurable
+            outcomes.
           </p>
         </div>
       </section>
@@ -84,7 +93,7 @@ export default function ProgrammesPage() {
           <div className="max-w-2xl">
             <span className="section-label">
               <Layers size={15} />
-              All Programmes
+              Short & Professional Courses
             </span>
             <h2 className="mt-5 text-3xl font-black tracking-tight text-[#003b73] sm:text-4xl">
               Find the right programme for you.
@@ -149,9 +158,156 @@ export default function ProgrammesPage() {
           </div>
 
           <p className="mt-8 text-center text-xs leading-5 text-slate-400">
-            Programme titles, durations and fees displayed here are editable
+            Short-course titles, durations and fees displayed here are editable
             sample content pending official UPEC approval.
           </p>
+        </div>
+      </section>
+
+      {/* POSTGRADUATE PROGRAMMES */}
+      <section className="bg-white py-20 sm:py-28">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+          <div className="max-w-3xl">
+            <span className="section-label">
+              <GraduationCap size={15} />
+              Postgraduate Programmes
+            </span>
+            <h2 className="mt-5 text-3xl font-black tracking-tight text-[#003b73] sm:text-4xl">
+              Advance your career with a postgraduate degree.
+            </h2>
+            <p className="mt-4 inline-flex items-center gap-2 rounded-full bg-amber-50 px-4 py-2 text-sm font-black text-amber-700">
+              🎓 {postgraduateInfo.session}
+            </p>
+            <p className="mt-5 text-base leading-8 text-slate-600">
+              Applications are invited from suitably qualified candidates for
+              admission into Postgraduate Degrees such as the Master of Science
+              (M.Sc) and Postgraduate Diploma (PGD) in Entrepreneurship at the
+              University of Port Harcourt Entrepreneurial Centre.
+            </p>
+          </div>
+
+          {/* Programme cards */}
+          <div className="mt-12 grid gap-6 lg:grid-cols-2">
+            {postgraduateProgrammes.map((prog) => (
+              <div
+                key={prog.title}
+                className="flex flex-col rounded-3xl border border-blue-100 bg-[#f7fbff] p-8"
+              >
+                <div className="grid h-12 w-12 place-items-center rounded-xl bg-[#003b73] text-white">
+                  <GraduationCap size={24} />
+                </div>
+                <h3 className="mt-5 text-xl font-black text-[#003b73]">
+                  {prog.title}
+                </h3>
+
+                <div className="mt-4 flex items-start gap-2 rounded-xl bg-white p-3 text-sm">
+                  <Calendar
+                    size={18}
+                    className="mt-0.5 shrink-0 text-[#0070c9]"
+                  />
+                  <span className="font-semibold text-slate-700">
+                    {prog.duration}
+                  </span>
+                </div>
+
+                <p className="mt-6 text-xs font-black uppercase tracking-wide text-slate-400">
+                  Admission Requirements
+                </p>
+                <div className="mt-3 space-y-3">
+                  {prog.requirements.map((req) => (
+                    <div key={req} className="flex gap-2">
+                      <CheckCircle2
+                        size={18}
+                        className="mt-0.5 shrink-0 text-[#0070c9]"
+                      />
+                      <p className="text-sm leading-6 text-slate-600">{req}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Application & Payment info */}
+          <div className="mt-8 grid gap-6 lg:grid-cols-2">
+            {/* How to apply */}
+            <div className="rounded-3xl border border-slate-100 bg-white p-8 shadow-sm">
+              <div className="flex items-center gap-3">
+                <div className="grid h-11 w-11 place-items-center rounded-xl bg-[#e3f2ff] text-[#003b73]">
+                  <Building2 size={22} />
+                </div>
+                <h3 className="text-lg font-black text-[#003b73]">
+                  Method of Application
+                </h3>
+              </div>
+              <p className="mt-5 text-sm leading-7 text-slate-600">
+                Applicants should apply online via the official registration
+                portal, or visit the University of Port Harcourt Entrepreneurial
+                Centre (UPEC) at the University of Port Harcourt.
+              </p>
+              <a
+                href={postgraduateInfo.onlineLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary mt-6"
+              >
+                Register Online
+                <ArrowRight size={18} />
+              </a>
+              <div className="mt-6 border-t border-slate-100 pt-5 text-sm text-slate-600">
+                <p className="font-bold text-[#003b73]">Enquiries</p>
+                <p className="mt-2">📞 {postgraduateInfo.phones}</p>
+                <p className="mt-1">{postgraduateInfo.registrar}</p>
+                <p className="mt-1">
+                  University of Port Harcourt, Choba, PMB 5323, Port Harcourt.
+                </p>
+              </div>
+            </div>
+
+            {/* Payment */}
+            <div className="rounded-3xl border border-slate-100 bg-white p-8 shadow-sm">
+              <div className="flex items-center gap-3">
+                <div className="grid h-11 w-11 place-items-center rounded-xl bg-[#e3f2ff] text-[#003b73]">
+                  <CreditCard size={22} />
+                </div>
+                <h3 className="text-lg font-black text-[#003b73]">Payments</h3>
+              </div>
+              <p className="mt-5 text-sm leading-7 text-slate-600">
+                A non-refundable application fee of{" "}
+                <span className="font-black text-[#003b73]">
+                  {postgraduateInfo.applicationFee}
+                </span>{" "}
+                should be paid into:
+              </p>
+
+              <div className="mt-5 space-y-3 rounded-2xl bg-[#f7fbff] p-5 text-sm">
+                <div className="flex justify-between gap-4">
+                  <span className="text-slate-500">Bank Name</span>
+                  <span className="text-right font-bold text-[#003b73]">
+                    {postgraduateInfo.bankName}
+                  </span>
+                </div>
+                <div className="flex justify-between gap-4">
+                  <span className="text-slate-500">Account Name</span>
+                  <span className="text-right font-bold text-[#003b73]">
+                    {postgraduateInfo.accountName}
+                  </span>
+                </div>
+                <div className="flex justify-between gap-4">
+                  <span className="text-slate-500">Account Number</span>
+                  <span className="text-right font-bold text-[#003b73]">
+                    {postgraduateInfo.accountNumber}
+                  </span>
+                </div>
+              </div>
+
+              <p className="mt-4 text-xs leading-6 text-slate-500">
+                Narration of transaction should be in the candidate&apos;s name
+                and in favour of UPEC. Payment can also be made online on the
+                website using debit or credit card.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
