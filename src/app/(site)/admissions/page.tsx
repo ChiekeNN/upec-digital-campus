@@ -172,13 +172,7 @@ export default function AdmissionsPage() {
                 <ArrowRight size={18} />
               </Link>
             </div>
-          </div>
-
-          <p className="mt-6 text-center text-xs text-slate-400">
-            Online account creation, document upload and payment will be enabled
-            in an upcoming release. For now, both routes lead to our contact
-            team.
-          </p>
+         
         </div>
       </section>
 
