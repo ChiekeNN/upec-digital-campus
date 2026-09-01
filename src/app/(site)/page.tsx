@@ -101,8 +101,8 @@ export default function Home() {
           <div className="relative mx-auto w-full max-w-xl">
             <div className="relative min-h-[460px] overflow-hidden rounded-[2rem] border border-white/15 bg-white/10 p-3 shadow-2xl backdrop-blur-sm">
               <Image
-                src="https://images.unsplash.com/photo-1573497491208-6b1acb260507?auto=format&fit=crop&w=1400&q=90"
-                alt="Confident African entrepreneur in a professional setting"
+                src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1400&q=90"
+                alt="Young professionals collaborating during an entrepreneurship training session"
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 45vw"
@@ -153,8 +153,8 @@ export default function Home() {
         <div className="mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-2 lg:items-center">
           <div className="relative min-h-[430px] overflow-hidden rounded-[2rem] bg-slate-200 shadow-xl">
             <Image
-              src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1400&q=85"
-              alt="African business professionals collaborating in a meeting"
+              src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1400&q=85"
+              alt="Students collaborating during a learning session"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover"
@@ -546,8 +546,8 @@ export default function Home() {
 
           <div className="relative min-h-[520px] overflow-hidden rounded-[2rem] bg-[#003b73]">
             <Image
-              src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1400&q=85"
-              alt="Young African entrepreneurs collaborating on a startup"
+              src="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1400&q=85"
+              alt="Entrepreneurs discussing ideas in a collaborative workspace"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover opacity-80"
