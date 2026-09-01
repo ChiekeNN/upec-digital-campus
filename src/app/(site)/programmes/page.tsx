@@ -87,83 +87,6 @@ export default function ProgrammesPage() {
         </div>
       </section>
 
-      {/* PROGRAMME GRID */}
-      <section className="bg-[#f7fbff] py-20 sm:py-28">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="max-w-2xl">
-            <span className="section-label">
-              <Layers size={15} />
-              Short & Professional Courses
-            </span>
-            <h2 className="mt-5 text-3xl font-black tracking-tight text-[#003b73] sm:text-4xl">
-              Find the right programme for you.
-            </h2>
-          </div>
-
-          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {programmes.map((programme) => (
-              <article
-                key={programme.slug}
-                className="group flex flex-col overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-sm transition duration-300 hover:-translate-y-2 hover:shadow-xl"
-              >
-                <div className="relative h-52 overflow-hidden">
-                  <Image
-                    src={programme.image}
-                    alt={programme.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover transition duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#003b73]/70 via-transparent to-transparent" />
-                  <span className="absolute bottom-4 left-4 rounded-full bg-white/95 px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.1em] text-[#003b73]">
-                    {programme.category}
-                  </span>
-                </div>
-
-                <div className="flex flex-1 flex-col p-6">
-                  <h3 className="text-lg font-extrabold leading-6 text-[#003b73]">
-                    {programme.title}
-                  </h3>
-
-                  <p className="mt-3 flex-1 text-sm leading-6 text-slate-600">
-                    {programme.description}
-                  </p>
-
-                  <div className="mt-5 flex items-center gap-4 text-xs font-bold text-slate-500">
-                    <span className="flex items-center gap-1.5">
-                      <Clock size={14} />
-                      {programme.duration}
-                    </span>
-                    <span className="flex items-center gap-1.5">
-                      <MonitorPlay size={14} />
-                      {programme.mode}
-                    </span>
-                  </div>
-
-                  <div className="mt-5 flex items-center justify-between border-t border-slate-100 pt-4">
-                    <span className="text-sm font-black text-[#003b73]">
-                      {programme.fee}
-                    </span>
-                    <Link
-                      href={`/programmes/${programme.slug}`}
-                      className="inline-flex items-center gap-2 text-sm font-extrabold text-[#0070c9] hover:text-[#003b73]"
-                    >
-                      View details
-                      <ArrowRight size={16} />
-                    </Link>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-
-          <p className="mt-8 text-center text-xs leading-5 text-slate-400">
-            Short-course titles, durations and fees displayed here are editable
-            sample content pending official UPEC approval.
-          </p>
-        </div>
-      </section>
-
       {/* POSTGRADUATE PROGRAMMES */}
       <section className="bg-white py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
@@ -308,6 +231,83 @@ export default function ProgrammesPage() {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* PROGRAMME GRID */}
+      <section className="bg-[#f7fbff] py-20 sm:py-28">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+          <div className="max-w-2xl">
+            <span className="section-label">
+              <Layers size={15} />
+              Short & Professional Courses
+            </span>
+            <h2 className="mt-5 text-3xl font-black tracking-tight text-[#003b73] sm:text-4xl">
+              Find the right programme for you.
+            </h2>
+          </div>
+
+          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {programmes.map((programme) => (
+              <article
+                key={programme.slug}
+                className="group flex flex-col overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-sm transition duration-300 hover:-translate-y-2 hover:shadow-xl"
+              >
+                <div className="relative h-52 overflow-hidden">
+                  <Image
+                    src={programme.image}
+                    alt={programme.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover transition duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#003b73]/70 via-transparent to-transparent" />
+                  <span className="absolute bottom-4 left-4 rounded-full bg-white/95 px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.1em] text-[#003b73]">
+                    {programme.category}
+                  </span>
+                </div>
+
+                <div className="flex flex-1 flex-col p-6">
+                  <h3 className="text-lg font-extrabold leading-6 text-[#003b73]">
+                    {programme.title}
+                  </h3>
+
+                  <p className="mt-3 flex-1 text-sm leading-6 text-slate-600">
+                    {programme.description}
+                  </p>
+
+                  <div className="mt-5 flex items-center gap-4 text-xs font-bold text-slate-500">
+                    <span className="flex items-center gap-1.5">
+                      <Clock size={14} />
+                      {programme.duration}
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                      <MonitorPlay size={14} />
+                      {programme.mode}
+                    </span>
+                  </div>
+
+                  <div className="mt-5 flex items-center justify-between border-t border-slate-100 pt-4">
+                    <span className="text-sm font-black text-[#003b73]">
+                      {programme.fee}
+                    </span>
+                    <Link
+                      href={`/programmes/${programme.slug}`}
+                      className="inline-flex items-center gap-2 text-sm font-extrabold text-[#0070c9] hover:text-[#003b73]"
+                    >
+                      View details
+                      <ArrowRight size={16} />
+                    </Link>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <p className="mt-8 text-center text-xs leading-5 text-slate-400">
+            Short-course titles, durations and fees displayed here are editable
+            sample content pending official UPEC approval.
+          </p>
         </div>
       </section>
 
