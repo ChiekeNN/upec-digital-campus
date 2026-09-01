@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -6,39 +5,33 @@ import {
   Building2,
   Calendar,
   CheckCircle2,
-  Clock,
   CreditCard,
   GraduationCap,
-  Layers,
   MonitorPlay,
 } from "lucide-react";
-import {
-  programmes,
-  postgraduateProgrammes,
-  postgraduateInfo,
-} from "@/data/site";
+import { postgraduateProgrammes, postgraduateInfo } from "@/data/site";
 
 export const metadata = {
   title: "Programmes | University of Port Harcourt Entrepreneurial Centre",
   description:
-    "Explore UPEC's professional, vocational, executive, postgraduate and enterprise programmes designed for practical learning and measurable outcomes.",
+    "Explore UPEC's postgraduate programmes — Master of Science (M.Sc) and Postgraduate Diploma (PGD) in Entrepreneurship.",
 };
 
 const highlights = [
   {
     icon: MonitorPlay,
     title: "Flexible Learning",
-    text: "Online, physical and hybrid options to fit your schedule.",
+    text: "Full time and part time options to fit your schedule.",
   },
   {
     icon: BadgeCheck,
-    title: "Practical Skills",
-    text: "Learn by doing, with real-world tools and outcomes.",
+    title: "Recognized Degrees",
+    text: "Earn accredited postgraduate qualifications.",
   },
   {
     icon: GraduationCap,
-    title: "Certificates & Degrees",
-    text: "Earn certificates and postgraduate qualifications.",
+    title: "Career Growth",
+    text: "Advance your career and entrepreneurial journey.",
   },
 ];
 
@@ -54,13 +47,12 @@ export default function ProgrammesPage() {
           </span>
 
           <h1 className="mt-6 max-w-4xl text-4xl font-black leading-[1.02] tracking-tight sm:text-6xl">
-            Learn skills that move ideas forward.
+            Advance your career with a postgraduate degree.
           </h1>
 
           <p className="mt-6 max-w-2xl text-base leading-8 text-blue-100 sm:text-lg">
-            Professional, vocational, executive, postgraduate and enterprise
-            programmes built for practical learning, real skills and measurable
-            outcomes.
+            Postgraduate programmes in Entrepreneurship built for practical
+            learning, real skills and measurable outcomes.
           </p>
         </div>
       </section>
@@ -96,7 +88,7 @@ export default function ProgrammesPage() {
               Postgraduate Programmes
             </span>
             <h2 className="mt-5 text-3xl font-black tracking-tight text-[#003b73] sm:text-4xl">
-              Advance your career with a postgraduate degree.
+              Master of Science & Postgraduate Diploma.
             </h2>
             <p className="mt-4 inline-flex items-center gap-2 rounded-full bg-amber-50 px-4 py-2 text-sm font-black text-amber-700">
               🎓 {postgraduateInfo.session}
@@ -153,7 +145,6 @@ export default function ProgrammesPage() {
 
           {/* Application & Payment info */}
           <div className="mt-8 grid gap-6 lg:grid-cols-2">
-            {/* How to apply */}
             <div className="rounded-3xl border border-slate-100 bg-white p-8 shadow-sm">
               <div className="flex items-center gap-3">
                 <div className="grid h-11 w-11 place-items-center rounded-xl bg-[#e3f2ff] text-[#003b73]">
@@ -187,7 +178,6 @@ export default function ProgrammesPage() {
               </div>
             </div>
 
-            {/* Payment */}
             <div className="rounded-3xl border border-slate-100 bg-white p-8 shadow-sm">
               <div className="flex items-center gap-3">
                 <div className="grid h-11 w-11 place-items-center rounded-xl bg-[#e3f2ff] text-[#003b73]">
@@ -234,88 +224,11 @@ export default function ProgrammesPage() {
         </div>
       </section>
 
-      {/* PROGRAMME GRID */}
-      <section className="bg-[#f7fbff] py-20 sm:py-28">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="max-w-2xl">
-            <span className="section-label">
-              <Layers size={15} />
-              Short & Professional Courses
-            </span>
-            <h2 className="mt-5 text-3xl font-black tracking-tight text-[#003b73] sm:text-4xl">
-              Find the right programme for you.
-            </h2>
-          </div>
-
-          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {programmes.map((programme) => (
-              <article
-                key={programme.slug}
-                className="group flex flex-col overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-sm transition duration-300 hover:-translate-y-2 hover:shadow-xl"
-              >
-                <div className="relative h-52 overflow-hidden">
-                  <Image
-                    src={programme.image}
-                    alt={programme.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover transition duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#003b73]/70 via-transparent to-transparent" />
-                  <span className="absolute bottom-4 left-4 rounded-full bg-white/95 px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.1em] text-[#003b73]">
-                    {programme.category}
-                  </span>
-                </div>
-
-                <div className="flex flex-1 flex-col p-6">
-                  <h3 className="text-lg font-extrabold leading-6 text-[#003b73]">
-                    {programme.title}
-                  </h3>
-
-                  <p className="mt-3 flex-1 text-sm leading-6 text-slate-600">
-                    {programme.description}
-                  </p>
-
-                  <div className="mt-5 flex items-center gap-4 text-xs font-bold text-slate-500">
-                    <span className="flex items-center gap-1.5">
-                      <Clock size={14} />
-                      {programme.duration}
-                    </span>
-                    <span className="flex items-center gap-1.5">
-                      <MonitorPlay size={14} />
-                      {programme.mode}
-                    </span>
-                  </div>
-
-                  <div className="mt-5 flex items-center justify-between border-t border-slate-100 pt-4">
-                    <span className="text-sm font-black text-[#003b73]">
-                      {programme.fee}
-                    </span>
-                    <Link
-                      href={`/programmes/${programme.slug}`}
-                      className="inline-flex items-center gap-2 text-sm font-extrabold text-[#0070c9] hover:text-[#003b73]"
-                    >
-                      View details
-                      <ArrowRight size={16} />
-                    </Link>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-
-          <p className="mt-8 text-center text-xs leading-5 text-slate-400">
-            Short-course titles, durations and fees displayed here are editable
-            sample content pending official UPEC approval.
-          </p>
-        </div>
-      </section>
-
       {/* CTA */}
       <section className="bg-[#003b73] py-20 text-white sm:py-24">
         <div className="mx-auto max-w-5xl px-5 text-center sm:px-8">
           <h2 className="text-3xl font-black leading-tight tracking-tight sm:text-5xl">
-            Ready to start learning?
+            Ready to start your postgraduate journey?
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-blue-100">
             Begin your application today and take the next step in your

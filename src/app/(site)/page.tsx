@@ -7,8 +7,10 @@ import {
   BookOpen,
   BriefcaseBusiness,
   Building2,
+  Calendar,
   CalendarDays,
   CheckCircle2,
+  CreditCard,
   GraduationCap,
   Handshake,
   Lightbulb,
@@ -20,8 +22,8 @@ import {
 
 import {
   events,
-  programmes,
   successStories,
+  postgraduateProgrammes,
   postgraduateInfo,
 } from "@/data/site";
 
@@ -99,8 +101,8 @@ export default function Home() {
           <div className="relative mx-auto w-full max-w-xl">
             <div className="relative min-h-[460px] overflow-hidden rounded-[2rem] border border-white/15 bg-white/10 p-3 shadow-2xl backdrop-blur-sm">
               <Image
-                src="https://images.unsplash.com/photo-1653565685060-e15e492a7fda?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="Young professionals collaborating during an entrepreneurship training session"
+                src="https://images.unsplash.com/photo-1573497491208-6b1acb260507?auto=format&fit=crop&w=1400&q=90"
+                alt="Confident African entrepreneur in a professional setting"
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 45vw"
@@ -151,8 +153,8 @@ export default function Home() {
         <div className="mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-2 lg:items-center">
           <div className="relative min-h-[430px] overflow-hidden rounded-[2rem] bg-slate-200 shadow-xl">
             <Image
-              src="https://images.unsplash.com/photo-1739292774739-ee38cd9a5735?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt="Students collaborating during a learning session"
+              src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1400&q=85"
+              alt="African business professionals collaborating in a meeting"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover"
@@ -217,133 +219,148 @@ export default function Home() {
         </div>
       </section>
 
-      {/* POSTGRADUATE HIGHLIGHT */}
-      <section className="bg-white pt-20 sm:pt-28">
+      {/* POSTGRADUATE PROGRAMMES */}
+      <section className="bg-white py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="relative overflow-hidden rounded-[2.5rem] bg-[#003b73] p-10 text-white sm:p-14">
-            <div className="relative z-10 max-w-2xl">
-              <span className="inline-flex items-center gap-2 rounded-full bg-[#f7b733] px-4 py-2 text-xs font-black uppercase tracking-[0.13em] text-[#003b73]">
-                🎓 {postgraduateInfo.session}
-              </span>
-              <h2 className="mt-6 text-3xl font-black leading-tight tracking-tight sm:text-4xl">
-                Postgraduate Programmes in Entrepreneurship
-              </h2>
-              <p className="mt-5 text-base leading-8 text-blue-100">
-                Applications are now open for the Master of Science (M.Sc) and
-                Postgraduate Diploma (PGD) in Entrepreneurship at the University
-                of Port Harcourt Entrepreneurial Centre.
-              </p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Link
-                  href="/programmes"
-                  className="btn-primary bg-[#f7b733] text-[#003b73] hover:bg-white"
-                >
-                  View Requirements
-                  <ArrowRight size={18} />
-                </Link>
-                <a
-                  href={postgraduateInfo.onlineLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-outline"
-                >
-                  Register Online
-                  <ArrowUpRight size={18} />
-                </a>
-              </div>
-            </div>
-
-            <GraduationCap
-              className="absolute -right-6 -bottom-6 text-white/5"
-              size={220}
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* PROGRAMMES */}
-      <section id="programmes" className="bg-white py-20 sm:py-28">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-            <div className="max-w-2xl">
-              <span className="section-label">
-                <GraduationCap size={15} />
-                Explore Programmes
-              </span>
-
-              <h2 className="mt-5 text-4xl font-black tracking-tight text-[#003b73] sm:text-5xl">
-                Learn skills that move ideas forward.
-              </h2>
-
-              <p className="mt-5 text-base leading-8 text-slate-600">
-                Professional, vocational, executive and enterprise programmes
-                designed for practical learning and measurable outcomes.
-              </p>
-            </div>
-
-            <Link
-              href="/programmes"
-              className="inline-flex items-center gap-2 font-bold text-[#003b73] transition hover:gap-3"
-            >
-              View all programmes
-              <ArrowRight size={18} />
-            </Link>
+          <div className="max-w-3xl">
+            <span className="section-label">
+              <GraduationCap size={15} />
+              Postgraduate Programmes
+            </span>
+            <h2 className="mt-5 text-3xl font-black tracking-tight text-[#003b73] sm:text-4xl">
+              Advance your career with a postgraduate degree.
+            </h2>
+            <p className="mt-4 inline-flex items-center gap-2 rounded-full bg-amber-50 px-4 py-2 text-sm font-black text-amber-700">
+              🎓 {postgraduateInfo.session}
+            </p>
+            <p className="mt-5 text-base leading-8 text-slate-600">
+              Applications are invited from suitably qualified candidates for
+              admission into Postgraduate Degrees such as the Master of Science
+              (M.Sc) and Postgraduate Diploma (PGD) in Entrepreneurship at the
+              University of Port Harcourt Entrepreneurial Centre.
+            </p>
           </div>
 
-          <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-            {programmes.map((programme) => (
-              <article
-                key={programme.slug}
-                className="group overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-sm transition duration-300 hover:-translate-y-2 hover:shadow-xl"
+          {/* Programme cards */}
+          <div className="mt-12 grid gap-6 lg:grid-cols-2">
+            {postgraduateProgrammes.map((prog) => (
+              <div
+                key={prog.title}
+                className="flex flex-col rounded-3xl border border-blue-100 bg-[#f7fbff] p-8"
               >
-                <div className="relative h-52 overflow-hidden">
-                  <Image
-                    src={programme.image}
-                    alt={programme.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
-                    className="object-cover transition duration-500 group-hover:scale-110"
+                <div className="grid h-12 w-12 place-items-center rounded-xl bg-[#003b73] text-white">
+                  <GraduationCap size={24} />
+                </div>
+                <h3 className="mt-5 text-xl font-black text-[#003b73]">
+                  {prog.title}
+                </h3>
+
+                <div className="mt-4 flex items-start gap-2 rounded-xl bg-white p-3 text-sm">
+                  <Calendar
+                    size={18}
+                    className="mt-0.5 shrink-0 text-[#0070c9]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#003b73]/70 via-transparent to-transparent" />
-                  <span className="absolute bottom-4 left-4 rounded-full bg-white/95 px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.1em] text-[#003b73]">
-                    {programme.category}
+                  <span className="font-semibold text-slate-700">
+                    {prog.duration}
                   </span>
                 </div>
 
-                <div className="p-6">
-                  <h3 className="text-lg font-extrabold leading-6 text-[#003b73]">
-                    {programme.title}
-                  </h3>
-
-                  <p className="mt-3 text-sm leading-6 text-slate-600">
-                    {programme.description}
-                  </p>
-
-                  <div className="mt-5 flex items-center justify-between border-t border-slate-100 pt-4">
-                    <span className="text-xs font-bold text-slate-500">
-                      {programme.duration}
-                    </span>
-                    <span className="text-sm font-black text-[#003b73]">
-                      {programme.fee}
-                    </span>
-                  </div>
-
-                  <Link
-                    href={`/programmes/${programme.slug}`}
-                    className="mt-5 inline-flex items-center gap-2 text-sm font-extrabold text-[#0070c9] hover:text-[#003b73]"
-                  >
-                    View programme
-                    <ArrowRight size={16} />
-                  </Link>
+                <p className="mt-6 text-xs font-black uppercase tracking-wide text-slate-400">
+                  Admission Requirements
+                </p>
+                <div className="mt-3 space-y-3">
+                  {prog.requirements.map((req) => (
+                    <div key={req} className="flex gap-2">
+                      <CheckCircle2
+                        size={18}
+                        className="mt-0.5 shrink-0 text-[#0070c9]"
+                      />
+                      <p className="text-sm leading-6 text-slate-600">{req}</p>
+                    </div>
+                  ))}
                 </div>
-              </article>
+              </div>
             ))}
           </div>
 
-          <p className="mt-7 text-center text-xs leading-5 text-slate-400">
-            Programme titles, durations and fees displayed here are editable
-            sample content pending official UPEC approval.
-          </p>
+          {/* Application & Payment info */}
+          <div className="mt-8 grid gap-6 lg:grid-cols-2">
+            <div className="rounded-3xl border border-slate-100 bg-white p-8 shadow-sm">
+              <div className="flex items-center gap-3">
+                <div className="grid h-11 w-11 place-items-center rounded-xl bg-[#e3f2ff] text-[#003b73]">
+                  <Building2 size={22} />
+                </div>
+                <h3 className="text-lg font-black text-[#003b73]">
+                  Method of Application
+                </h3>
+              </div>
+              <p className="mt-5 text-sm leading-7 text-slate-600">
+                Applicants should apply online via the official registration
+                portal, or visit the University of Port Harcourt Entrepreneurial
+                Centre (UPEC) at the University of Port Harcourt.
+              </p>
+              <a
+                href={postgraduateInfo.onlineLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary mt-6"
+              >
+                Register Online
+                <ArrowRight size={18} />
+              </a>
+              <div className="mt-6 border-t border-slate-100 pt-5 text-sm text-slate-600">
+                <p className="font-bold text-[#003b73]">Enquiries</p>
+                <p className="mt-2">📞 {postgraduateInfo.phones}</p>
+                <p className="mt-1">{postgraduateInfo.registrar}</p>
+                <p className="mt-1">
+                  University of Port Harcourt, Choba, PMB 5323, Port Harcourt.
+                </p>
+              </div>
+            </div>
+
+            <div className="rounded-3xl border border-slate-100 bg-white p-8 shadow-sm">
+              <div className="flex items-center gap-3">
+                <div className="grid h-11 w-11 place-items-center rounded-xl bg-[#e3f2ff] text-[#003b73]">
+                  <CreditCard size={22} />
+                </div>
+                <h3 className="text-lg font-black text-[#003b73]">Payments</h3>
+              </div>
+              <p className="mt-5 text-sm leading-7 text-slate-600">
+                A non-refundable application fee of{" "}
+                <span className="font-black text-[#003b73]">
+                  {postgraduateInfo.applicationFee}
+                </span>{" "}
+                should be paid into:
+              </p>
+
+              <div className="mt-5 space-y-3 rounded-2xl bg-[#f7fbff] p-5 text-sm">
+                <div className="flex justify-between gap-4">
+                  <span className="text-slate-500">Bank Name</span>
+                  <span className="text-right font-bold text-[#003b73]">
+                    {postgraduateInfo.bankName}
+                  </span>
+                </div>
+                <div className="flex justify-between gap-4">
+                  <span className="text-slate-500">Account Name</span>
+                  <span className="text-right font-bold text-[#003b73]">
+                    {postgraduateInfo.accountName}
+                  </span>
+                </div>
+                <div className="flex justify-between gap-4">
+                  <span className="text-slate-500">Account Number</span>
+                  <span className="text-right font-bold text-[#003b73]">
+                    {postgraduateInfo.accountNumber}
+                  </span>
+                </div>
+              </div>
+
+              <p className="mt-4 text-xs leading-6 text-slate-500">
+                Narration of transaction should be in the candidate&apos;s name
+                and in favour of UPEC. Payment can also be made online on the
+                website using debit or credit card.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -529,8 +546,8 @@ export default function Home() {
 
           <div className="relative min-h-[520px] overflow-hidden rounded-[2rem] bg-[#003b73]">
             <Image
-              src="https://images.unsplash.com/photo-1653565685009-8ccebd8ecec1?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt="Entrepreneurs discussing ideas in a collaborative workspace"
+              src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1400&q=85"
+              alt="Young African entrepreneurs collaborating on a startup"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover opacity-80"
@@ -646,6 +663,11 @@ export default function Home() {
               </figure>
             ))}
           </div>
+
+          <p className="mt-6 text-center text-xs text-slate-400">
+            Testimonials are temporary sample content and will be replaced with
+            verified UPEC learner and entrepreneur success stories.
+          </p>
         </div>
       </section>
 
