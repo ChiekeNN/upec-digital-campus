@@ -101,7 +101,7 @@ export default function Home() {
           <div className="relative mx-auto w-full max-w-xl">
             <div className="relative min-h-[460px] overflow-hidden rounded-[2rem] border border-white/15 bg-white/10 p-3 shadow-2xl backdrop-blur-sm">
               <Image
-                src="https://unsplash.com/photos/a-group-of-men-eating-food-yPvEDY-kMCI"
+                src="https://images.unsplash.com/photo-1562910859-be83f1df7b56?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjV8fGJsYWNrJTIwc3R1ZGVudHMlMjBlbnRyZXByZW5ldXJzfGVufDB8MHwwfHx8Mg%3D%3D"
                 alt="African professionals collaborating during an entrepreneurship session"
                 fill
                 priority
