@@ -137,6 +137,40 @@ export const programmes = [
   },
 ];
 
+export const postgraduateProgrammes = [
+  {
+    title: "Postgraduate Diploma (PGD) in Entrepreneurship",
+    duration: "Full Time: 1 academic session · Part Time: 2 academic sessions",
+    requirements: [
+      "1st degree from University of Port Harcourt or any other recognized university",
+      "HND or its equivalent (with at least an upper credit) and a recognized professional qualification in Entrepreneurship, with at least 5 years working experience in Entrepreneurship or any related organization",
+      "The PGD is a Full Time / Part Time Programme",
+    ],
+  },
+  {
+    title: "Master of Science (M.Sc) in Entrepreneurship",
+    duration:
+      "Full Time: 12–24 calendar months · Part Time: 24–36 calendar months",
+    requirements: [
+      "PGD, or a 1st Degree (not lower than Second Class Lower) in Entrepreneurship or related discipline (e.g. Social Sciences, Management Sciences, Health Sciences, Geography, Town Planning, Engineering, etc.)",
+      "An M.Sc Degree in Entrepreneurship from University of Port Harcourt or any other recognized University",
+      "M.Sc degree in any related discipline with a minimum CGPA of 3.0 on a 5 point scale",
+      "The programme runs on full time / part time basis",
+    ],
+  },
+];
+
+export const postgraduateInfo = {
+  session: "2025/2026 Admission Ongoing",
+  applicationFee: "₦25,000 (non-refundable)",
+  bankName: "U and C Micro Finance Bank",
+  accountName: "Entrepreneurial Centre Uniport",
+  accountNumber: "1100230201",
+  onlineLink: "https://upec.uniportdatacenter.net",
+  registrar: "Mrs Gloria Chindah, Registrar",
+  phones: "08063159233, 08032652508",
+};
+
 export const events = [
   {
     date: "18",
