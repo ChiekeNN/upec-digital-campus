@@ -6,8 +6,8 @@ export const siteConfig = {
 
   // Replace these before public launch with verified official UPEC details.
   email: "admissions@upec.uniport.edu.ng",
-  phone: "+234 800 000 0000",
-  whatsapp: "2348000000000",
+  phone: "+234 806 315 9233",
+  whatsapp: "2348063159233",
   address:
     "Abuja Park, near the Faculty of Management Sciences, University of Port Harcourt, Choba, Rivers State, Nigeria.",
 
