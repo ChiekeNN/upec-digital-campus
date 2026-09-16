@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, CalendarDays, Clock, MapPin } from "lucide-react";
 import { events } from "@/data/site";
+import NewsImage from "@/components/NewsImage";
 
 export const metadata = {
   title: "News & Events | University of Port Harcourt Entrepreneurial Centre",
@@ -39,9 +40,8 @@ export default function EventsPage() {
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="grid gap-0 overflow-hidden rounded-[2rem] border border-blue-100 bg-[#f7fbff] shadow-sm lg:grid-cols-[1.1fr_0.9fr]">
             <div className="relative min-h-[380px] w-full overflow-hidden bg-slate-100">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={encodeURI(featured.image)}
+              <NewsImage
+                src={featured.image}
                 alt={featured.title}
                 className="h-full w-full object-cover"
               />
@@ -112,9 +112,8 @@ export default function EventsPage() {
                 className="group grid overflow-hidden rounded-[1.75rem] border border-blue-100 bg-white shadow-sm transition hover:shadow-xl lg:grid-cols-[380px_1fr]"
               >
                 <div className="relative min-h-[280px] w-full overflow-hidden bg-slate-100">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={encodeURI(event.image)}
+                  <NewsImage
+                    src={event.image}
                     alt={event.title}
                     className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]"
                   />

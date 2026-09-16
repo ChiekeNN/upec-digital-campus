@@ -184,7 +184,7 @@ export const events = [
       "Today, Dr. Henry O. Wobo was appointed the Acting Director of the University of Port Harcourt Entrepreneurial Centre by the 10th Vice Chancellor of the University of Port Harcourt, Professor Prof. Chike Princewill Rewhuamwhu Chike.",
     content: `Today, Dr. Henry O. Wobo was appointed the Acting Director of the University of Port Harcourt Entrepreneurial Centre by the 10th Vice Chancellor of the University of Port Harcourt, Professor, Prof. Chike Princewill Rewhuamwhu Chike.`,
     type: "Appointment",
-    image: "/driector and VC.jpeg",
+    image: "/director-and-vc.jpeg",
   },
   {
     id: 2,
@@ -316,7 +316,7 @@ The visit marks a significant step towards strengthening inter-institutional rel
 
 UPEC appreciates the delegation from Bayelsa Medical University for the visit and looks forward to fruitful engagements and sustainable partnerships between both institutions.`,
     type: "Collaboration",
-    image: "/director and bayelsa director.jpg",
+    image: "/director-and-bayelsa-director.jpg",
   },
   {
     id: 6,

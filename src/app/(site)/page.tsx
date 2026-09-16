@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import NewsImage from "@/components/NewsImage";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -604,9 +605,8 @@ export default function Home() {
                 className="group flex flex-col overflow-hidden rounded-[1.75rem] border border-blue-100 bg-white transition hover:-translate-y-1 hover:shadow-xl"
               >
                 <div className="relative h-56 w-full overflow-hidden bg-slate-100">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={encodeURI(event.image)}
+                  <NewsImage
+                    src={event.image}
                     alt={event.title}
                     className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                   />
@@ -665,9 +665,8 @@ export default function Home() {
                 className="flex gap-4 rounded-2xl border border-blue-100 bg-white p-4 transition hover:shadow-md"
               >
                 <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-xl bg-slate-100">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={encodeURI(event.image)}
+                  <NewsImage
+                    src={event.image}
                     alt={event.title}
                     className="h-full w-full object-cover"
                   />
