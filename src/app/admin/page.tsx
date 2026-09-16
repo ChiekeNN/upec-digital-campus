@@ -117,7 +117,7 @@ export default async function AdminDashboard() {
                 </tr>
               </thead>
               <tbody>
-                {recentApplications.map((app) => (
+                {recentApplications.map((app: any) => (
                   <tr
                     key={app.id}
                     className="border-b border-slate-50 last:border-0"

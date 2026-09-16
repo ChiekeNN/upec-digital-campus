@@ -25,10 +25,10 @@ export default function Header() {
           </p>
 
           <a
-            href={`mailto:${siteConfig.email}`}
+            href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
             className="ml-auto text-blue-100 transition hover:text-white"
           >
-            {siteConfig.email}
+            {siteConfig.phone}
           </a>
         </div>
       </div>
