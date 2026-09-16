@@ -46,3 +46,45 @@ model User {
   verified     Boolean  @default(false)
   createdAt    DateTime @default(now())
 }
+
+// Postgraduate applications (M.Sc / PGD in Entrepreneurship)
+model PostgraduateApplication {
+  id                   String   @id @default(cuid())
+  reference            String   @unique
+  programme            String
+  photo                String?  @db.Text
+  photoName            String?
+  name                 String
+  formerName           String?
+  dateOfBirth          String?
+  placeOfBirth         String?
+  maritalStatus        String?
+  nationality          String?
+  stateOfOrigin        String?
+  homeTown             String?
+  presentEmployment    String?
+  presentAddress       String?
+  phone                String?
+  email                String
+  numberOfChildren     String?
+  nokName              String?
+  nokAddress           String?
+  nokRelationship      String?
+  nokPhone             String?
+  education            Json?
+  cgpa                 String?
+  cgpaScale            String?
+  languageSpoken       String?
+  languageWritten      String?
+  certificateReceived  String?
+  degreeAimedAt        String?
+  areaOfSpecialisation String?
+  researchInterest     String?
+  modeOfStudy          String?
+  hostelRequired       String?
+  sponsorName          String?
+  sponsorAddress       String?
+  referees             Json?
+  status               String   @default("Submitted")
+  createdAt            DateTime @default(now())
+}

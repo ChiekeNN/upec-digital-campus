@@ -279,6 +279,16 @@ export default function Home() {
                     </div>
                   ))}
                 </div>
+
+                <Link
+                  href={`/apply?programme=${
+                    prog.title.includes("M.Sc") ? "msc" : "pgd"
+                  }`}
+                  className="btn-primary mt-7 w-full justify-center"
+                >
+                  Apply Now
+                  <ArrowRight size={18} />
+                </Link>
               </div>
             ))}
           </div>
@@ -299,15 +309,10 @@ export default function Home() {
                 portal, or visit the University of Port Harcourt Entrepreneurial
                 Centre (UPEC) at the University of Port Harcourt.
               </p>
-              <a
-                href={postgraduateInfo.onlineLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary mt-6"
-              >
+              <Link href="/apply?programme=pg" className="btn-primary mt-6">
                 Register Online
                 <ArrowRight size={18} />
-              </a>
+              </Link>
               <div className="mt-6 border-t border-slate-100 pt-5 text-sm text-slate-600">
                 <p className="font-bold text-[#003b73]">Enquiries</p>
                 <p className="mt-2">📞 {postgraduateInfo.phones}</p>
