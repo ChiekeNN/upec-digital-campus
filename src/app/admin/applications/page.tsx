@@ -1,10 +1,10 @@
-import { prisma } from "@/lib/prisma";
+import { postgraduateApplication, prisma } from "@/lib/prisma";
 
 export default async function ApplicationsPage() {
   const applications = await prisma.application.findMany({
     orderBy: { createdAt: "desc" },
   });
-  const pgApplications = await prisma.postgraduateApplication.findMany({
+  const pgApplications = await postgraduateApplication.findMany({
     orderBy: { createdAt: "desc" },
   });
 
@@ -96,17 +96,7 @@ export default async function ApplicationsPage() {
                 </tr>
               </thead>
               <tbody>
-                {pgApplications.map(
-                  (app: {
-                    id: string;
-                    reference: string;
-                    name: string;
-                    email: string;
-                    phone: string | null;
-                    programme: string;
-                    modeOfStudy: string | null;
-                    status: string;
-                  }) => (
+                {pgApplications.map((app) => (
                     <tr
                       key={app.id}
                       className="border-b border-slate-50 last:border-0"
@@ -131,8 +121,7 @@ export default async function ApplicationsPage() {
                         </span>
                       </td>
                     </tr>
-                  ),
-                )}
+                ))}
               </tbody>
             </table>
           </div>

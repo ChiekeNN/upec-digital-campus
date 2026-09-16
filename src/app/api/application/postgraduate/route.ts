@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+import { postgraduateApplication } from "@/lib/prisma";
 
 export async function POST(request: Request) {
   try {
@@ -58,7 +58,7 @@ export async function POST(request: Request) {
 
     const reference = "UPEC-PG-" + Date.now().toString().slice(-6);
 
-    await prisma.postgraduateApplication.create({
+    await postgraduateApplication.create({
       data: {
         reference,
         programme,

@@ -46,6 +46,7 @@ model User {
   verified     Boolean  @default(false)
   createdAt    DateTime @default(now())
 }
+
 // Postgraduate applications (M.Sc / PGD in Entrepreneurship)
 model PostgraduateApplication {
   id                   String   @id @default(cuid())
