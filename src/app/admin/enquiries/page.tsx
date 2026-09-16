@@ -20,7 +20,7 @@ export default async function EnquiriesPage() {
             No enquiries yet.
           </div>
         ) : (
-          enquiries.map((e) => (
+          enquiries.map((e: any) => (
             <div
               key={e.id}
               className="rounded-3xl border border-slate-100 bg-white p-6 shadow-sm"

@@ -35,7 +35,7 @@ export default async function ApplicationsPage() {
                 </tr>
               </thead>
               <tbody>
-                {applications.map((app) => (
+                {applications.map((app: any) => (
                   <tr
                     key={app.id}
                     className="border-b border-slate-50 last:border-0"
@@ -96,7 +96,7 @@ export default async function ApplicationsPage() {
                 </tr>
               </thead>
               <tbody>
-                {pgApplications.map((app) => (
+                {pgApplications.map((app: any) => (
                     <tr
                       key={app.id}
                       className="border-b border-slate-50 last:border-0"

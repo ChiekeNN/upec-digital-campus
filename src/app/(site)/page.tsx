@@ -571,61 +571,115 @@ export default function Home() {
         </div>
       </section>
 
-      {/* EVENTS */}
+      {/* NEWS & EVENTS */}
       <section id="events" className="bg-[#f7fbff] py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="max-w-2xl">
-            <span className="section-label">
-              <CalendarDays size={15} />
-              News & Events
-            </span>
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-2xl">
+              <span className="section-label">
+                <CalendarDays size={15} />
+                News & Events
+              </span>
 
-            <h2 className="mt-5 text-4xl font-black tracking-tight text-[#003b73] sm:text-5xl">
-              Connect, learn and grow with UPEC.
-            </h2>
+              <h2 className="mt-5 text-4xl font-black tracking-tight text-[#003b73] sm:text-5xl">
+                Latest News & Events from UPEC.
+              </h2>
 
-            <p className="mt-5 text-base leading-8 text-slate-600">
-              Discover entrepreneurship workshops, innovation events, startup
-              calls, community programmes and learning opportunities.
-            </p>
+              <p className="mt-5 text-base leading-8 text-slate-600">
+                Stay updated with leadership announcements, strategic partnerships,
+                collaborations, entrepreneurship programmes and innovation activities
+                at the University of Port Harcourt Entrepreneurial Centre.
+              </p>
+            </div>
+            <Link href="/events" className="btn-primary hidden lg:inline-flex">
+              View All News & Events
+              <ArrowRight size={18} />
+            </Link>
           </div>
 
-          <div className="mt-12 grid gap-5 lg:grid-cols-3">
-            {events.map((event) => (
+          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {events.slice(0, 6).map((event) => (
               <article
-                key={event.title}
-                className="group rounded-3xl border border-blue-100 bg-white p-6 transition hover:-translate-y-1 hover:shadow-xl"
+                key={event.id}
+                className="group flex flex-col overflow-hidden rounded-[1.75rem] border border-blue-100 bg-white transition hover:-translate-y-1 hover:shadow-xl"
               >
-                <div className="flex items-start justify-between gap-4">
-                  <div className="grid h-16 w-16 place-items-center rounded-2xl bg-[#003b73] text-center text-white">
-                    <span className="text-xl font-black leading-none">
-                      {event.date}
-                    </span>
-                    <span className="mt-1 text-[10px] font-bold tracking-[0.14em]">
-                      {event.month}
+                <div className="relative h-56 w-full overflow-hidden bg-slate-100">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={encodeURI(event.image)}
+                    alt={event.title}
+                    className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute left-4 top-4 flex items-center gap-2">
+                    <div className="grid h-14 w-14 place-items-center rounded-2xl bg-[#003b73] text-center text-white shadow-lg">
+                      <span className="text-lg font-black leading-none">
+                        {event.date}
+                      </span>
+                      <span className="mt-1 text-[9px] font-bold tracking-[0.14em]">
+                        {event.month}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="absolute right-4 top-4">
+                    <span className="rounded-full bg-white/95 px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.08em] text-[#003b73] shadow">
+                      {event.type}
                     </span>
                   </div>
-
-                  <span className="rounded-full bg-blue-50 px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.08em] text-[#0070c9]">
-                    {event.type}
-                  </span>
                 </div>
 
-                <h3 className="mt-7 text-xl font-black leading-7 text-[#003b73]">
-                  {event.title}
-                </h3>
+                <div className="flex flex-1 flex-col p-6">
+                  <p className="text-xs font-bold uppercase tracking-wide text-[#0070c9]">
+                    {event.fullDate}
+                  </p>
+                  <h3 className="mt-3 line-clamp-3 text-lg font-black leading-6 text-[#003b73]">
+                    {event.title}
+                  </h3>
 
-                <p className="mt-4 text-sm leading-7 text-slate-600">
-                  {event.description}
-                </p>
+                  <p className="mt-3 line-clamp-3 flex-1 text-sm leading-6 text-slate-600">
+                    {event.description}
+                  </p>
 
-                <Link
-                  href="/events"
-                  className="mt-6 inline-flex items-center gap-2 text-sm font-extrabold text-[#0070c9] group-hover:text-[#003b73]"
-                >
-                  Register interest
-                  <ArrowRight size={16} />
-                </Link>
+                  <Link
+                    href="/events"
+                    className="mt-5 inline-flex items-center gap-2 text-sm font-extrabold text-[#0070c9] group-hover:text-[#003b73]"
+                  >
+                    Read more
+                    <ArrowRight size={16} />
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-10 flex justify-center lg:hidden">
+            <Link href="/events" className="btn-primary">
+              View All News & Events
+              <ArrowRight size={18} />
+            </Link>
+          </div>
+
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            {events.slice(6).map((event) => (
+              <article
+                key={event.id}
+                className="flex gap-4 rounded-2xl border border-blue-100 bg-white p-4 transition hover:shadow-md"
+              >
+                <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-xl bg-slate-100">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={encodeURI(event.image)}
+                    alt={event.title}
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="text-[11px] font-bold uppercase tracking-wide text-[#0070c9]">
+                    {event.fullDate} · {event.type}
+                  </p>
+                  <h4 className="mt-1 line-clamp-2 text-sm font-black leading-5 text-[#003b73]">
+                    {event.title}
+                  </h4>
+                </div>
               </article>
             ))}
           </div>
