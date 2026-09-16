@@ -17,7 +17,10 @@ export default function NewsImage({ src, alt, className }: NewsImageProps) {
     <img
       src={imgSrc}
       alt={alt}
-      className={className}
+      // object-top keeps the top of the photo visible: news photos are
+      // mostly portrait phone shots, and object-cover's default
+      // centre position was chopping off the top of the image
+      className={`object-top ${className ?? ""}`.trim()}
       onError={() => {
         if (!failed) {
           setFailed(true);
