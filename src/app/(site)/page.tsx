@@ -101,8 +101,8 @@ export default function Home() {
           <div className="relative mx-auto w-full max-w-xl">
             <div className="relative min-h-[460px] overflow-hidden rounded-[2rem] border border-white/15 bg-white/10 p-3 shadow-2xl backdrop-blur-sm">
               <Image
-                src="https://images.unsplash.com/photo-1562910859-be83f1df7b56?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjV8fGJsYWNrJTIwc3R1ZGVudHMlMjBlbnRyZXByZW5ldXJzfGVufDB8MHwwfHx8Mg%3D%3D"
-                alt="African professionals collaborating during an entrepreneurship session"
+                src="/upec-building.png"
+                alt="The UPEC Entrepreneurial Centre building at the University of Port Harcourt"
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 45vw"
@@ -354,11 +354,6 @@ export default function Home() {
                 </div>
               </div>
 
-              <p className="mt-4 text-xs leading-6 text-slate-500">
-                Narration of transaction should be in the candidate&apos;s name
-                and in favour of UPEC. Payment can also be made online on the
-                website using debit or credit card.
-              </p>
             </div>
           </div>
         </div>
@@ -664,10 +659,6 @@ export default function Home() {
             ))}
           </div>
 
-          <p className="mt-6 text-center text-xs text-slate-400">
-            Testimonials are temporary sample content and will be replaced with
-            verified UPEC learner and entrepreneur success stories.
-          </p>
         </div>
       </section>
 
