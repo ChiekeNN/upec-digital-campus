@@ -379,7 +379,7 @@ The Centre appreciates the TETFund delegation for the visit and looks forward to
 
 The training is designed to equip students with practical entrepreneurial skills and knowledge that can be translated into income-generating opportunities and sustainable business ventures.`,
     type: "Training",
-    image: "/upec-building.png",
+    image: "/upec-liquid-soap-production.jpg",
   },
   {
     id: 9,
