@@ -133,6 +133,55 @@ export default function Home() {
         </div>
       </section>
 
+      {/* DIRECTOR'S WELCOME */}
+      <section className="bg-[#f7fbff] py-16 sm:py-20">
+        <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:px-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+          <div className="relative mx-auto w-full max-w-sm">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-blue-100 bg-[#e3f2ff] shadow-xl">
+              <Image
+                src="/director.jpeg"
+                alt="Dr Henry O. Wobo, Director, University of Port Harcourt Entrepreneurial Centre"
+                fill
+                sizes="(max-width: 1024px) 100vw, 40vw"
+                className="object-cover object-top"
+              />
+            </div>
+            <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-[#f7b733] px-5 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#003b73] shadow-lg">
+              Director&apos;s Welcome
+            </div>
+          </div>
+
+          <div>
+            <span className="section-label">
+              <Handshake size={15} />
+              Welcome Message
+            </span>
+
+            <h2 className="mt-5 text-3xl font-black leading-tight tracking-tight text-[#003b73] sm:text-4xl">
+              A warm welcome from the Director.
+            </h2>
+
+            <p className="mt-6 text-base leading-8 text-slate-600">
+              Welcome to the University of Port Harcourt Entrepreneurial Centre
+              (UPEC) — where ideas become enterprises. It is my privilege to
+              invite students, staff, entrepreneurs and our host communities to
+              learn, build and launch with us, and to turn knowledge into value
+              and innovation into opportunity.
+            </p>
+
+            <div className="mt-7 border-l-4 border-[#f7b733] pl-5">
+              <p className="text-lg font-black leading-7 text-[#003b73]">
+                Dr Henry O. Wobo, B.Sc, M.Sc, ACA, ACTI, PhD
+              </p>
+              <p className="mt-1 text-sm font-bold text-[#0070c9]">Director</p>
+              <p className="mt-1 text-sm leading-6 text-slate-500">
+                University of Port Harcourt Entrepreneurial Centre
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* IMPACT */}
       <section className="border-b border-slate-100 bg-white">
         <div className="mx-auto grid max-w-7xl grid-cols-2 divide-x divide-y divide-slate-100 px-5 sm:grid-cols-4 sm:px-8">
