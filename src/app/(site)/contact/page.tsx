@@ -11,12 +11,6 @@ export const metadata = {
 
 const contactCards = [
   {
-    icon: Mail,
-    label: "Email Us",
-    value: siteConfig.email,
-    href: `mailto:${siteConfig.email}`,
-  },
-  {
     icon: Phone,
     label: "Call Us",
     value: siteConfig.phone,
@@ -54,7 +48,7 @@ export default function ContactPage() {
 
       {/* CONTACT CARDS */}
       <section className="bg-white py-16 sm:py-20">
-        <div className="mx-auto grid max-w-7xl gap-6 px-5 sm:grid-cols-3 sm:px-8">
+        <div className="mx-auto grid max-w-7xl gap-6 px-5 sm:grid-cols-2 sm:px-8">
           {contactCards.map((card) => {
             const Icon = card.icon;
             return (

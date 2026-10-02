@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowUpRight, MapPin, Phone } from "lucide-react";
 import { siteConfig } from "@/data/site";
 
 function FacebookIcon() {
@@ -173,14 +173,6 @@ export default function Footer() {
             </h3>
 
             <div className="mt-5 space-y-4 text-sm leading-6 text-blue-100">
-              <a
-                href={`mailto:${siteConfig.email}`}
-                className="flex gap-3 hover:text-white"
-              >
-                <Mail size={18} className="mt-1 shrink-0 text-[#84c7ff]" />
-                <span>{siteConfig.email}</span>
-              </a>
-
               <a
                 href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
                 className="flex gap-3 hover:text-white"

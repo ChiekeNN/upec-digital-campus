@@ -4,9 +4,8 @@ export const siteConfig = {
   university: "University of Port Harcourt",
   domain: "upec.uniport.edu.ng",
 
-  email: "admissions@upec.uniport.edu.ng",
-  phone: "+234 803 265 2508",
-  whatsapp: "2348032652508",
+  phone: "08063158233",
+  whatsapp: "2348063158233",
   address:
     "Abuja Park, near the Faculty of Management Sciences, University of Port Harcourt, Choba, Rivers State, Nigeria.",
 
@@ -165,7 +164,7 @@ export const postgraduateInfo = {
   accountNumber: "1100230201",
   onlineLink: "https://upec.uniportdatacenter.net",
   registrar: "Mrs Gloria Chindah, Registrar",
-  phones: "+234 803 265 2508",
+  phones: "08063158233",
 };
 
 // News & Events data - 9 items as provided

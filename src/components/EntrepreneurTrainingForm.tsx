@@ -21,6 +21,40 @@ import {
 
 type Status = "idle" | "loading" | "success" | "error";
 
+/* ---------------------------------------------------------------
+   Nigerian date format helpers — DD/MM/YY
+---------------------------------------------------------------- */
+
+/** Formats a JS Date as DD/MM/YYYY (Nigerian / UK style). */
+function toNgDate(date: Date): string {
+  const dd = String(date.getDate()).padStart(2, "0");
+  const mm = String(date.getMonth() + 1).padStart(2, "0");
+  return `${dd}/${mm}/${date.getFullYear()}`;
+}
+
+/** Masks free typing into DD/MM/YY (or DD/MM/YYYY) as the user types. */
+function maskNgDate(input: string, longYear = false): string {
+  const digits = input.replace(/\D/g, "").slice(0, longYear ? 8 : 6);
+  const parts = [digits.slice(0, 2), digits.slice(2, 4), digits.slice(4)];
+  return parts.filter(Boolean).join("/");
+}
+
+/** Validates a DD/MM/YY or DD/MM/YYYY string and checks the day exists. */
+function isValidNgDate(value: string, longYear = false): boolean {
+  const pattern = longYear
+    ? /^(\d{2})\/(\d{2})\/(\d{4})$/
+    : /^(\d{2})\/(\d{2})\/(\d{2})$/;
+  const match = pattern.exec(value);
+  if (!match) return false;
+  const day = Number(match[1]);
+  const month = Number(match[2]);
+  const year = longYear ? Number(match[3]) : 2000 + Number(match[3]);
+  if (month < 1 || month > 12 || day < 1) return false;
+  if (longYear && (year < 1900 || year > new Date().getFullYear() + 10))
+    return false;
+  return day <= new Date(year, month, 0).getDate();
+}
+
 const MAX_PHOTO_BYTES = 2 * 1024 * 1024; // 2MB
 
 const qualifications = [
@@ -150,8 +184,8 @@ export default function EntrepreneurTrainingForm({
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
   const [furtherSupport, setFurtherSupport] = useState("Yes");
   const [declarationName, setDeclarationName] = useState("");
-  const [declarationDate, setDeclarationDate] = useState(
-    () => new Date().toISOString().split("T")[0],
+  const [declarationDate, setDeclarationDate] = useState(() =>
+    toNgDate(new Date()),
   );
   const [declarationChecked, setDeclarationChecked] = useState(false);
 
@@ -223,15 +257,43 @@ export default function EntrepreneurTrainingForm({
       return;
     }
 
-    setStatus("loading");
-    setFeedback("");
-
     const form = e.currentTarget;
     const formData = new FormData(form);
     const fields: Record<string, string> = {};
     formData.forEach((value, key) => {
       fields[key] = String(value);
     });
+
+    // All dates must be valid Nigerian format: DD/MM/YY
+    const dateFields: [string, string, boolean][] = [
+      ["Training Date", fields.trainingDate || "", true],
+      ["Date of Birth", fields.dateOfBirth || "", true],
+      ["Declaration Date", declarationDate || fields.declarationDate || "", true],
+    ];
+    const badDate = dateFields.find(
+      ([, value, longYear]) => !isValidNgDate(value, longYear),
+    );
+    if (!badDate) {
+      // Date of birth must not be in the future
+      const [d, m, y] = (fields.dateOfBirth || "").split("/").map(Number);
+      if (new Date(y, m - 1, d).getTime() > Date.now()) {
+        setStatus("error");
+        setFeedback("Date of Birth cannot be in the future.");
+        return;
+      }
+    }
+    if (badDate) {
+      setStatus("error");
+      setFeedback(
+        `Please enter a valid ${badDate[0]} in ${
+          badDate[2] ? "DD/MM/YYYY" : "DD/MM/YY"
+        } format.`,
+      );
+      return;
+    }
+
+    setStatus("loading");
+    setFeedback("");
 
     const payload = {
       photo,
@@ -644,16 +706,14 @@ export default function EntrepreneurTrainingForm({
                   className="form-input bg-white"
                 />
               </div>
-              <div>
-                <label className="form-label">Date *</label>
-                <input
-                  name="trainingDate"
-                  type="date"
-                  required
-                  defaultValue={new Date().toISOString().split("T")[0]}
-                  className="form-input bg-white"
-                />
-              </div>
+              <NgDateField
+                label="Date"
+                name="trainingDate"
+                required
+                longYear
+                defaultValue={toNgDate(new Date())}
+                className="form-input bg-white"
+              />
               <div>
                 <label className="form-label">Venue *</label>
                 <input
@@ -729,18 +789,13 @@ export default function EntrepreneurTrainingForm({
             <input type="hidden" name="gender" value={gender} required />
           </div>
 
-          <Field
-            label="Date of Birth"
-            name="dateOfBirth"
-            type="date"
-            required
-          />
+          <NgDateField label="Date of Birth" name="dateOfBirth" required longYear />
           <Field
             label="Phone Number"
             name="phone"
             type="tel"
             required
-            placeholder="e.g. +234 803 000 0000"
+            placeholder="e.g. 08012345678"
           />
           <Field
             label="Email Address"
@@ -1147,17 +1202,15 @@ export default function EntrepreneurTrainingForm({
               className="form-input bg-white font-semibold text-[#003b73]"
             />
           </div>
-          <div>
-            <label className="form-label">Date *</label>
-            <input
-              name="declarationDate"
-              type="date"
-              required
-              value={declarationDate}
-              onChange={(e) => setDeclarationDate(e.target.value)}
-              className="form-input bg-white"
-            />
-          </div>
+          <NgDateField
+            label="Date"
+            name="declarationDate"
+            required
+            longYear
+            value={declarationDate}
+            onChange={setDeclarationDate}
+            className="form-input bg-white"
+          />
         </div>
       </section>
 
@@ -1219,6 +1272,75 @@ function SectionTitle({
       {subtitle && (
         <p className="mt-1.5 text-xs leading-5 text-slate-500 sm:text-sm">
           {subtitle}
+        </p>
+      )}
+    </div>
+  );
+}
+
+function NgDateField({
+  label,
+  name,
+  required,
+  value,
+  onChange,
+  defaultValue,
+  full,
+  longYear = false,
+  className = "form-input",
+}: {
+  label: string;
+  name: string;
+  required?: boolean;
+  value?: string;
+  onChange?: (value: string) => void;
+  defaultValue?: string;
+  full?: boolean;
+  /** Use a four-digit year (DD/MM/YYYY) instead of DD/MM/YY. */
+  longYear?: boolean;
+  className?: string;
+}) {
+  const [internal, setInternal] = useState(defaultValue ?? "");
+  const controlled = value !== undefined;
+  const current = controlled ? value : internal;
+  const maxLength = longYear ? 10 : 8;
+  const format = longYear ? "DD/MM/YYYY" : "DD/MM/YY";
+  const invalid =
+    current.length === maxLength && !isValidNgDate(current, longYear);
+
+  function handleChange(raw: string) {
+    const masked = maskNgDate(raw, longYear);
+    if (!controlled) setInternal(masked);
+    onChange?.(masked);
+  }
+
+  return (
+    <div className={full ? "sm:col-span-2" : undefined}>
+      <label className="form-label">
+        {label} {required && "*"}{" "}
+        <span className="text-xs font-semibold text-slate-400">({format})</span>
+      </label>
+      <input
+        name={name}
+        type="text"
+        inputMode="numeric"
+        autoComplete="off"
+        required={required}
+        value={current}
+        onChange={(e) => handleChange(e.target.value)}
+        placeholder={format}
+        maxLength={maxLength}
+        pattern={longYear ? "\d{2}/\d{2}/\d{4}" : "\d{2}/\d{2}/\d{2}"}
+        title={
+          longYear
+            ? "Enter the date as DD/MM/YYYY, e.g. 05/03/1990"
+            : "Enter the date as DD/MM/YY, e.g. 02/10/26"
+        }
+        className={className}
+      />
+      {invalid && (
+        <p className="mt-1 text-xs font-semibold text-red-600">
+          Please enter a valid date in {format} format.
         </p>
       )}
     </div>
