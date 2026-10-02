@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { NOTIFICATION_RECIPIENT, sendApplicationEmail } from "@/lib/mailer";
 
 export async function POST(request: Request) {
   try {
@@ -38,22 +39,44 @@ export async function POST(request: Request) {
       "-" +
       Date.now().toString().slice(-6);
 
-    // Save to database
-    await prisma.application.create({
-      data: {
-        reference,
-        applicationType: applicationType || "eoi",
-        name,
-        email,
-        phone: phone || null,
-        programme,
-        location: location || null,
-        qualification: qualification || null,
-        applicantType: applicantType || null,
-        documentName: documentName || null,
-        message: message || null,
-      },
-    });
+    // Save to database (non-fatal: the email below still goes out if the DB is unavailable)
+    let saved = true;
+    try {
+      await prisma.application.create({
+        data: {
+          reference,
+          applicationType: applicationType || "eoi",
+          name,
+          email,
+          phone: phone || null,
+          programme,
+          location: location || null,
+          qualification: qualification || null,
+          applicantType: applicantType || null,
+          documentName: documentName || null,
+          message: message || null,
+        },
+      });
+    } catch (dbError) {
+      saved = false;
+      console.warn("Database write failed for application:", dbError);
+    }
+
+    // Email the application to chiekenn@gmail.com (see src/lib/mailer.ts)
+    const emailResult = await sendApplicationEmail({ ...data, reference });
+    if (!emailResult.sent) {
+      console.warn(
+        `Application email to ${NOTIFICATION_RECIPIENT} was not sent:`,
+        emailResult.error,
+      );
+    }
+
+    if (!saved && !emailResult.sent) {
+      return NextResponse.json(
+        { success: false, error: "We could not submit your application right now. Please try again shortly." },
+        { status: 500 },
+      );
+    }
 
     return NextResponse.json({
       success: true,

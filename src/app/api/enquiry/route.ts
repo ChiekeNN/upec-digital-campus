@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { NOTIFICATION_RECIPIENT, sendContactEnquiryEmail } from "@/lib/mailer";
 
 export async function POST(request: Request) {
   try {
@@ -21,16 +22,38 @@ export async function POST(request: Request) {
       );
     }
 
-    // Save to database
-    await prisma.enquiry.create({
-      data: {
-        name,
-        email,
-        phone: phone || null,
-        subject: subject || null,
-        message,
-      },
-    });
+    // Save to database (non-fatal: the email below still goes out if the DB is unavailable)
+    let saved = true;
+    try {
+      await prisma.enquiry.create({
+        data: {
+          name,
+          email,
+          phone: phone || null,
+          subject: subject || null,
+          message,
+        },
+      });
+    } catch (dbError) {
+      saved = false;
+      console.warn("Database write failed for contact enquiry:", dbError);
+    }
+
+    // Email the enquiry to chiekenn@gmail.com (see src/lib/mailer.ts)
+    const emailResult = await sendContactEnquiryEmail({ name, email, phone, subject, message });
+    if (!emailResult.sent) {
+      console.warn(
+        `Contact enquiry email to ${NOTIFICATION_RECIPIENT} was not sent:`,
+        emailResult.error,
+      );
+    }
+
+    if (!saved && !emailResult.sent) {
+      return NextResponse.json(
+        { success: false, error: "We could not send your message right now. Please try again shortly." },
+        { status: 500 },
+      );
+    }
 
     return NextResponse.json({
       success: true,
