@@ -1,4 +1,9 @@
+import dns from "node:dns";
 import nodemailer from "nodemailer";
+
+// Prefer IPv4 when resolving SMTP hosts — some hosting environments
+// have no IPv6 route to Gmail (ENETUNREACH on AAAA records).
+dns.setDefaultResultOrder("ipv4first");
 
 /**
  * Recipient for Entrepreneur Training Registration notifications.
@@ -65,8 +70,6 @@ function createTransport() {
     host: process.env.SMTP_HOST || "smtp.gmail.com",
     port: Number(process.env.SMTP_PORT || 465),
     secure: Number(process.env.SMTP_PORT || 465) === 465,
-    // Force IPv4 — some hosting environments have no IPv6 route to Gmail
-    family: 4,
     auth: {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS,
