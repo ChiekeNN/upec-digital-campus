@@ -1,4 +1,5 @@
-import { Mail, MapPin, Phone } from "lucide-react";
+import Link from "next/link";
+import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { siteConfig } from "@/data/site";
 
 function FacebookIcon() {
@@ -77,43 +78,92 @@ export default function Footer() {
             </h3>
             <ul className="mt-5 space-y-3 text-sm text-blue-100">
               <li>
-                <a href="#about" className="hover:text-white">
+                <Link href="/about" className="hover:text-white">
                   About UPEC
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#programmes" className="hover:text-white">
+                <Link href="/programmes" className="hover:text-white">
                   Programmes
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#learn" className="hover:text-white">
-                  Learn Online
-                </a>
+                <Link
+                  href="/entrepreneur-training"
+                  className="font-semibold text-[#f7b733] hover:text-white"
+                >
+                  Entrepreneur Training
+                </Link>
               </li>
               <li>
-                <a href="#incubation" className="hover:text-white">
+                <Link href="/admissions" className="hover:text-white">
+                  Admissions
+                </Link>
+              </li>
+              <li>
+                <Link href="/incubation" className="hover:text-white">
                   Incubation Hub
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#events" className="hover:text-white">
+                <Link href="/events" className="hover:text-white">
                   News & Events
-                </a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="hover:text-white">
+                  Contact
+                </Link>
               </li>
             </ul>
           </div>
 
           <div>
             <h3 className="text-sm font-bold uppercase tracking-[0.16em] text-blue-200">
-              Future Portal
+              Entrepreneur Training
             </h3>
             <ul className="mt-5 space-y-3 text-sm text-blue-100">
-              <li>Online Applications</li>
-              <li>Payments & Receipts</li>
-              <li>Student Dashboard</li>
-              <li>Moodle LMS</li>
-              <li>Certificates</li>
+              <li>
+                <Link
+                  href="/entrepreneur-training#register"
+                  className="inline-flex items-center gap-1 font-semibold text-white hover:text-[#f7b733]"
+                >
+                  Registration Form
+                  <ArrowUpRight size={14} />
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/entrepreneur-training#tracks"
+                  className="hover:text-white"
+                >
+                  Fashion, Shoe Making & Hair Dressing
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/entrepreneur-training#tracks"
+                  className="hover:text-white"
+                >
+                  Catering, Soap & Perfume Production
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/entrepreneur-training#tracks"
+                  className="hover:text-white"
+                >
+                  ICT, Paint Production, Welding & Driving
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/entrepreneur-training#register"
+                  className="hover:text-white"
+                >
+                  Post-Training & Incubation Support
+                </Link>
+              </li>
             </ul>
           </div>
 

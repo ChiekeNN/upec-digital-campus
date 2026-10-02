@@ -26,6 +26,7 @@ function createMockPrisma() {
     application: createMockDelegate(),
     enquiry: createMockDelegate(),
     postgraduateApplication: createMockDelegate(),
+    entrepreneurTrainingRegistration: createMockDelegate(),
     user: createMockDelegate(),
   };
 }
@@ -114,8 +115,69 @@ type PostgraduateApplicationDelegate = {
 /**
  * Typed accessor for the PostgraduateApplication model.
  */
-export const postgraduateApplication = (
-  prisma as unknown as {
-    postgraduateApplication: PostgraduateApplicationDelegate;
-  }
-).postgraduateApplication;
+export const postgraduateApplication =
+  (
+    prisma as unknown as {
+      postgraduateApplication?: PostgraduateApplicationDelegate;
+    }
+  ).postgraduateApplication ?? createMockDelegate();
+
+export type EntrepreneurTrainingRecord = {
+  id: string;
+  reference: string;
+  photo: string | null;
+  photoName: string | null;
+  programmeOrganisation: string | null;
+  trainingTitle: string | null;
+  trainingDate: string | null;
+  venue: string | null;
+  fullName: string;
+  gender: string | null;
+  dateOfBirth: string | null;
+  phone: string | null;
+  email: string;
+  stateOfOrigin: string | null;
+  residentialAddress: string | null;
+  lga: string | null;
+  highestQualification: string | null;
+  occupation: string | null;
+  employmentStatus: string | null;
+  employmentOther: string | null;
+  ownsBusiness: string | null;
+  businessName: string | null;
+  businessType: string | null;
+  yearsInBusiness: string | null;
+  businessLocation: string | null;
+  intendedBusinessType: string | null;
+  trainingInterests: unknown;
+  otherTrainingInterest: string | null;
+  trainingExpectations: string | null;
+  businessChallenge: string | null;
+  furtherSupport: string | null;
+  emergencyName: string | null;
+  emergencyRelationship: string | null;
+  emergencyPhone: string | null;
+  declarationName: string | null;
+  declarationDate: string | null;
+  status: string;
+  createdAt: Date;
+};
+
+type EntrepreneurTrainingDelegate = {
+  create(args: {
+    data: Record<string, unknown>;
+  }): Promise<EntrepreneurTrainingRecord>;
+  findMany(args?: {
+    orderBy?: Record<string, "asc" | "desc">;
+  }): Promise<EntrepreneurTrainingRecord[]>;
+  count(args?: Record<string, unknown>): Promise<number>;
+};
+
+export const entrepreneurTrainingRegistration: EntrepreneurTrainingDelegate =
+  (
+    prisma as unknown as {
+      entrepreneurTrainingRegistration?: EntrepreneurTrainingDelegate;
+    }
+  ).entrepreneurTrainingRegistration ??
+  (createMockDelegate() as unknown as EntrepreneurTrainingDelegate);
+

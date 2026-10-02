@@ -23,6 +23,7 @@ export const navigation = [
   { label: "Home", href: "/" },
   { label: "About UPEC", href: "/about" },
   { label: "Programmes", href: "/programmes" },
+  { label: "Entrepreneur Training", href: "/entrepreneur-training" },
   { label: "Admissions", href: "/admissions" },
   { label: "Incubation Hub", href: "/incubation" },
   { label: "News & Events", href: "/events" },
@@ -410,6 +411,71 @@ He reminded the participants that a skill can become a business, a business can 
 The programme reflects the commitment of the University of Port Harcourt Entrepreneurial Centre to promoting entrepreneurship, innovation, practical skills acquisition, and capacity building, while fostering opportunities that enable individuals to develop their potential and contribute to sustainable economic development.`,
     type: "Empowerment",
     image: "/upec-riwut.jpg",
+  },
+];
+
+export const newsItems = events;
+
+export const entrepreneurTrainingTracks = [
+  {
+    name: "Fashion and Designing",
+    category: "Creative & Garment Hub",
+    description:
+      "Pattern drafting, garment construction, industrial sewing, and fashion business management in UPEC's 100+ machine Fashion Hub.",
+  },
+  {
+    name: "Shoe making",
+    category: "Footwear & Leatherworks",
+    description:
+      "Handcrafted and machine-assisted footwear design, sole finishing, leather sourcing, and commercial footwear branding.",
+  },
+  {
+    name: "Catering",
+    category: "Culinary & Food Enterprise",
+    description:
+      "Commercial catering, pastry & bakery arts, food hygiene standards, event costing, and hospitality management.",
+  },
+  {
+    name: "Driving",
+    category: "Transport & Logistics",
+    description:
+      "Defensive driving, road safety certification, vehicle maintenance basics, and transport/logistics entrepreneurship.",
+  },
+  {
+    name: "Paint Production",
+    category: "Industrial & Chemical Production",
+    description:
+      "Formulation and production of emulsion, gloss, textured, and industrial paints with quality control and packaging.",
+  },
+  {
+    name: "Soap making",
+    category: "Cosmetics & Household Products",
+    description:
+      "Liquid multipurpose soap, bar soap, detergents, disinfectants, and NAFDAC-ready product packaging.",
+  },
+  {
+    name: "ICT",
+    category: "Digital & Technology Skills",
+    description:
+      "Digital literacy, web & software fundamentals, digital marketing, e-commerce operations, and AI productivity tools.",
+  },
+  {
+    name: "Hair Dressing",
+    category: "Beauty & Cosmetology",
+    description:
+      "Modern hair styling, braiding, wig making, salon management, customer retention, and beauty product retail.",
+  },
+  {
+    name: "Welding",
+    category: "Technical & Metal Fabrication",
+    description:
+      "Arc and gas welding, structural metal fabrication, safety workshop practices, and technical contracting.",
+  },
+  {
+    name: "Perfume production",
+    category: "Fragrance & Essential Oils",
+    description:
+      "Oil and spray perfume blending, scent longevity formulation, bottle branding, and high-margin retail strategy.",
   },
 ];
 
