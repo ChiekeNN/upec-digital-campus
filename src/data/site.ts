@@ -24,9 +24,6 @@ export const navigation = [
   { label: "About UPEC", href: "/about" },
   { label: "Programmes", href: "/programmes" },
   { label: "Entrepreneur Training", href: "/entrepreneur-training" },
-  { label: "Admissions", href: "/admissions" },
-  { label: "Incubation Hub", href: "/incubation" },
-  { label: "News & Events", href: "/events" },
   { label: "Contact", href: "/contact" },
 ];
 
