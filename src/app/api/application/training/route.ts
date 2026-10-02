@@ -65,6 +65,7 @@ export async function POST(request: Request) {
 
     const reference = "UPEC-ET-" + Date.now().toString().slice(-6);
 
+    let saved = true;
     try {
       await entrepreneurTrainingRegistration.create({
         data: {
@@ -108,6 +109,7 @@ export async function POST(request: Request) {
         },
       });
     } catch (dbError) {
+      saved = false;
       console.warn(
         "Database write skipped or unavailable for Entrepreneur Training Registration:",
         dbError,
@@ -127,6 +129,16 @@ export async function POST(request: Request) {
           NOTIFICATION_RECIPIENT +
           " was not sent:",
         emailResult.error,
+      );
+    }
+
+    if (!saved && !emailResult.sent) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "We could not submit your registration right now. Please try again shortly.",
+        },
+        { status: 500 },
       );
     }
 

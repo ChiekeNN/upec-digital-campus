@@ -35,9 +35,18 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
-## Email Notifications (Entrepreneur Training Registration)
+## Email Notifications (all website forms)
 
-When a participant submits the **Entrepreneur Training Registration** form, the full registration details (plus the uploaded passport photo) are emailed to **chiekenn@gmail.com** (configurable via `NOTIFICATION_EMAIL`).
+Every form on the site emails its submitted details to **chiekenn@gmail.com** (configurable via `NOTIFICATION_EMAIL`) as soon as the visitor clicks submit:
+
+| Form | Page | API route |
+| --- | --- | --- |
+| Contact enquiry | `/contact` | `/api/enquiry` |
+| Expression of Interest / Programme Application | `/apply` | `/api/application` |
+| Postgraduate Application (passport photo attached) | `/apply` | `/api/application/postgraduate` |
+| Entrepreneur Training Registration (passport photo attached) | `/entrepreneur-training` | `/api/application/training` |
+
+Each email's **Reply-To** is set to the person who filled the form, so you can reply straight from Gmail. The email code lives in `src/lib/mailer.ts`.
 
 To enable email delivery, configure SMTP environment variables (see `.env.example`):
 
@@ -49,4 +58,4 @@ SMTP_USER="your-email@gmail.com"
 SMTP_PASS="your-gmail-app-password"
 ```
 
-For Gmail, create an **App Password** (Google Account → Security → 2-Step Verification → App passwords) and use it as `SMTP_PASS`. The registration is still saved even if email delivery fails, so missing SMTP configuration never blocks a submission.
+For Gmail, create an **App Password** (Google Account → Security → 2-Step Verification → App passwords) and use it as `SMTP_PASS`. Submissions are also saved to the database when one is configured; a submission only fails if **both** the database save and the email delivery fail.
