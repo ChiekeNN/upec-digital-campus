@@ -1,5 +1,9 @@
 import { NextResponse } from "next/server";
 import { entrepreneurTrainingRegistration } from "@/lib/prisma";
+import {
+  NOTIFICATION_RECIPIENT,
+  sendTrainingRegistrationEmail,
+} from "@/lib/mailer";
 
 export async function POST(request: Request) {
   try {
@@ -110,11 +114,32 @@ export async function POST(request: Request) {
       );
     }
 
+    // Email the submitted registration details to the recipient
+    // (chiekenn@gmail.com by default — see src/lib/mailer.ts).
+    const emailResult = await sendTrainingRegistrationEmail({
+      ...data,
+      reference,
+    });
+
+    if (!emailResult.sent) {
+      console.warn(
+        "Entrepreneur Training Registration saved, but email notification to " +
+          NOTIFICATION_RECIPIENT +
+          " was not sent:",
+        emailResult.error,
+      );
+    }
+
     return NextResponse.json({
       success: true,
       reference,
+      emailSent: emailResult.sent,
       message:
-        "Your Entrepreneur Training Registration has been submitted successfully. Please keep or print your registration slip for verification at the training venue.",
+        "Your Entrepreneur Training Registration has been submitted successfully" +
+        (emailResult.sent
+          ? ` and the details have been sent to ${NOTIFICATION_RECIPIENT}. `
+          : ". ") +
+        "Please keep or print your registration slip for verification at the training venue.",
     });
   } catch (error) {
     console.error("Entrepreneur training registration error:", error);

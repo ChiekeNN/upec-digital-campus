@@ -34,3 +34,19 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Email Notifications (Entrepreneur Training Registration)
+
+When a participant submits the **Entrepreneur Training Registration** form, the full registration details (plus the uploaded passport photo) are emailed to **chiekenn@gmail.com** (configurable via `NOTIFICATION_EMAIL`).
+
+To enable email delivery, configure SMTP environment variables (see `.env.example`):
+
+```bash
+NOTIFICATION_EMAIL="chiekenn@gmail.com"
+SMTP_HOST="smtp.gmail.com"
+SMTP_PORT="465"
+SMTP_USER="your-email@gmail.com"
+SMTP_PASS="your-gmail-app-password"
+```
+
+For Gmail, create an **App Password** (Google Account → Security → 2-Step Verification → App passwords) and use it as `SMTP_PASS`. The registration is still saved even if email delivery fails, so missing SMTP configuration never blocks a submission.
