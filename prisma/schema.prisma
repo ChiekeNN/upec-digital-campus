@@ -88,3 +88,46 @@ model PostgraduateApplication {
   status               String   @default("Submitted")
   createdAt            DateTime @default(now())
 }
+
+// Entrepreneur Training Registration Form
+model EntrepreneurTrainingRegistration {
+  id                    String   @id @default(cuid())
+  reference             String   @unique
+  photo                 String?  @db.Text
+  photoName             String?
+  programmeOrganisation String?
+  trainingTitle         String?
+  trainingDate          String?
+  venue                 String?
+  fullName              String
+  gender                String?
+  dateOfBirth           String?
+  phone                 String?
+  email                 String
+  stateOfOrigin         String?
+  residentialAddress    String?
+  lga                   String?
+  highestQualification  String?
+  occupation            String?
+  employmentStatus      String?
+  employmentOther       String?
+  ownsBusiness          String?
+  businessName          String?
+  businessType          String?
+  yearsInBusiness       String?
+  businessLocation      String?
+  intendedBusinessType  String?
+  trainingInterests     Json?
+  otherTrainingInterest String?
+  trainingExpectations  String?
+  businessChallenge     String?
+  furtherSupport        String?
+  emergencyName         String?
+  emergencyRelationship String?
+  emergencyPhone        String?
+  declarationName       String?
+  declarationDate       String?
+  status                String   @default("Registered")
+  createdAt             DateTime @default(now())
+}
+

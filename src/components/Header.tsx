@@ -56,12 +56,12 @@ export default function Header() {
             </div>
           </Link>
 
-          <div className="hidden items-center gap-7 lg:flex">
+          <div className="hidden items-center gap-4 lg:flex xl:gap-6">
             {navigation.map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
-                className={`text-sm font-semibold transition ${
+                className={`whitespace-nowrap text-sm font-semibold transition ${
                   isActive(item.href)
                     ? "text-[#003b73]"
                     : "text-slate-600 hover:text-[#003b73]"

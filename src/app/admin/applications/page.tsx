@@ -1,12 +1,25 @@
-import { postgraduateApplication, prisma } from "@/lib/prisma";
+import {
+  entrepreneurTrainingRegistration,
+  postgraduateApplication,
+  prisma,
+} from "@/lib/prisma";
 
 export default async function ApplicationsPage() {
-  const applications = await prisma.application.findMany({
-    orderBy: { createdAt: "desc" },
-  });
-  const pgApplications = await postgraduateApplication.findMany({
-    orderBy: { createdAt: "desc" },
-  });
+  const applications = await prisma.application
+    .findMany({
+      orderBy: { createdAt: "desc" },
+    })
+    .catch(() => []);
+  const pgApplications = await postgraduateApplication
+    .findMany({
+      orderBy: { createdAt: "desc" },
+    })
+    .catch(() => []);
+  const trainingRegistrations = await entrepreneurTrainingRegistration
+    .findMany({
+      orderBy: { createdAt: "desc" },
+    })
+    .catch(() => []);
 
   return (
     <div className="mt-24 lg:mt-0">
@@ -121,6 +134,65 @@ export default async function ApplicationsPage() {
                         </span>
                       </td>
                     </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+
+      <h2 className="mt-12 text-xl font-black text-[#003b73]">
+        Entrepreneur Training Registrations
+      </h2>
+      <p className="mt-2 text-sm text-slate-500">
+        {trainingRegistrations.length} training registration(s).
+      </p>
+
+      <div className="mt-6 rounded-3xl border border-slate-100 bg-white p-6 shadow-sm">
+        {trainingRegistrations.length === 0 ? (
+          <p className="text-sm text-slate-500">
+            No entrepreneur training registrations yet.
+          </p>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-sm">
+              <thead>
+                <tr className="border-b border-slate-100 text-xs uppercase tracking-wide text-slate-400">
+                  <th className="pb-3 pr-4 font-bold">Reference</th>
+                  <th className="pb-3 pr-4 font-bold">Full Name</th>
+                  <th className="pb-3 pr-4 font-bold">Phone / Email</th>
+                  <th className="pb-3 pr-4 font-bold">Programme / Org</th>
+                  <th className="pb-3 pr-4 font-bold">Training Interests</th>
+                  <th className="pb-3 font-bold">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {trainingRegistrations.map((reg: any) => (
+                  <tr
+                    key={reg.id}
+                    className="border-b border-slate-50 last:border-0"
+                  >
+                    <td className="py-3 pr-4 font-bold text-[#003b73]">
+                      {reg.reference}
+                    </td>
+                    <td className="py-3 pr-4 text-slate-700">{reg.fullName}</td>
+                    <td className="py-3 pr-4 text-slate-600">
+                      {reg.phone || "-"} · {reg.email}
+                    </td>
+                    <td className="py-3 pr-4 text-slate-600">
+                      {reg.programmeOrganisation || reg.trainingTitle || "-"}
+                    </td>
+                    <td className="py-3 pr-4 text-slate-600">
+                      {Array.isArray(reg.trainingInterests)
+                        ? reg.trainingInterests.join(", ")
+                        : "-"}
+                    </td>
+                    <td className="py-3">
+                      <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-bold text-emerald-700">
+                        {reg.status}
+                      </span>
+                    </td>
+                  </tr>
                 ))}
               </tbody>
             </table>
