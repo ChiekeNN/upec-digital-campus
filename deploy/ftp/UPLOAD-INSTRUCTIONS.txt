@@ -1,0 +1,62 @@
+UPEC DIGITAL CAMPUS — FTP-READY PACKAGE
+========================================
+
+Everything inside THIS folder is the complete website. Upload ALL of it
+(including the "api" folder, the ".htaccess" file and this file) to your
+hosting account.
+
+STEP-BY-STEP (FileZilla)
+------------------------
+1. Unzip ftp-deploy.zip. It creates a folder called "ftp-deploy".
+2. Open FileZilla and connect to your hosting account.
+3. LEFT side (your computer): open the unzipped "ftp-deploy" folder.
+4. RIGHT side (your server): open the "public_html" folder.
+   Tip: if public_html already contains an old default page such as
+   index.html, index2.html or cgi-bin placeholders, delete them first so
+   they don't override the new site.
+5. Select EVERYTHING inside ftp-deploy (Edit -> Select All) and drag it
+   into public_html on the right.
+6. IMPORTANT in FileZilla: make sure hidden files are transferred.
+   Server menu -> "Force showing hidden files" (or the .htaccess file
+   will be skipped and pretty pages/404 will not work).
+7. Wait for all transfers to finish, then open your domain in a browser.
+
+WHAT WORKS ON YOUR HOSTING
+--------------------------
+* Every page, photo and the installable app (PWA): YES
+* Contact form (/contact): YES - emailed to chiekenn@gmail.com
+* Apply form - Express Interest / Full Application (/apply): YES
+* Postgraduate Application with passport photo (/apply): YES
+* Entrepreneur Training Registration with photo (/entrepreneur-training): YES
+* Every submission is ALSO saved as a backup file in:
+      public_html/api/_submissions/
+  (blocked from web visitors; check it via FileZilla)
+
+NOT included in this package (as agreed):
+* /admin login and the admin dashboard (need the Node.js server + database)
+
+IF FORMS DON'T DELIVER EMAIL
+----------------------------
+Most shared hosts deliver mail() out of the box. If emails don't arrive:
+1. Check your Spam/Junk folder.
+2. Open api/upec-forms.php in a text editor and fill in the SMTP block
+   near the top (Gmail example below), then re-upload that ONE file:
+
+       const UPEC_SMTP_HOST = 'smtp.gmail.com';
+       const UPEC_SMTP_PORT = 587;
+       const UPEC_SMTP_USER = 'your-email@gmail.com';
+       const UPEC_SMTP_PASS = 'your-gmail-app-password';
+
+   Gmail App Password: Google Account -> Security -> 2-Step Verification
+   -> App passwords.
+
+CHANGE THE NOTIFICATION ADDRESS
+-------------------------------
+Same file (api/upec-forms.php), very first setting:
+    const UPEC_NOTIFICATION_EMAIL = 'chiekenn@gmail.com';
+
+TESTING AFTER UPLOAD
+--------------------
+Submit the Contact form once from your live site. You should see the
+success message instantly and receive the email within a few minutes.
+A backup copy appears in api/_submissions/ either way.

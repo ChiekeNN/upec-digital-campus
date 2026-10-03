@@ -1,0 +1,38 @@
+# UPEC Digital Campus — Apache config for the FTP/static deployment.
+# Upload this file to public_html together with everything else.
+
+Options -Indexes
+DirectoryIndex index.html index.php
+
+# Show the site's own 404 page for missing URLs
+ErrorDocument 404 /404.html
+
+# Block access to hidden files (.htaccess, .env, .git, ...)
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+# Route the form submission URLs to their PHP handlers. The rewrite happens
+# internally ([L] = no redirect), so POST requests stay POST.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^api/enquiry/?$                   api/enquiry.php       [L]
+    RewriteRule ^api/application/?$               api/application.php   [L]
+    RewriteRule ^api/application/postgraduate/?$  api/postgraduate.php  [L]
+    RewriteRule ^api/application/training/?$      api/training.php      [L]
+</IfModule>
+
+# Compress text assets
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml
+</IfModule>
+
+# Browser caching for static assets
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 30 days"
+    ExpiresByType application/javascript "access plus 30 days"
+    ExpiresByType image/jpeg "access plus 30 days"
+    ExpiresByType image/png "access plus 30 days"
+    ExpiresByType image/svg+xml "access plus 30 days"
+</IfModule>
