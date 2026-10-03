@@ -197,7 +197,7 @@ export const events = [
 
 Dear Esteemed Members of Staff,
 
-It gives me great pleasure and a deep sense of responsibility to warmly welcome you all to the University of Port Harcourt Entrepreneurship Centre. I am honoured to assume the responsibility of serving as the Director of this important Centre, and I look forward to working closely with each and every one of you.
+It gives me great pleasure and a deep sense of responsibility to warmly welcome you all to the University of Port Harcourt Entrepreneurship Centre. I am honoured to assume the responsibility of serving as the Ag. Director of this important Centre, and I look forward to working closely with each and every one of you.
 
 I wish to begin by expressing my sincere appreciation to the Vice-Chancellor and Management of the University for the confidence reposed in me by entrusting me with this responsibility. I also appreciate the contributions of previous leadership and members of staff who have worked to establish and advance the vision of the Centre.
 
@@ -226,7 +226,7 @@ Together, let us build a Centre where ideas become enterprises, knowledge become
 Thank you, and God bless you all.
 
 Dr. Henry Wobo
-Director
+Ag. Director
 University of Port Harcourt Entrepreneurship Centre`,
     type: "Leadership",
     image: "/director.jpeg",
@@ -388,13 +388,13 @@ The training is designed to equip students with practical entrepreneurial skills
       "UNIPORT ENTREPRENEURIAL CENTRE IN COLLABORATION WITH RIWUT ON ENTREPRENEURIAL SKILLS ACQUISITION",
     description:
       "UPEC and Rivers Women Unite for Tinubu (RIWUT) hold entrepreneurial skills acquisition programme for women's empowerment and enterprise development.",
-    content: `The University of Port Harcourt Entrepreneurial Centre (UPEC), under the leadership of its Director, Dr. Henry Wobo, in collaboration with Rivers Women Unite for Tinubu (RIWUT), led by Chief Dr. Ashley Igbara, held an entrepreneurial skills acquisition programme today, 9 September 2026, aimed at promoting women's empowerment, enterprise development, and economic inclusion.
+    content: `The University of Port Harcourt Entrepreneurial Centre (UPEC), under the leadership of its Ag. Director, Dr. Henry Wobo, in collaboration with Rivers Women Unite for Tinubu (RIWUT), led by Chief Dr. Ashley Igbara, held an entrepreneurial skills acquisition programme today, 9 September 2026, aimed at promoting women's empowerment, enterprise development, and economic inclusion.
 
 The programme brought together women for practical learning and skills development, providing participants with relevant knowledge and competencies to support self-reliance, enterprise creation, and sustainable livelihoods.
 
 The event was graced by the Vice-Chancellor, University of Port Harcourt, Prof. Chike Princewill, represented by the Deputy Vice-Chancellor (Administration), Prof. Chukwudi Ochi Onyeaso. In his remarks, Prof. Onyeaso conveyed the University's support for initiatives that promote entrepreneurship, practical skills development, and capacity building. He emphasised the importance of equipping individuals, particularly women, with relevant skills that can enhance their economic productivity and contribution to society.
 
-Speaking at the programme, the Director of the University of Port Harcourt Entrepreneurial Centre, Dr. Henry Wobo, congratulated RIWUT for organising the laudable initiative and emphasised that entrepreneurship goes beyond simply starting a business. According to him, entrepreneurship involves identifying opportunities, solving problems, creating value, and building sustainable enterprises.
+Speaking at the programme, the Ag. Director of the University of Port Harcourt Entrepreneurial Centre, Dr. Henry Wobo, congratulated RIWUT for organising the laudable initiative and emphasised that entrepreneurship goes beyond simply starting a business. According to him, entrepreneurship involves identifying opportunities, solving problems, creating value, and building sustainable enterprises.
 
 Dr. Wobo noted that skills acquisition should be complemented by innovation and creativity, financial literacy, digital competence, market knowledge, mentorship, and networking. He further highlighted the role of quality entrepreneurial training in transforming ideas into viable businesses, encouraging participants to learn, practise, and develop confidence in their abilities.
 
