@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { LucideIcon } from "lucide-react";
 
 export type Tab = {
@@ -19,7 +20,30 @@ export default function DepartmentDashboard({
   subtitle: string;
   tabs: Tab[];
 }) {
-  const [active, setActive] = useState(tabs[0]?.id);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const initial = searchParams.get("tab");
+  const [active, setActive] = useState(
+    tabs.some((t) => t.id === initial) ? (initial as string) : tabs[0]?.id,
+  );
+
+  // Sync when URL changes (e.g., sidebar click)
+  useEffect(() => {
+    const t = searchParams.get("tab");
+    if (t && tabs.some((x) => x.id === t) && t !== active) {
+      setActive(t);
+    }
+  }, [searchParams, tabs, active]);
+
+  function handleTab(id: string) {
+    setActive(id);
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("tab", id);
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+  }
+
   const current = tabs.find((t) => t.id === active) ?? tabs[0];
 
   return (
@@ -36,7 +60,7 @@ export default function DepartmentDashboard({
           return (
             <button
               key={tab.id}
-              onClick={() => setActive(tab.id)}
+              onClick={() => handleTab(tab.id)}
               className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold transition ${
                 isActive
                   ? "bg-[#003b73] text-white shadow-sm"
