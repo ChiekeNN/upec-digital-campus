@@ -14,11 +14,11 @@ import CrudManager from "@/components/CrudManager";
 import { BarChart, DonutChart } from "@/components/Charts";
 
 const staffInitial = [
-  { id: 1, name: "Dr. Henry Wobo", role: "Acting Director", status: "Active" },
-  { id: 2, name: "Mrs. Gloria Chindah", role: "Registrar", status: "Active" },
-  { id: 3, name: "Mr. Chidi Okoro", role: "IT Officer", status: "On Leave" },
-  { id: 4, name: "Ms. Amaka Nwosu", role: "Finance Officer", status: "Active" },
-  { id: 5, name: "Mr. Tunde Bakare", role: "Admin Officer", status: "Active" },
+  { id: 1, name: "Dr. Henry Wobo", role: "Acting Director", status: "Active", photo: "https://i.pravatar.cc/80?img=12" },
+  { id: 2, name: "Mrs. Gloria Chindah", role: "Registrar", status: "Active", photo: "https://i.pravatar.cc/80?img=47" },
+  { id: 3, name: "Mr. Chidi Okoro", role: "IT Officer", status: "On Leave", photo: "https://i.pravatar.cc/80?img=33" },
+  { id: 4, name: "Ms. Amaka Nwosu", role: "Finance Officer", status: "Active", photo: "https://i.pravatar.cc/80?img=45" },
+  { id: 5, name: "Mr. Tunde Bakare", role: "Admin Officer", status: "Active", photo: "https://i.pravatar.cc/80?img=59" },
 ];
 
 const leaveInitial = [
@@ -127,6 +127,7 @@ export default function AdministrationDashboard() {
           ]}
           initialRows={staffInitial}
           storageKey="upec_admin_staff"
+          avatarKey="photo"
           resource="admin-staff"
           accent="from-[#003b73] to-[#0070c9]"
           addLabel="Add Staff"
