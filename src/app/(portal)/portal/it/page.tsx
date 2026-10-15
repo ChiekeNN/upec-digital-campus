@@ -24,11 +24,11 @@ const stats = [
 ];
 
 const usersInitial = [
-  { id: 1, name: "Dr. Henry Wobo", email: "director@upecuniport.com.ng", role: "Director", status: "Active" },
-  { id: 2, name: "Mrs. Gloria Chindah", email: "registrar@upecuniport.com.ng", role: "Registrar", status: "Active" },
-  { id: 3, name: "Mr. Chidi Okoro", email: "it@upecuniport.com.ng", role: "IT Admin", status: "Active" },
-  { id: 4, name: "Ms. Amaka Nwosu", email: "finance@upecuniport.com.ng", role: "Finance", status: "Active" },
-  { id: 5, name: "Student Account", email: "student01@upecuniport.com.ng", role: "Student", status: "Suspended" },
+  { id: 1, name: "Dr. Henry Wobo", email: "director@upecuniport.com.ng", role: "Director", status: "Active", photo: "https://i.pravatar.cc/80?img=12" },
+  { id: 2, name: "Mrs. Gloria Chindah", email: "registrar@upecuniport.com.ng", role: "Registrar", status: "Active", photo: "https://i.pravatar.cc/80?img=47" },
+  { id: 3, name: "Mr. Chidi Okoro", email: "it@upecuniport.com.ng", role: "IT Admin", status: "Active", photo: "https://i.pravatar.cc/80?img=33" },
+  { id: 4, name: "Ms. Amaka Nwosu", email: "finance@upecuniport.com.ng", role: "Finance", status: "Active", photo: "https://i.pravatar.cc/80?img=45" },
+  { id: 5, name: "Student Account", email: "student01@upecuniport.com.ng", role: "Student", status: "Suspended", photo: "https://i.pravatar.cc/80?img=59" },
 ];
 
 const contentInitial = [
@@ -137,6 +137,7 @@ export default function ItDashboard() {
           ]}
           initialRows={usersInitial}
           storageKey="upec_it_users"
+          avatarKey="photo"
           resource="it-users"
           accent="from-[#003b73] to-[#0070c9]"
           addLabel="Add User"
