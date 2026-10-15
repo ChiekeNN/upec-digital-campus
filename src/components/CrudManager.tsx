@@ -181,6 +181,10 @@ export default function CrudManager({
   }
 
   async function saveForm() {
+    if (avatarKey && !form[avatarKey]) {
+      setToast({ msg: "Please upload a photo before saving.", kind: "error" });
+      return;
+    }
     setSaving(true);
     try {
       if (modal === "add") {
@@ -460,6 +464,36 @@ export default function CrudManager({
             </div>
 
             <div className="mt-5 space-y-4">
+              {avatarKey && (
+                <div>
+                  <label className="form-label">Photo (required)</label>
+                  <div className="flex items-center gap-4">
+                    <img
+                      src={form[avatarKey] || "https://i.pravatar.cc/80?u=new"}
+                      alt="Preview"
+                      className="h-16 w-16 rounded-full object-cover ring-2 ring-slate-200"
+                    />
+                    <label className="cursor-pointer rounded-xl border border-dashed border-[#0070c9] bg-blue-50 px-4 py-2.5 text-sm font-bold text-[#0070c9] transition hover:bg-blue-100">
+                      Upload photo
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (!file) return;
+                          const reader = new FileReader();
+                          reader.onload = () => setForm((f) => ({ ...f, [avatarKey]: reader.result as string }));
+                          reader.readAsDataURL(file);
+                        }}
+                      />
+                    </label>
+                  </div>
+                  {!form[avatarKey] && (
+                    <p className="mt-1 text-xs text-red-500">A photo is required before saving.</p>
+                  )}
+                </div>
+              )}
               {columns.map((c) => (
                 <div key={c.key}>
                   <label className="form-label">{c.label}</label>
