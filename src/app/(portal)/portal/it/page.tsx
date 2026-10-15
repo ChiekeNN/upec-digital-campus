@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import DepartmentDashboard, { Tab } from "@/components/DepartmentDashboard";
 import CrudManager from "@/components/CrudManager";
+import { BarChart, DonutChart } from "@/components/Charts";
 
 const stats = [
   { label: "Registered Users", value: 312, icon: Users, color: "bg-[#003b73]" },
@@ -99,6 +100,23 @@ export default function ItDashboard() {
                 </li>
               ))}
             </ul>
+          </div>
+          <div className="grid gap-5 lg:grid-cols-2">
+            <DonutChart
+              title="Users by Status"
+              data={[
+                { label: "Active", value: 4, color: "#10b981" },
+                { label: "Suspended", value: 1, color: "#ef4444" },
+              ]}
+              centerLabel="5"
+            />
+            <BarChart
+              title="Content Status"
+              data={[
+                { label: "Published", value: 3, color: "#10b981" },
+                { label: "Draft", value: 1, color: "#f7b733" },
+              ]}
+            />
           </div>
         </div>
       ),

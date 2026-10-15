@@ -34,6 +34,9 @@ export default function CrudManager({
   accent = "from-[#003b73] to-[#0070c9]",
   addLabel = "Add New",
   emptyText = "No records yet.",
+  canAdd = true,
+  canEdit = true,
+  canDelete = true,
 }: {
   title?: string;
   subtitle?: string;
@@ -43,6 +46,9 @@ export default function CrudManager({
   accent?: string;
   addLabel?: string;
   emptyText?: string;
+  canAdd?: boolean;
+  canEdit?: boolean;
+  canDelete?: boolean;
 }) {
   const [rows, setRows] = useState<Row[]>(initialRows);
   const [loaded, setLoaded] = useState(false);
@@ -167,12 +173,14 @@ export default function CrudManager({
               >
                 <Download size={16} /> Export
               </button>
-              <button
-                onClick={openAdd}
-                className="inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2 text-sm font-bold text-[#003b73] shadow transition hover:bg-blue-50"
-              >
-                <Plus size={16} /> {addLabel}
-              </button>
+              {canAdd && (
+                <button
+                  onClick={openAdd}
+                  className="inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2 text-sm font-bold text-[#003b73] shadow transition hover:bg-blue-50"
+                >
+                  <Plus size={16} /> {addLabel}
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -242,20 +250,24 @@ export default function CrudManager({
                       >
                         <Eye size={15} />
                       </button>
-                      <button
-                        onClick={() => openEdit(row)}
-                        className="grid h-8 w-8 place-items-center rounded-lg bg-amber-50 text-amber-600 transition hover:bg-amber-500 hover:text-white"
-                        aria-label="Edit"
-                      >
-                        <Pencil size={15} />
-                      </button>
-                      <button
-                        onClick={() => setConfirmDelete(row)}
-                        className="grid h-8 w-8 place-items-center rounded-lg bg-red-50 text-red-600 transition hover:bg-red-500 hover:text-white"
-                        aria-label="Delete"
-                      >
-                        <Trash2 size={15} />
-                      </button>
+                      {canEdit && (
+                        <button
+                          onClick={() => openEdit(row)}
+                          className="grid h-8 w-8 place-items-center rounded-lg bg-amber-50 text-amber-600 transition hover:bg-amber-500 hover:text-white"
+                          aria-label="Edit"
+                        >
+                          <Pencil size={15} />
+                        </button>
+                      )}
+                      {canDelete && (
+                        <button
+                          onClick={() => setConfirmDelete(row)}
+                          className="grid h-8 w-8 place-items-center rounded-lg bg-red-50 text-red-600 transition hover:bg-red-500 hover:text-white"
+                          aria-label="Delete"
+                        >
+                          <Trash2 size={15} />
+                        </button>
+                      )}
                     </div>
                   </td>
                 </tr>

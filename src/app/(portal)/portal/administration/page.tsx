@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import DepartmentDashboard, { Tab } from "@/components/DepartmentDashboard";
 import CrudManager from "@/components/CrudManager";
+import { BarChart, DonutChart } from "@/components/Charts";
 
 const staffInitial = [
   { id: 1, name: "Dr. Henry Wobo", role: "Acting Director", status: "Active" },
@@ -90,6 +91,23 @@ export default function AdministrationDashboard() {
                 </li>
               ))}
             </ul>
+          </div>
+          <div className="grid gap-5 lg:grid-cols-2">
+            <DonutChart
+              title="Staff Status"
+              data={[
+                { label: "Active", value: 4, color: "#10b981" },
+                { label: "On Leave", value: 1, color: "#f7b733" },
+              ]}
+              centerLabel="5"
+            />
+            <BarChart
+              title="Leave Requests"
+              data={[
+                { label: "Approved", value: 1, color: "#10b981" },
+                { label: "Pending", value: 2, color: "#f7b733" },
+              ]}
+            />
           </div>
         </div>
       ),

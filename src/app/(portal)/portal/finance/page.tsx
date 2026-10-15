@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import DepartmentDashboard, { Tab } from "@/components/DepartmentDashboard";
 import CrudManager from "@/components/CrudManager";
+import { BarChart, DonutChart } from "@/components/Charts";
 
 const stats = [
   { label: "Total Revenue", value: "₦4.2M", icon: TrendingUp, color: "bg-[#003b73]" },
@@ -90,6 +91,24 @@ export default function FinanceDashboard() {
                 </li>
               ))}
             </ul>
+          </div>
+          <div className="grid gap-5 lg:grid-cols-2">
+            <BarChart
+              title="Invoice Status"
+              data={[
+                { label: "Paid", value: 2, color: "#10b981" },
+                { label: "Pending", value: 1, color: "#f7b733" },
+                { label: "Overdue", value: 1, color: "#ef4444" },
+              ]}
+            />
+            <DonutChart
+              title="Account Reconciliation"
+              data={[
+                { label: "Reconciled", value: 2, color: "#10b981" },
+                { label: "Pending", value: 1, color: "#f7b733" },
+              ]}
+              centerLabel="3"
+            />
           </div>
         </div>
       ),
