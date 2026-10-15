@@ -11,6 +11,8 @@ import {
   CheckCircle2,
   AlertTriangle,
   Download,
+  Cloud,
+  HardDrive,
 } from "lucide-react";
 
 export type Column = {
@@ -37,6 +39,7 @@ export default function CrudManager({
   canAdd = true,
   canEdit = true,
   canDelete = true,
+  resource,
 }: {
   title?: string;
   subtitle?: string;
@@ -49,36 +52,72 @@ export default function CrudManager({
   canAdd?: boolean;
   canEdit?: boolean;
   canDelete?: boolean;
+  resource?: string;
 }) {
   const [rows, setRows] = useState<Row[]>(initialRows);
   const [loaded, setLoaded] = useState(false);
+  const [apiMode, setApiMode] = useState<boolean>(!!resource);
   const [search, setSearch] = useState("");
   const [modal, setModal] = useState<ModalMode>(null);
   const [active, setActive] = useState<Row | null>(null);
   const [form, setForm] = useState<Row>({});
   const [confirmDelete, setConfirmDelete] = useState<Row | null>(null);
   const [toast, setToast] = useState<{ msg: string; kind: "success" | "error" } | null>(null);
+  const [saving, setSaving] = useState(false);
 
-  // Load from localStorage
+  // Load data
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem(storageKey);
-      if (raw) {
-        const parsed = JSON.parse(raw);
-        if (Array.isArray(parsed)) setRows(parsed);
+    let cancelled = false;
+    async function load() {
+      if (resource) {
+        try {
+          const res = await fetch(`/api/portal/records/${resource}`, { cache: "no-store" });
+          const json = await res.json();
+          if (!cancelled) {
+            if (json?.success && Array.isArray(json.rows)) {
+              if (json.rows.length > 0) setRows(json.rows);
+              else setRows(initialRows);
+              setApiMode(true);
+            } else {
+              // fallback to localStorage
+              loadLocal();
+              setApiMode(false);
+            }
+          }
+        } catch {
+          if (!cancelled) {
+            loadLocal();
+            setApiMode(false);
+          }
+        }
+      } else {
+        loadLocal();
       }
-    } catch {}
-    setLoaded(true);
-  }, [storageKey]);
+      if (!cancelled) setLoaded(true);
+    }
+    function loadLocal() {
+      try {
+        const raw = localStorage.getItem(storageKey);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed) && parsed.length) setRows(parsed);
+        }
+      } catch {}
+    }
+    load();
+    return () => {
+      cancelled = true;
+    };
+  }, [resource, storageKey, initialRows]);
 
-  // Persist
+  // Persist to localStorage (only in local mode or as cache)
   useEffect(() => {
-    if (loaded) {
+    if (loaded && !apiMode) {
       try {
         localStorage.setItem(storageKey, JSON.stringify(rows));
       } catch {}
     }
-  }, [rows, loaded, storageKey]);
+  }, [rows, loaded, storageKey, apiMode]);
 
   useEffect(() => {
     if (!toast) return;
@@ -112,24 +151,76 @@ export default function CrudManager({
     setModal("edit");
   }
 
-  function saveForm() {
-    if (modal === "add") {
-      const newRow = { id: Date.now(), ...form };
-      setRows((prev) => [newRow, ...prev]);
-      setToast({ msg: "Record added successfully.", kind: "success" });
-    } else if (modal === "edit" && active) {
-      setRows((prev) =>
-        prev.map((r) => (r.id === active.id ? { ...r, ...form } : r)),
-      );
-      setToast({ msg: "Record updated successfully.", kind: "success" });
+  async function saveForm() {
+    setSaving(true);
+    try {
+      if (modal === "add") {
+        if (apiMode && resource) {
+          const res = await fetch(`/api/portal/records/${resource}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(form),
+          });
+          const json = await res.json();
+          if (json?.success && json.row) {
+            setRows((prev) => [json.row, ...prev]);
+          } else {
+            const newRow = { id: Date.now(), ...form };
+            setRows((prev) => [newRow, ...prev]);
+            if (!json?.success) setToast({ msg: "Saved locally (DB unavailable).", kind: "error" });
+            else setToast({ msg: "Record added.", kind: "success" });
+            setSaving(false);
+            setModal(null);
+            setActive(null);
+            return;
+          }
+        } else {
+          const newRow = { id: Date.now(), ...form };
+          setRows((prev) => [newRow, ...prev]);
+        }
+        setToast({ msg: "Record added successfully.", kind: "success" });
+      } else if (modal === "edit" && active) {
+        if (apiMode && resource) {
+          const res = await fetch(`/api/portal/records/${resource}/${active.id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(form),
+          });
+          const json = await res.json();
+          if (json?.success && json.row) {
+            setRows((prev) => prev.map((r) => (r.id === active.id ? json.row : r)));
+          } else {
+            setRows((prev) => prev.map((r) => (r.id === active.id ? { ...r, ...form } : r)));
+            setToast({ msg: "Saved locally (DB unavailable).", kind: "error" });
+            setSaving(false);
+            setModal(null);
+            setActive(null);
+            return;
+          }
+        } else {
+          setRows((prev) => prev.map((r) => (r.id === active.id ? { ...r, ...form } : r)));
+        }
+        setToast({ msg: "Record updated successfully.", kind: "success" });
+      }
+    } catch {
+      setToast({ msg: "Save failed.", kind: "error" });
+    } finally {
+      setSaving(false);
+      setModal(null);
+      setActive(null);
     }
-    setModal(null);
-    setActive(null);
   }
 
-  function doDelete(row: Row) {
+  async function doDelete(row: Row) {
+    setSaving(true);
+    try {
+      if (apiMode && resource) {
+        await fetch(`/api/portal/records/${resource}/${row.id}`, { method: "DELETE" });
+      }
+    } catch {}
     setRows((prev) => prev.filter((r) => r.id !== row.id));
     setConfirmDelete(null);
+    setSaving(false);
     setToast({ msg: "Record deleted.", kind: "success" });
   }
 
@@ -152,7 +243,7 @@ export default function CrudManager({
       localStorage.removeItem(storageKey);
     } catch {}
     setRows(initialRows);
-    setToast({ msg: "Data reset to defaults.", kind: "success" });
+    setToast({ msg: "Data reset to defaults (local).", kind: "success" });
   }
 
   const isReadOnly = modal === "view";
@@ -166,7 +257,11 @@ export default function CrudManager({
               <h2 className="text-xl font-black sm:text-2xl">{title}</h2>
               {subtitle && <p className="mt-1 text-sm text-white/80">{subtitle}</p>}
             </div>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1 text-xs font-bold">
+                {apiMode ? <Cloud size={12} /> : <HardDrive size={12} />}
+                {apiMode ? "Database" : "Local demo"}
+              </span>
               <button
                 onClick={exportCsv}
                 className="inline-flex items-center gap-2 rounded-xl bg-white/15 px-4 py-2 text-sm font-bold text-white backdrop-blur transition hover:bg-white/25"
@@ -186,7 +281,6 @@ export default function CrudManager({
         </div>
       )}
 
-      {/* Search + reset */}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="relative flex-1 max-w-md">
           <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
@@ -205,12 +299,11 @@ export default function CrudManager({
             onClick={resetData}
             className="text-xs font-bold text-slate-400 underline-offset-2 hover:text-red-500 hover:underline"
           >
-            Reset to defaults
+            Reset
           </button>
         </div>
       </div>
 
-      {/* Table */}
       <div className="overflow-x-auto rounded-3xl border border-slate-100 bg-white shadow-sm">
         <table className="w-full text-left text-sm">
           <thead>
@@ -277,7 +370,6 @@ export default function CrudManager({
         </table>
       </div>
 
-      {/* View/Edit/Add Modal */}
       {modal && (
         <div className="fixed inset-0 z-[60] grid place-items-center bg-black/50 p-4 backdrop-blur-sm">
           <div className="w-full max-w-lg rounded-3xl bg-white p-6 shadow-2xl sm:p-8">
@@ -343,9 +435,10 @@ export default function CrudManager({
                 </button>
                 <button
                   onClick={saveForm}
-                  className="inline-flex items-center gap-2 rounded-xl bg-[#003b73] px-5 py-2.5 text-sm font-bold text-white shadow transition hover:bg-[#00284f]"
+                  disabled={saving}
+                  className="inline-flex items-center gap-2 rounded-xl bg-[#003b73] px-5 py-2.5 text-sm font-bold text-white shadow transition hover:bg-[#00284f] disabled:opacity-60"
                 >
-                  <CheckCircle2 size={16} /> Save
+                  <CheckCircle2 size={16} /> {saving ? "Saving..." : "Save"}
                 </button>
               </div>
             )}
@@ -353,7 +446,6 @@ export default function CrudManager({
         </div>
       )}
 
-      {/* Delete confirm */}
       {confirmDelete && (
         <div className="fixed inset-0 z-[60] grid place-items-center bg-black/50 p-4 backdrop-blur-sm">
           <div className="w-full max-w-sm rounded-3xl bg-white p-6 shadow-2xl">
@@ -373,7 +465,8 @@ export default function CrudManager({
               </button>
               <button
                 onClick={() => doDelete(confirmDelete)}
-                className="inline-flex items-center gap-2 rounded-xl bg-red-600 px-5 py-2.5 text-sm font-bold text-white shadow transition hover:bg-red-700"
+                disabled={saving}
+                className="inline-flex items-center gap-2 rounded-xl bg-red-600 px-5 py-2.5 text-sm font-bold text-white shadow transition hover:bg-red-700 disabled:opacity-60"
               >
                 <Trash2 size={16} /> Delete
               </button>
@@ -382,7 +475,6 @@ export default function CrudManager({
         </div>
       )}
 
-      {/* Toast */}
       {toast && (
         <div className="fixed bottom-6 right-6 z-[70] rounded-2xl bg-[#003b73] px-5 py-3 text-sm font-bold text-white shadow-2xl">
           {toast.msg}

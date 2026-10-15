@@ -137,6 +137,7 @@ export default function ItDashboard() {
           ]}
           initialRows={usersInitial}
           storageKey="upec_it_users"
+          resource="it-users"
           accent="from-[#003b73] to-[#0070c9]"
           addLabel="Add User"
         />
@@ -158,6 +159,7 @@ export default function ItDashboard() {
           ]}
           initialRows={contentInitial}
           storageKey="upec_it_content"
+          resource="it-content"
           accent="from-[#0070c9] to-[#84c7ff]"
           addLabel="New Page"
         />
@@ -178,6 +180,7 @@ export default function ItDashboard() {
           ]}
           initialRows={backupsInitial}
           storageKey="upec_it_backups"
+          resource="it-backups"
           accent="from-[#f7b733] to-[#f59e0b]"
           addLabel="Run Backup"
         />
@@ -199,6 +202,7 @@ export default function ItDashboard() {
           ]}
           initialRows={logsInitial}
           storageKey="upec_it_logs"
+          resource="it-logs"
           accent="from-red-500 to-rose-500"
           addLabel="Log Entry"
         />
@@ -218,6 +222,7 @@ export default function ItDashboard() {
           ]}
           initialRows={settingsInitial}
           storageKey="upec_it_settings"
+          resource="it-settings"
           accent="from-purple-500 to-indigo-500"
           addLabel="Add Setting"
         />

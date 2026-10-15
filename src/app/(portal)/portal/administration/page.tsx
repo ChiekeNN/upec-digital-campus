@@ -127,6 +127,7 @@ export default function AdministrationDashboard() {
           ]}
           initialRows={staffInitial}
           storageKey="upec_admin_staff"
+          resource="admin-staff"
           accent="from-[#003b73] to-[#0070c9]"
           addLabel="Add Staff"
         />
@@ -149,6 +150,7 @@ export default function AdministrationDashboard() {
           ]}
           initialRows={leaveInitial}
           storageKey="upec_admin_leave"
+          resource="admin-leave"
           accent="from-[#0070c9] to-[#84c7ff]"
           addLabel="New Leave"
         />
@@ -169,6 +171,7 @@ export default function AdministrationDashboard() {
           ]}
           initialRows={docsInitial}
           storageKey="upec_admin_docs"
+          resource="admin-docs"
           accent="from-[#f7b733] to-[#f59e0b]"
           addLabel="Add Document"
         />
@@ -190,6 +193,7 @@ export default function AdministrationDashboard() {
           ]}
           initialRows={facilitiesInitial}
           storageKey="upec_admin_facilities"
+          resource="admin-facilities"
           accent="from-emerald-500 to-teal-500"
           addLabel="Report Issue"
         />
@@ -209,6 +213,7 @@ export default function AdministrationDashboard() {
           ]}
           initialRows={reportsInitial}
           storageKey="upec_admin_reports"
+          resource="admin-reports"
           accent="from-purple-500 to-indigo-500"
           addLabel="New Report"
         />

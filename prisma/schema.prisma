@@ -131,3 +131,15 @@ model EntrepreneurTrainingRegistration {
   createdAt             DateTime @default(now())
 }
 
+
+// Generic portal records (JSON-backed) for department consoles
+model PortalRecord {
+  id        String   @id @default(cuid())
+  resource  String
+  data      Json
+  createdBy String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([resource])
+}
