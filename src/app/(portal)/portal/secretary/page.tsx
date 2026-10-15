@@ -135,6 +135,7 @@ export default function SecretaryDashboard() {
           ]}
           initialRows={correspondenceInitial}
           storageKey="upec_secretary_correspondence"
+          resource="secretary-correspondence"
           accent="from-[#003b73] to-[#0070c9]"
           addLabel="New Letter"
         />
@@ -156,6 +157,7 @@ export default function SecretaryDashboard() {
           ]}
           initialRows={appointmentsInitial}
           storageKey="upec_secretary_appointments"
+          resource="secretary-appointments"
           accent="from-[#0070c9] to-[#84c7ff]"
           addLabel="New Appointment"
         />
@@ -176,6 +178,7 @@ export default function SecretaryDashboard() {
           ]}
           initialRows={minutesInitial}
           storageKey="upec_secretary_minutes"
+          resource="secretary-minutes"
           accent="from-[#f7b733] to-[#f59e0b]"
           addLabel="New Minutes"
         />
@@ -196,6 +199,7 @@ export default function SecretaryDashboard() {
           ]}
           initialRows={staffInitial}
           storageKey="upec_secretary_staff"
+          resource="secretary-staff"
           accent="from-emerald-500 to-teal-500"
           addLabel="Add Staff"
         />
@@ -216,6 +220,7 @@ export default function SecretaryDashboard() {
           ]}
           initialRows={notificationsInitial}
           storageKey="upec_secretary_notifications"
+          resource="secretary-notifications"
           accent="from-purple-500 to-indigo-500"
           addLabel="New Notification"
         />

@@ -130,6 +130,7 @@ export default function FinanceDashboard() {
           ]}
           initialRows={invoicesInitial}
           storageKey="upec_finance_invoices"
+          resource="finance-invoices"
           accent="from-[#003b73] to-[#0070c9]"
           addLabel="New Invoice"
         />
@@ -153,6 +154,7 @@ export default function FinanceDashboard() {
           ]}
           initialRows={paymentsInitial}
           storageKey="upec_finance_payments"
+          resource="finance-payments"
           accent="from-[#0070c9] to-[#84c7ff]"
           addLabel="Record Payment"
         />
@@ -174,6 +176,7 @@ export default function FinanceDashboard() {
           ]}
           initialRows={payrollInitial}
           storageKey="upec_finance_payroll"
+          resource="finance-payroll"
           accent="from-[#f7b733] to-[#f59e0b]"
           addLabel="Add Payroll"
         />
@@ -195,6 +198,7 @@ export default function FinanceDashboard() {
           ]}
           initialRows={expensesInitial}
           storageKey="upec_finance_expenses"
+          resource="finance-expenses"
           accent="from-emerald-500 to-teal-500"
           addLabel="New Expense"
         />
@@ -215,6 +219,7 @@ export default function FinanceDashboard() {
           ]}
           initialRows={reconciliationInitial}
           storageKey="upec_finance_recon"
+          resource="finance-recon"
           accent="from-purple-500 to-indigo-500"
           addLabel="Add Account"
         />
