@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import {
   LayoutDashboard,
@@ -24,40 +24,40 @@ import {
 } from "lucide-react";
 import { PortalRole, roleLabel } from "@/lib/portal-roles";
 
-type NavLink = { label: string; href: string; icon: any };
+type NavLink = { label: string; tab: string; icon: any };
 
 const linksByRole: Record<PortalRole, NavLink[]> = {
   secretary: [
-    { label: "Dashboard", href: "/portal/secretary", icon: LayoutDashboard },
-    { label: "Correspondence", href: "/portal/secretary", icon: Mail },
-    { label: "Appointments", href: "/portal/secretary", icon: Calendar },
-    { label: "Meeting Minutes", href: "/portal/secretary", icon: FileText },
-    { label: "Staff Directory", href: "/portal/secretary", icon: Users },
-    { label: "Notifications", href: "/portal/secretary", icon: Activity },
+    { label: "Dashboard", tab: "overview", icon: LayoutDashboard },
+    { label: "Correspondence", tab: "correspondence", icon: Mail },
+    { label: "Appointments", tab: "appointments", icon: Calendar },
+    { label: "Meeting Minutes", tab: "minutes", icon: FileText },
+    { label: "Staff Directory", tab: "directory", icon: Users },
+    { label: "Notifications", tab: "notifications", icon: Activity },
   ],
   administration: [
-    { label: "Dashboard", href: "/portal/administration", icon: LayoutDashboard },
-    { label: "Staff Records", href: "/portal/administration", icon: Users },
-    { label: "Leave & Attendance", href: "/portal/administration", icon: Calendar },
-    { label: "Documents", href: "/portal/administration", icon: FileText },
-    { label: "Facilities", href: "/portal/administration", icon: Building2 },
-    { label: "Reports", href: "/portal/administration", icon: Activity },
+    { label: "Dashboard", tab: "overview", icon: LayoutDashboard },
+    { label: "Staff Records", tab: "staff", icon: Users },
+    { label: "Leave & Attendance", tab: "leave", icon: Calendar },
+    { label: "Documents", tab: "documents", icon: FileText },
+    { label: "Facilities", tab: "facilities", icon: Building2 },
+    { label: "Reports", tab: "reports", icon: Activity },
   ],
   it: [
-    { label: "Dashboard", href: "/portal/it", icon: LayoutDashboard },
-    { label: "User Management", href: "/portal/it", icon: Users },
-    { label: "Content (CMS)", href: "/portal/it", icon: FileText },
-    { label: "Database & Backups", href: "/portal/it", icon: Database },
-    { label: "Security Logs", href: "/portal/it", icon: ShieldCheck },
-    { label: "Settings", href: "/portal/it", icon: Settings },
+    { label: "Dashboard", tab: "overview", icon: LayoutDashboard },
+    { label: "User Management", tab: "users", icon: Users },
+    { label: "Content (CMS)", tab: "content", icon: FileText },
+    { label: "Database & Backups", tab: "database", icon: Database },
+    { label: "Security Logs", tab: "security", icon: ShieldCheck },
+    { label: "Settings", tab: "settings", icon: Settings },
   ],
   finance: [
-    { label: "Dashboard", href: "/portal/finance", icon: LayoutDashboard },
-    { label: "Invoices", href: "/portal/finance", icon: Receipt },
-    { label: "Fee Payments", href: "/portal/finance", icon: CreditCard },
-    { label: "Payroll", href: "/portal/finance", icon: Wallet },
-    { label: "Expenses", href: "/portal/finance", icon: FileText },
-    { label: "Reconciliation", href: "/portal/finance", icon: Activity },
+    { label: "Dashboard", tab: "overview", icon: LayoutDashboard },
+    { label: "Invoices", tab: "invoices", icon: Receipt },
+    { label: "Fee Payments", tab: "payments", icon: CreditCard },
+    { label: "Payroll", tab: "payroll", icon: Wallet },
+    { label: "Expenses", tab: "expenses", icon: FileText },
+    { label: "Reconciliation", tab: "reconciliation", icon: Activity },
   ],
 };
 
@@ -69,6 +69,7 @@ export default function PortalNav({
   name: string;
 }) {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [open, setOpen] = useState(false);
   const links = linksByRole[role];
 
@@ -140,11 +141,13 @@ export default function PortalNav({
         <nav className="flex flex-1 flex-col gap-1 p-4">
           {links.map((link) => {
             const Icon = link.icon;
-            const active = pathname === link.href;
+            const href = `/portal/${role}?tab=${link.tab}`;
+            const currentTab = searchParams?.get("tab") || "overview";
+            const active = pathname === `/portal/${role}` && currentTab === link.tab;
             return (
               <Link
                 key={link.label}
-                href={link.href}
+                href={href}
                 onClick={() => setOpen(false)}
                 className={`flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-bold transition ${
                   active

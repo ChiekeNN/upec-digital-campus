@@ -24,10 +24,10 @@ const stats = [
 ];
 
 const correspondenceInitial = [
-  { id: 1, ref: "UPEC/SEC/001", from: "Vice Chancellor's Office", subject: "Meeting invitation", date: "2026-10-12", status: "Pending" },
-  { id: 2, ref: "UPEC/SEC/002", from: "Faculty of Science", subject: "Request for hall booking", date: "2026-10-11", status: "Replied" },
-  { id: 3, ref: "UPEC/SEC/003", from: "TETFund", subject: "Familiarisation visit follow-up", date: "2026-10-09", status: "Pending" },
-  { id: 4, ref: "UPEC/SEC/004", from: "Director's Office", subject: "Memo: staff meeting", date: "2026-10-08", status: "Filed" },
+  { id: 1, ref: "UPEC/SEC/001", from: "Vice Chancellor's Office", to: "Director's Office", subject: "Meeting invitation", date: "2026-10-12", status: "Pending" },
+  { id: 2, ref: "UPEC/SEC/002", from: "Faculty of Science", to: "UPEC Secretariat", subject: "Request for hall booking", date: "2026-10-11", status: "Replied" },
+  { id: 3, ref: "UPEC/SEC/003", from: "TETFund", to: "Director's Office", subject: "Familiarisation visit follow-up", date: "2026-10-09", status: "Pending" },
+  { id: 4, ref: "UPEC/SEC/004", from: "Director's Office", to: "All Staff", subject: "Memo: staff meeting", date: "2026-10-08", status: "Filed" },
 ];
 
 const appointmentsInitial = [
@@ -128,7 +128,8 @@ export default function SecretaryDashboard() {
           subtitle="Track incoming and outgoing letters, memos and directives."
           columns={[
             { key: "ref", label: "Reference" },
-            { key: "from", label: "From / To" },
+            { key: "from", label: "From" },
+            { key: "to", label: "To" },
             { key: "subject", label: "Subject" },
             { key: "date", label: "Date", type: "date" },
             { key: "status", label: "Status", type: "select", options: ["Pending", "Replied", "Filed", "Closed"] },
