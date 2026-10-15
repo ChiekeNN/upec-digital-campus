@@ -44,10 +44,10 @@ const minutesInitial = [
 ];
 
 const staffInitial = [
-  { id: 1, name: "Dr. Henry Wobo", role: "Acting Director", dept: "Director's Office" },
-  { id: 2, name: "Mrs. Gloria Chindah", role: "Registrar", dept: "Administration" },
-  { id: 3, name: "Mr. Chidi Okoro", role: "IT Officer", dept: "IT" },
-  { id: 4, name: "Ms. Amaka Nwosu", role: "Finance Officer", dept: "Finance" },
+  { id: 1, name: "Dr. Henry Wobo", role: "Acting Director", dept: "Director's Office", photo: "https://i.pravatar.cc/80?img=12" },
+  { id: 2, name: "Mrs. Gloria Chindah", role: "Registrar", dept: "Administration", photo: "https://i.pravatar.cc/80?img=47" },
+  { id: 3, name: "Mr. Chidi Okoro", role: "IT Officer", dept: "IT", photo: "https://i.pravatar.cc/80?img=33" },
+  { id: 4, name: "Ms. Amaka Nwosu", role: "Finance Officer", dept: "Finance", photo: "https://i.pravatar.cc/80?img=45" },
 ];
 
 const notificationsInitial = [
@@ -200,6 +200,7 @@ export default function SecretaryDashboard() {
           ]}
           initialRows={staffInitial}
           storageKey="upec_secretary_staff"
+          avatarKey="photo"
           resource="secretary-staff"
           accent="from-emerald-500 to-teal-500"
           addLabel="Add Staff"

@@ -40,6 +40,8 @@ export default function CrudManager({
   canEdit = true,
   canDelete = true,
   resource,
+  reorderable = true,
+  avatarKey,
 }: {
   title?: string;
   subtitle?: string;
@@ -53,6 +55,8 @@ export default function CrudManager({
   canEdit?: boolean;
   canDelete?: boolean;
   resource?: string;
+  reorderable?: boolean;
+  avatarKey?: string;
 }) {
   const [rows, setRows] = useState<Row[]>(initialRows);
   const [loaded, setLoaded] = useState(false);
@@ -75,8 +79,20 @@ export default function CrudManager({
           const json = await res.json();
           if (!cancelled) {
             if (json?.success && Array.isArray(json.rows)) {
-              if (json.rows.length > 0) setRows(json.rows);
-              else setRows(initialRows);
+              let loadedRows = json.rows.length > 0 ? json.rows : initialRows;
+              try {
+                const orderRaw = localStorage.getItem(storageKey + "_order");
+                if (orderRaw) {
+                  const order = JSON.parse(orderRaw);
+                  if (Array.isArray(order)) {
+                    const map = new Map(loadedRows.map((r: any) => [r.id, r]));
+                    const ordered = order.map((id: any) => map.get(id)).filter(Boolean);
+                    const rest = loadedRows.filter((r: any) => !order.includes(r.id));
+                    loadedRows = [...ordered, ...rest];
+                  }
+                }
+              } catch {}
+              setRows(loadedRows);
               setApiMode(true);
             } else {
               // fallback to localStorage
@@ -101,6 +117,19 @@ export default function CrudManager({
         if (raw) {
           const parsed = JSON.parse(raw);
           if (Array.isArray(parsed) && parsed.length) setRows(parsed);
+        }
+      } catch {}
+      // apply saved order
+      try {
+        const orderRaw = localStorage.getItem(storageKey + "_order");
+        if (orderRaw) {
+          const order = JSON.parse(orderRaw);
+          setRows((prev) => {
+            const map = new Map(prev.map((r) => [r.id, r]));
+            const ordered = order.map((id: any) => map.get(id)).filter(Boolean);
+            const rest = prev.filter((r) => !order.includes(r.id));
+            return [...ordered, ...rest];
+          });
         }
       } catch {}
     }
@@ -224,6 +253,21 @@ export default function CrudManager({
     setToast({ msg: "Record deleted.", kind: "success" });
   }
 
+  function moveRow(row: Row, direction: "up" | "down") {
+    setRows((prev) => {
+      const idx = prev.findIndex((r) => r.id === row.id);
+      if (idx === -1) return prev;
+      const target = direction === "up" ? idx - 1 : idx + 1;
+      if (target < 0 || target >= prev.length) return prev;
+      const next = [...prev];
+      [next[idx], next[target]] = [next[target], next[idx]];
+      try {
+        localStorage.setItem(storageKey + "_order", JSON.stringify(next.map((r) => r.id)));
+      } catch {}
+      return next;
+    });
+  }
+
   function exportCsv() {
     const header = columns.map((c) => c.label).join(",");
     const body = rows
@@ -308,6 +352,7 @@ export default function CrudManager({
         <table className="w-full text-left text-sm">
           <thead>
             <tr className="border-b border-slate-100 bg-slate-50/60 text-xs uppercase tracking-wide text-slate-500">
+              {avatarKey && <th className="px-4 py-3 font-bold">Photo</th>}
               {columns.map((c) => (
                 <th key={c.key} className="px-4 py-3 font-bold">
                   {c.label}
@@ -329,6 +374,15 @@ export default function CrudManager({
                   key={row.id ?? JSON.stringify(row)}
                   className="border-b border-slate-50 transition hover:bg-blue-50/40 last:border-0"
                 >
+                  {avatarKey && (
+                    <td className="px-4 py-3">
+                      <img
+                        src={row[avatarKey] || `https://i.pravatar.cc/80?u=${row.id}`}
+                        alt=""
+                        className="h-10 w-10 rounded-full object-cover ring-2 ring-slate-100"
+                      />
+                    </td>
+                  )}
                   {columns.map((c) => (
                     <td key={c.key} className="px-4 py-3 text-slate-700">
                       {String(row[c.key] ?? "—")}
@@ -336,6 +390,26 @@ export default function CrudManager({
                   ))}
                   <td className="px-4 py-3">
                     <div className="flex justify-end gap-1.5">
+                      {reorderable && (
+                        <>
+                          <button
+                            onClick={() => moveRow(row, "up")}
+                            className="grid h-8 w-8 place-items-center rounded-lg bg-slate-100 text-slate-600 transition hover:bg-slate-300"
+                            aria-label="Move up"
+                            title="Move up"
+                          >
+                            ↑
+                          </button>
+                          <button
+                            onClick={() => moveRow(row, "down")}
+                            className="grid h-8 w-8 place-items-center rounded-lg bg-slate-100 text-slate-600 transition hover:bg-slate-300"
+                            aria-label="Move down"
+                            title="Move down"
+                          >
+                            ↓
+                          </button>
+                        </>
+                      )}
                       <button
                         onClick={() => openView(row)}
                         className="grid h-8 w-8 place-items-center rounded-lg bg-blue-50 text-[#0070c9] transition hover:bg-[#0070c9] hover:text-white"
