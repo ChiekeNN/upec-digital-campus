@@ -5,7 +5,6 @@ import {
   ArrowRight,
   ArrowUpRight,
   BadgeCheck,
-  BookOpen,
   BriefcaseBusiness,
   Building2,
   Calendar,
@@ -416,116 +415,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* LEARN ONLINE */}
-      <section
-        id="learn"
-        className="overflow-hidden bg-[#003b73] py-20 text-white sm:py-28"
-      >
-        <div className="mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-          <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.12em] text-blue-100">
-              <BookOpen size={15} />
-              Learn Online with UPEC
-            </span>
-
-            <h2 className="mt-5 text-4xl font-black leading-tight tracking-tight sm:text-5xl">
-              Your UPEC classroom, wherever you are.
-            </h2>
-
-            <p className="mt-6 text-base leading-8 text-blue-100">
-              The UPEC Moodle Learning Management System will give learners
-              access to videos, notes, quizzes, assignments, feedback,
-              certificates and live-class links through one unified UPEC
-              platform.
-            </p>
-
-            <div className="mt-8 space-y-4">
-              {[
-                "Access courses through upec.uniport.edu.ng/learn",
-                "Learn on mobile phone, tablet or computer",
-                "Track progress, deadlines, grades and certificates",
-                "Join a structured learning community",
-              ].map((item) => (
-                <div key={item} className="flex items-center gap-3">
-                  <CheckCircle2 size={20} className="shrink-0 text-[#84c7ff]" />
-                  <p className="text-sm font-semibold text-blue-50">{item}</p>
-                </div>
-              ))}
-            </div>
-
-            <Link
-              href="/admissions"
-              className="btn-primary mt-9 bg-[#f7b733] text-[#003b73] hover:bg-white"
-            >
-              Get Ready to Learn
-              <ArrowRight size={18} />
-            </Link>
-          </div>
-
-          <div className="relative rounded-[2rem] border border-white/15 bg-white/10 p-4 shadow-2xl backdrop-blur">
-            <div className="rounded-[1.45rem] bg-[#f7fbff] p-5 text-slate-800 sm:p-7">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-xs font-black uppercase tracking-[0.14em] text-[#0070c9]">
-                    Learner Dashboard Preview
-                  </p>
-                  <h3 className="mt-2 text-2xl font-black text-[#003b73]">
-                    Good morning, Ada.
-                  </h3>
-                </div>
-
-                <div className="grid h-12 w-12 place-items-center rounded-xl bg-[#e8f4ff] text-[#003b73]">
-                  <GraduationCap size={24} />
-                </div>
-              </div>
-
-              <div className="mt-7 rounded-2xl bg-[#003b73] p-5 text-white">
-                <div className="flex items-center justify-between">
-                  <p className="text-sm font-bold">Digital Entrepreneurship</p>
-                  <span className="rounded-full bg-white/15 px-2 py-1 text-xs font-bold text-blue-100">
-                    Active
-                  </span>
-                </div>
-
-                <div className="mt-5 h-2 overflow-hidden rounded-full bg-white/20">
-                  <div className="h-full w-[68%] rounded-full bg-[#84c7ff]" />
-                </div>
-
-                <div className="mt-3 flex justify-between text-xs text-blue-100">
-                  <span>68% complete</span>
-                  <span>Next class: Thursday</span>
-                </div>
-              </div>
-
-              <div className="mt-5 grid gap-4 sm:grid-cols-2">
-                <div className="rounded-2xl border border-slate-100 bg-white p-4 shadow-sm">
-                  <p className="text-xs font-bold uppercase tracking-wide text-slate-400">
-                    Upcoming Task
-                  </p>
-                  <p className="mt-2 text-sm font-extrabold text-[#003b73]">
-                    Submit Business Model Canvas
-                  </p>
-                  <p className="mt-2 text-xs font-semibold text-[#0070c9]">
-                    Due in 3 days
-                  </p>
-                </div>
-
-                <div className="rounded-2xl border border-slate-100 bg-white p-4 shadow-sm">
-                  <p className="text-xs font-bold uppercase tracking-wide text-slate-400">
-                    Certificate Status
-                  </p>
-                  <p className="mt-2 text-sm font-extrabold text-[#003b73]">
-                    Complete 2 more modules
-                  </p>
-                  <p className="mt-2 text-xs font-semibold text-emerald-600">
-                    You are on track
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* INCUBATION */}
       <section id="incubation" className="bg-white py-20 sm:py-28">
