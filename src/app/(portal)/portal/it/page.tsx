@@ -13,6 +13,7 @@ import {
   Activity,
 } from "lucide-react";
 import DepartmentDashboard, { Tab } from "@/components/DepartmentDashboard";
+import CrudManager from "@/components/CrudManager";
 
 const stats = [
   { label: "Registered Users", value: 312, icon: Users, color: "bg-[#003b73]" },
@@ -21,86 +22,42 @@ const stats = [
   { label: "Backups (30d)", value: 30, icon: Database, color: "bg-emerald-500" },
 ];
 
-const users = [
-  { name: "Dr. Henry Wobo", email: "director@upecuniport.com.ng", role: "Director", status: "Active" },
-  { name: "Mrs. Gloria Chindah", email: "registrar@upecuniport.com.ng", role: "Registrar", status: "Active" },
-  { name: "Mr. Chidi Okoro", email: "it@upecuniport.com.ng", role: "IT Admin", status: "Active" },
-  { name: "Ms. Amaka Nwosu", email: "finance@upecuniport.com.ng", role: "Finance", status: "Active" },
-  { name: "Student Account", email: "student01@upecuniport.com.ng", role: "Student", status: "Suspended" },
+const usersInitial = [
+  { id: 1, name: "Dr. Henry Wobo", email: "director@upecuniport.com.ng", role: "Director", status: "Active" },
+  { id: 2, name: "Mrs. Gloria Chindah", email: "registrar@upecuniport.com.ng", role: "Registrar", status: "Active" },
+  { id: 3, name: "Mr. Chidi Okoro", email: "it@upecuniport.com.ng", role: "IT Admin", status: "Active" },
+  { id: 4, name: "Ms. Amaka Nwosu", email: "finance@upecuniport.com.ng", role: "Finance", status: "Active" },
+  { id: 5, name: "Student Account", email: "student01@upecuniport.com.ng", role: "Student", status: "Suspended" },
 ];
 
-const content = [
-  { page: "Home", lastEdited: "2026-10-14", by: "IT Admin", status: "Published" },
-  { page: "About UPEC", lastEdited: "2026-10-10", by: "IT Admin", status: "Published" },
-  { page: "Programmes", lastEdited: "2026-10-08", by: "Admin Officer", status: "Published" },
-  { page: "News & Events", lastEdited: "2026-10-15", by: "IT Admin", status: "Draft" },
+const contentInitial = [
+  { id: 1, page: "Home", lastEdited: "2026-10-14", by: "IT Admin", status: "Published" },
+  { id: 2, page: "About UPEC", lastEdited: "2026-10-10", by: "IT Admin", status: "Published" },
+  { id: 3, page: "Programmes", lastEdited: "2026-10-08", by: "Admin Officer", status: "Published" },
+  { id: 4, page: "News & Events", lastEdited: "2026-10-15", by: "IT Admin", status: "Draft" },
 ];
 
-const backups = [
-  { name: "db_backup_2026-10-15.sql", size: "42 MB", status: "Success" },
-  { name: "db_backup_2026-10-14.sql", size: "41 MB", status: "Success" },
-  { name: "db_backup_2026-10-13.sql", size: "41 MB", status: "Success" },
-  { name: "media_backup_2026-10-12.zip", size: "128 MB", status: "Success" },
+const backupsInitial = [
+  { id: 1, name: "db_backup_2026-10-15.sql", size: "42 MB", status: "Success" },
+  { id: 2, name: "db_backup_2026-10-14.sql", size: "41 MB", status: "Success" },
+  { id: 3, name: "db_backup_2026-10-13.sql", size: "41 MB", status: "Success" },
+  { id: 4, name: "media_backup_2026-10-12.zip", size: "128 MB", status: "Success" },
 ];
 
-const logs = [
-  { time: "2026-10-15 09:12", event: "Failed login attempt", user: "unknown", severity: "Warning" },
-  { time: "2026-10-15 08:45", event: "User created: student02", user: "IT Admin", severity: "Info" },
-  { time: "2026-10-14 17:30", event: "Database backup completed", user: "System", severity: "Info" },
-  { time: "2026-10-14 12:00", event: "Content published: Home", user: "IT Admin", severity: "Info" },
+const logsInitial = [
+  { id: 1, time: "2026-10-15 09:12", event: "Failed login attempt", user: "unknown", severity: "Warning" },
+  { id: 2, time: "2026-10-15 08:45", event: "User created: student02", user: "IT Admin", severity: "Info" },
+  { id: 3, time: "2026-10-14 17:30", event: "Database backup completed", user: "System", severity: "Info" },
+  { id: 4, time: "2026-10-14 12:00", event: "Content published: Home", user: "IT Admin", severity: "Info" },
 ];
 
-const settings = [
-  { key: "Site Name", value: "UPEC Digital Campus" },
-  { key: "Domain", value: "upecuniport.com.ng" },
-  { key: "Maintenance Mode", value: "Off" },
-  { key: "Email Notifications", value: "Enabled" },
-  { key: "Database", value: "PostgreSQL (Neon)" },
+const settingsInitial = [
+  { id: 1, key: "Site Name", value: "UPEC Digital Campus" },
+  { id: 2, key: "Domain", value: "upecuniport.com.ng" },
+  { id: 3, key: "Maintenance Mode", value: "Off" },
+  { id: 4, key: "Email Notifications", value: "Enabled" },
+  { id: 5, key: "Database", value: "PostgreSQL (Neon)" },
 ];
-
-function StatCards() {
-  return (
-    <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
-      {stats.map((s) => {
-        const Icon = s.icon;
-        return (
-          <div key={s.label} className="rounded-3xl border border-slate-100 bg-white p-6 shadow-sm">
-            <div className={`grid h-12 w-12 place-items-center rounded-xl ${s.color} text-white`}>
-              <Icon size={24} />
-            </div>
-            <p className="mt-5 text-3xl font-black text-[#003b73]">{s.value}</p>
-            <p className="mt-1 text-sm font-semibold text-slate-500">{s.label}</p>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
-
-function Table({ headers, rows }: { headers: string[]; rows: (string | React.ReactNode)[][] }) {
-  return (
-    <div className="overflow-x-auto rounded-3xl border border-slate-100 bg-white p-6 shadow-sm">
-      <table className="w-full text-left text-sm">
-        <thead>
-          <tr className="border-b border-slate-100 text-xs uppercase tracking-wide text-slate-400">
-            {headers.map((h) => (
-              <th key={h} className="pb-3 pr-4 font-bold">{h}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((r, i) => (
-            <tr key={i} className="border-b border-slate-50 last:border-0">
-              {r.map((c, j) => (
-                <td key={j} className="py-3 pr-4 text-slate-700">{c}</td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-}
 
 export default function ItDashboard() {
   const tabs: Tab[] = [
@@ -110,8 +67,22 @@ export default function ItDashboard() {
       icon: LayoutDashboard,
       content: (
         <div className="space-y-6">
-          <StatCards />
-          <div className="rounded-3xl border border-slate-100 bg-white p-6 shadow-sm">
+          <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+            {stats.map((s) => {
+              const Icon = s.icon;
+              return (
+                <div key={s.label} className="group relative overflow-hidden rounded-3xl border border-slate-100 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+                  <div className={`absolute -right-6 -top-6 h-24 w-24 rounded-full ${s.color} opacity-10 transition group-hover:scale-125`} />
+                  <div className={`grid h-12 w-12 place-items-center rounded-xl ${s.color} text-white shadow-md`}>
+                    <Icon size={24} />
+                  </div>
+                  <p className="mt-5 text-3xl font-black text-[#003b73]">{s.value}</p>
+                  <p className="mt-1 text-sm font-semibold text-slate-500">{s.label}</p>
+                </div>
+              );
+            })}
+          </div>
+          <div className="rounded-3xl border border-slate-100 bg-gradient-to-br from-white to-blue-50 p-6 shadow-sm">
             <h2 className="text-lg font-black text-[#003b73]">System Health</h2>
             <ul className="mt-4 space-y-3">
               {[
@@ -120,7 +91,7 @@ export default function ItDashboard() {
                 { label: "Email (SMTP)", status: "Healthy" },
                 { label: "CDN / Assets", status: "Healthy" },
               ].map((s) => (
-                <li key={s.label} className="flex items-center justify-between rounded-xl bg-[#f7fbff] px-4 py-3">
+                <li key={s.label} className="flex items-center justify-between rounded-xl bg-white px-4 py-3 shadow-sm">
                   <span className="text-sm font-bold text-[#003b73]">{s.label}</span>
                   <span className="flex items-center gap-1.5 text-xs font-bold text-emerald-700">
                     <CheckCircle2 size={14} /> {s.status}
@@ -137,9 +108,19 @@ export default function ItDashboard() {
       label: "User Management",
       icon: Users,
       content: (
-        <Table
-          headers={["Name", "Email", "Role", "Status"]}
-          rows={users.map((u) => [u.name, u.email, u.role, u.status])}
+        <CrudManager
+          title="User Management"
+          subtitle="Manage portal and system users."
+          columns={[
+            { key: "name", label: "Name" },
+            { key: "email", label: "Email", type: "email" },
+            { key: "role", label: "Role", type: "select", options: ["Director", "Registrar", "IT Admin", "Finance", "Admin Officer", "Student"] },
+            { key: "status", label: "Status", type: "select", options: ["Active", "Suspended", "Disabled"] },
+          ]}
+          initialRows={usersInitial}
+          storageKey="upec_it_users"
+          accent="from-[#003b73] to-[#0070c9]"
+          addLabel="Add User"
         />
       ),
     },
@@ -148,9 +129,19 @@ export default function ItDashboard() {
       label: "Content (CMS)",
       icon: FileText,
       content: (
-        <Table
-          headers={["Page", "Last Edited", "By", "Status"]}
-          rows={content.map((c) => [c.page, c.lastEdited, c.by, c.status])}
+        <CrudManager
+          title="Content Management"
+          subtitle="Track and edit website pages."
+          columns={[
+            { key: "page", label: "Page" },
+            { key: "lastEdited", label: "Last Edited", type: "date" },
+            { key: "by", label: "Edited By" },
+            { key: "status", label: "Status", type: "select", options: ["Published", "Draft", "Archived"] },
+          ]}
+          initialRows={contentInitial}
+          storageKey="upec_it_content"
+          accent="from-[#0070c9] to-[#84c7ff]"
+          addLabel="New Page"
         />
       ),
     },
@@ -159,9 +150,18 @@ export default function ItDashboard() {
       label: "Database & Backups",
       icon: Database,
       content: (
-        <Table
-          headers={["Backup", "Size", "Status"]}
-          rows={backups.map((b) => [b.name, b.size, b.status])}
+        <CrudManager
+          title="Backups"
+          subtitle="Database and media backups."
+          columns={[
+            { key: "name", label: "Backup File" },
+            { key: "size", label: "Size" },
+            { key: "status", label: "Status", type: "select", options: ["Success", "Failed", "In Progress"] },
+          ]}
+          initialRows={backupsInitial}
+          storageKey="upec_it_backups"
+          accent="from-[#f7b733] to-[#f59e0b]"
+          addLabel="Run Backup"
         />
       ),
     },
@@ -170,9 +170,19 @@ export default function ItDashboard() {
       label: "Security Logs",
       icon: ShieldCheck,
       content: (
-        <Table
-          headers={["Time", "Event", "User", "Severity"]}
-          rows={logs.map((l) => [l.time, l.event, l.user, l.severity])}
+        <CrudManager
+          title="Security Logs"
+          subtitle="Authentication and security events."
+          columns={[
+            { key: "time", label: "Time" },
+            { key: "event", label: "Event" },
+            { key: "user", label: "User" },
+            { key: "severity", label: "Severity", type: "select", options: ["Info", "Warning", "Error", "Critical"] },
+          ]}
+          initialRows={logsInitial}
+          storageKey="upec_it_logs"
+          accent="from-red-500 to-rose-500"
+          addLabel="Log Entry"
         />
       ),
     },
@@ -181,18 +191,18 @@ export default function ItDashboard() {
       label: "Settings",
       icon: Settings,
       content: (
-        <div className="overflow-x-auto rounded-3xl border border-slate-100 bg-white p-6 shadow-sm">
-          <table className="w-full text-left text-sm">
-            <tbody>
-              {settings.map((s) => (
-                <tr key={s.key} className="border-b border-slate-50 last:border-0">
-                  <td className="py-3 pr-4 font-bold text-[#003b73]">{s.key}</td>
-                  <td className="py-3 text-slate-700">{s.value}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <CrudManager
+          title="System Settings"
+          subtitle="Configure site-wide settings."
+          columns={[
+            { key: "key", label: "Setting" },
+            { key: "value", label: "Value" },
+          ]}
+          initialRows={settingsInitial}
+          storageKey="upec_it_settings"
+          accent="from-purple-500 to-indigo-500"
+          addLabel="Add Setting"
+        />
       ),
     },
   ];
