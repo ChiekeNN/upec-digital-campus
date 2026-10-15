@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import DepartmentDashboard, { Tab } from "@/components/DepartmentDashboard";
 import CrudManager from "@/components/CrudManager";
+import { BarChart, DonutChart } from "@/components/Charts";
 
 const stats = [
   { label: "Pending Letters", value: 12, icon: Inbox, color: "bg-[#003b73]" },
@@ -95,6 +96,24 @@ export default function SecretaryDashboard() {
                 </li>
               ))}
             </ul>
+          </div>
+          <div className="grid gap-5 lg:grid-cols-2">
+            <BarChart
+              title="Appointments by Status"
+              data={[
+                { label: "Confirmed", value: 3, color: "#10b981" },
+                { label: "Pending", value: 1, color: "#f7b733" },
+              ]}
+            />
+            <DonutChart
+              title="Correspondence Status"
+              data={[
+                { label: "Pending", value: 2, color: "#f7b733" },
+                { label: "Replied", value: 1, color: "#10b981" },
+                { label: "Filed", value: 1, color: "#0070c9" },
+              ]}
+              centerLabel="4"
+            />
           </div>
         </div>
       ),
