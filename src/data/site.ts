@@ -2,7 +2,7 @@ export const siteConfig = {
   shortName: "UPEC",
   fullName: "University of Port Harcourt Entrepreneurial Centre",
   university: "University of Port Harcourt",
-  domain: "upec.uniport.edu.ng",
+  domain: "upecuniport.com.ng",
 
   phone: "08063158233",
   whatsapp: "2348063158233",

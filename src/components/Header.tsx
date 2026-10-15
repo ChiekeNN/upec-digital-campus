@@ -72,7 +72,13 @@ export default function Header() {
             ))}
           </div>
 
-          <div className="hidden lg:block">
+          <div className="hidden items-center gap-3 lg:flex">
+            <Link
+              href="/portal/login"
+              className="text-sm font-semibold text-slate-600 transition hover:text-[#003b73]"
+            >
+              Staff Portal
+            </Link>
             <Link href="/apply" className="btn-primary">
               Apply Now
               <ArrowUpRight size={17} />
@@ -106,6 +112,14 @@ export default function Header() {
                   {item.label}
                 </Link>
               ))}
+
+              <Link
+                href="/portal/login"
+                onClick={closeMenu}
+                className="rounded-xl px-4 py-3 text-sm font-bold text-slate-700 transition hover:bg-blue-50 hover:text-[#003b73]"
+              >
+                Staff Portal
+              </Link>
 
               <Link
                 href="/apply"
