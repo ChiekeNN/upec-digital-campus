@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { SignJWT } from "jose";
-import { PORTAL_ROLES, roleLabel } from "@/lib/portal-auth";
+import { PORTAL_ROLES, roleLabel } from "@/lib/portal-roles";
 
 const DEFAULT_PASSWORDS: Record<string, string> = {
   secretary: "secretary123",

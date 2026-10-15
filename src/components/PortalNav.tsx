@@ -22,7 +22,7 @@ import {
   Receipt,
   CreditCard,
 } from "lucide-react";
-import { PortalRole, roleLabel } from "@/lib/portal-auth";
+import { PortalRole, roleLabel } from "@/lib/portal-roles";
 
 type NavLink = { label: string; href: string; icon: any };
 

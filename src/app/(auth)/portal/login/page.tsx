@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff, Loader2, Lock, ShieldCheck, Building2 } from "lucide-react";
-import { PORTAL_ROLES } from "@/lib/portal-auth";
+import { PORTAL_ROLES } from "@/lib/portal-roles";
 
 export default function PortalLoginPage() {
   const router = useRouter();
