@@ -128,6 +128,7 @@ export default function AdministrationDashboard() {
           initialRows={staffInitial}
           storageKey="upec_admin_staff"
           avatarKey="photo"
+          allowAttachments={false}
           resource="admin-staff"
           accent="from-[#003b73] to-[#0070c9]"
           addLabel="Add Staff"
