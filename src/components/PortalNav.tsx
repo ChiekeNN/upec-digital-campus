@@ -7,6 +7,7 @@ import { useState } from "react";
 import {
   LayoutDashboard,
   LogOut,
+  KeyRound,
   Menu,
   X,
   FileText,
@@ -71,7 +72,41 @@ export default function PortalNav({
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [open, setOpen] = useState(false);
+  const [pwOpen, setPwOpen] = useState(false);
+  const [currentPw, setCurrentPw] = useState("");
+  const [newPw, setNewPw] = useState("");
+  const [pwStatus, setPwStatus] = useState<"idle" | "loading" | "error" | "success">("idle");
+  const [pwError, setPwError] = useState("");
   const links = linksByRole[role];
+
+  async function handleChangePassword(e: React.FormEvent) {
+    e.preventDefault();
+    setPwStatus("loading");
+    setPwError("");
+    try {
+      const res = await fetch("/api/portal/change-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ currentPassword: currentPw, newPassword: newPw }),
+      });
+      const result = await res.json();
+      if (res.ok && result.success) {
+        setPwStatus("success");
+        setCurrentPw("");
+        setNewPw("");
+        setTimeout(() => {
+          setPwOpen(false);
+          setPwStatus("idle");
+        }, 1500);
+      } else {
+        setPwStatus("error");
+        setPwError(result.error || "Failed to change password.");
+      }
+    } catch {
+      setPwStatus("error");
+      setPwError("Could not reach the server.");
+    }
+  }
 
   async function handleLogout() {
     try {
@@ -101,13 +136,24 @@ export default function PortalNav({
           </div>
         </div>
 
-        <button
-          onClick={handleLogout}
-          className="flex items-center gap-2 rounded-lg bg-red-50 px-3 py-2 text-xs font-bold text-red-600 hover:bg-red-100"
-        >
-          <LogOut size={16} />
-          <span className="hidden sm:inline">Logout</span>
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setPwOpen(true)}
+            className="flex items-center gap-2 rounded-lg bg-blue-50 px-3 py-2 text-xs font-bold text-[#003b73] hover:bg-blue-100"
+            data-tooltip="Change password"
+          >
+            <KeyRound size={16} />
+            <span className="hidden sm:inline">Password</span>
+          </button>
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-2 rounded-lg bg-red-50 px-3 py-2 text-xs font-bold text-red-600 hover:bg-red-100"
+            data-tooltip="Logout"
+          >
+            <LogOut size={16} />
+            <span className="hidden sm:inline">Logout</span>
+          </button>
+        </div>
       </div>
 
       {open && (
@@ -172,6 +218,57 @@ export default function PortalNav({
           </button>
         </div>
       </aside>
+      {pwOpen && (
+        <div className="fixed inset-0 z-[60] grid place-items-center bg-black/50 p-4 backdrop-blur-sm">
+          <div className="w-full max-w-md rounded-3xl bg-white p-6 shadow-2xl sm:p-8">
+            <div className="flex items-center justify-between">
+              <h3 className="text-lg font-black text-[#003b73]">Change Password</h3>
+              <button
+                onClick={() => { setPwOpen(false); setPwStatus("idle"); setPwError(""); }}
+                className="grid h-9 w-9 place-items-center rounded-lg text-slate-400 hover:bg-slate-100"
+              >
+                <X size={18} />
+              </button>
+            </div>
+            <form onSubmit={handleChangePassword} className="mt-5 space-y-4">
+              <div>
+                <label className="form-label">Current Password</label>
+                <input
+                  type="password"
+                  required
+                  value={currentPw}
+                  onChange={(e) => setCurrentPw(e.target.value)}
+                  className="w-full rounded-xl border border-[#dbe4ef] bg-[#f8fafc] px-4 py-3 text-sm outline-none focus:border-[#003b73] focus:bg-white focus:ring-2 focus:ring-[#003b73]/20"
+                />
+              </div>
+              <div>
+                <label className="form-label">New Password</label>
+                <input
+                  type="password"
+                  required
+                  minLength={6}
+                  value={newPw}
+                  onChange={(e) => setNewPw(e.target.value)}
+                  className="w-full rounded-xl border border-[#dbe4ef] bg-[#f8fafc] px-4 py-3 text-sm outline-none focus:border-[#003b73] focus:bg-white focus:ring-2 focus:ring-[#003b73]/20"
+                />
+              </div>
+              {pwStatus === "error" && (
+                <p className="rounded-xl bg-red-50 px-4 py-3 text-sm font-semibold text-red-600">{pwError}</p>
+              )}
+              {pwStatus === "success" && (
+                <p className="rounded-xl bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-700">Password changed successfully.</p>
+              )}
+              <button
+                type="submit"
+                disabled={pwStatus === "loading"}
+                className="btn-primary w-full justify-center disabled:opacity-70"
+              >
+                {pwStatus === "loading" ? "Saving..." : "Change Password"}
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </>
   );
 }
