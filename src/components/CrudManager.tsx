@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   Plus,
   Search,
@@ -73,6 +73,8 @@ export default function CrudManager({
   const [confirmDelete, setConfirmDelete] = useState<Row | null>(null);
   const [toast, setToast] = useState<{ msg: string; kind: "success" | "error" } | null>(null);
   const [saving, setSaving] = useState(false);
+  const initialRowsRef = useRef(initialRows);
+  initialRowsRef.current = initialRows;
 
   // Load data
   useEffect(() => {
@@ -92,12 +94,12 @@ export default function CrudManager({
                   if (raw) {
                     const parsed = JSON.parse(raw);
                     if (Array.isArray(parsed) && parsed.length) loadedRows = parsed;
-                    else loadedRows = initialRows;
+                    else loadedRows = initialRowsRef.current;
                   } else {
-                    loadedRows = initialRows;
+                    loadedRows = initialRowsRef.current;
                   }
                 } catch {
-                  loadedRows = initialRows;
+                  loadedRows = initialRowsRef.current;
                 }
               }
               try {
@@ -157,7 +159,7 @@ export default function CrudManager({
     return () => {
       cancelled = true;
     };
-  }, [resource, storageKey, initialRows]);
+  }, [resource, storageKey]);
 
   // Persist to localStorage (only in local mode or as cache)
   useEffect(() => {
