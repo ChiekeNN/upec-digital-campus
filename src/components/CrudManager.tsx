@@ -618,14 +618,28 @@ export default function CrudManager({
               ))}
               {form.attachment && (
                 <div>
-                  <label className="form-label">Attachment</label>
-                  <a
-                    href={form.attachment.data}
-                    download={form.attachment.name}
-                    className="inline-flex items-center gap-2 rounded-xl bg-emerald-50 px-4 py-3 text-sm font-bold text-emerald-700 hover:bg-emerald-100"
-                  >
-                    <Download size={15} /> {form.attachment.name}
-                  </a>
+                  <label className="form-label">Attachment — {form.attachment.name}</label>
+                  {String(form.attachment.data).startsWith("data:image/") ? (
+                    <img
+                      src={form.attachment.data}
+                      alt={form.attachment.name}
+                      className="max-h-96 w-full rounded-xl border border-slate-200 object-contain bg-slate-50"
+                    />
+                  ) : String(form.attachment.data).includes("application/pdf") || String(form.attachment.name).toLowerCase().endsWith(".pdf") ? (
+                    <iframe
+                      src={form.attachment.data}
+                      title={form.attachment.name}
+                      className="h-96 w-full rounded-xl border border-slate-200 bg-white"
+                    />
+                  ) : (
+                    <a
+                      href={form.attachment.data}
+                      download={form.attachment.name}
+                      className="inline-flex items-center gap-2 rounded-xl bg-emerald-50 px-4 py-3 text-sm font-bold text-emerald-700 hover:bg-emerald-100"
+                    >
+                      <Download size={15} /> Download {form.attachment.name}
+                    </a>
+                  )}
                 </div>
               )}
             </div>
