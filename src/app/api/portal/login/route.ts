@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { SignJWT } from "jose";
 import { PORTAL_ROLES, roleLabel } from "@/lib/portal-roles";
-import { prisma } from "@/lib/prisma";
+import { cookies } from "next/headers";
 
 const DEFAULT_PASSWORDS: Record<string, string> = {
   secretary: "secretary123",
@@ -36,11 +36,11 @@ export async function POST(request: Request) {
 
     const envKey = ENV_KEYS[department];
     let expected = process.env[envKey] || DEFAULT_PASSWORDS[department];
-    // Check for a stored password override in the database
+    // Check for a stored password override in the cookie (set by change-password)
     try {
-      const recs = await (prisma as any).portalRecord.findMany({ where: { resource: "portal-passwords" } });
-      const override = recs.find((r: any) => r.data?.role === department);
-      if (override?.data?.password) expected = override.data.password;
+      const cookieStore = await cookies();
+      const override = cookieStore.get(`upec_pw_${department}`)?.value;
+      if (override) expected = override;
     } catch {}
     if (password !== expected) {
       return NextResponse.json(
