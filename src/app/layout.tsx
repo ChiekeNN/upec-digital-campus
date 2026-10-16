@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://upecuniport.com.ng"),
+  metadataBase: new URL("https://www.upecuniport.com.ng"),
   title: "UPEC | University of Port Harcourt Entrepreneurial Centre",
   description:
     "UPEC equips students, entrepreneurs and communities with practical entrepreneurship, innovation and future-work skills.",
@@ -21,16 +21,20 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    url: "https://upecuniport.com.ng",
+    url: "https://www.upecuniport.com.ng",
     siteName: "UPEC Digital Campus",
     title: "UPEC | University of Port Harcourt Entrepreneurial Centre",
     description:
       "UPEC equips students, entrepreneurs and communities with practical entrepreneurship, innovation and future-work skills.",
     images: [
       {
-        url: "/opengraph-image.png",
+        // Absolute www URL: apex (upecuniport.com.ng) 308-redirects to www,
+        // and some messaging-app crawlers won't follow redirects when fetching
+        // the share image, leaving the preview card blank.
+        url: "https://www.upecuniport.com.ng/opengraph-image.png",
         width: 1200,
         height: 630,
+        type: "image/png",
         alt: "UPEC - University of Port Harcourt Entrepreneurial Centre",
       },
     ],
@@ -40,7 +44,7 @@ export const metadata: Metadata = {
     title: "UPEC | University of Port Harcourt Entrepreneurial Centre",
     description:
       "UPEC equips students, entrepreneurs and communities with practical entrepreneurship, innovation and future-work skills.",
-    images: ["/twitter-image.png"],
+    images: ["https://www.upecuniport.com.ng/twitter-image.png"],
   },
 };
 
