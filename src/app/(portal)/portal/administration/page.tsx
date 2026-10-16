@@ -1,5 +1,7 @@
 "use client";
 
+import { useState, useCallback } from "react";
+
 import {
   LayoutDashboard,
   Users,
@@ -54,6 +56,18 @@ const stats = [
 ];
 
 export default function AdministrationDashboard() {
+  const [staffRows, setStaffRows] = useState<any[]>([]);
+  const [leaveRows, setLeaveRows] = useState<any[]>([]);
+  const [facilityRows, setFacilityRows] = useState<any[]>([]);
+  const onStaffChange = useCallback((rows: any[]) => setStaffRows(rows), []);
+  const onLeaveChange = useCallback((rows: any[]) => setLeaveRows(rows), []);
+  const onFacilityChange = useCallback((rows: any[]) => setFacilityRows(rows), []);
+
+  const totalStaff = staffRows.length || 0;
+  const onLeave = staffRows.filter((r) => r.status === "On Leave").length;
+  const pendingRequests = leaveRows.filter((r) => r.status === "Pending").length;
+  const facilitiesIssues = facilityRows.filter((r) => r.status !== "Resolved").length;
+
   const tabs: Tab[] = [
     {
       id: "overview",
@@ -62,7 +76,12 @@ export default function AdministrationDashboard() {
       content: (
         <div className="space-y-6">
           <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
-            {stats.map((s) => {
+            {[
+              { label: "Total Staff", value: totalStaff, icon: Users, color: "bg-[#003b73]" },
+              { label: "On Leave", value: onLeave, icon: Calendar, color: "bg-[#0070c9]" },
+              { label: "Pending Requests", value: pendingRequests, icon: FileText, color: "bg-[#f7b733]" },
+              { label: "Facilities Issues", value: facilitiesIssues, icon: Building2, color: "bg-emerald-500" },
+            ].map((s) => {
               const Icon = s.icon;
               return (
                 <div key={s.label} className="group relative overflow-hidden rounded-3xl border border-slate-100 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
@@ -129,6 +148,7 @@ export default function AdministrationDashboard() {
           storageKey="upec_admin_staff"
           avatarKey="photo"
           allowAttachments={false}
+          onChange={onStaffChange}
           resource="admin-staff"
           accent="from-[#003b73] to-[#0070c9]"
           addLabel="Add Staff"
@@ -152,6 +172,7 @@ export default function AdministrationDashboard() {
           ]}
           initialRows={leaveInitial}
           storageKey="upec_admin_leave"
+          onChange={onLeaveChange}
           resource="admin-leave"
           accent="from-[#0070c9] to-[#84c7ff]"
           addLabel="New Leave"
@@ -195,6 +216,7 @@ export default function AdministrationDashboard() {
           ]}
           initialRows={facilitiesInitial}
           storageKey="upec_admin_facilities"
+          onChange={onFacilityChange}
           resource="admin-facilities"
           accent="from-emerald-500 to-teal-500"
           addLabel="Report Issue"
