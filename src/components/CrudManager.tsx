@@ -11,6 +11,7 @@ import {
   CheckCircle2,
   AlertTriangle,
   Download,
+  Paperclip,
   Cloud,
   HardDrive,
 } from "lucide-react";
@@ -42,6 +43,7 @@ export default function CrudManager({
   resource,
   reorderable = true,
   avatarKey,
+  allowAttachments = true,
 }: {
   title?: string;
   subtitle?: string;
@@ -57,6 +59,7 @@ export default function CrudManager({
   resource?: string;
   reorderable?: boolean;
   avatarKey?: string;
+  allowAttachments?: boolean;
 }) {
   const [rows, setRows] = useState<Row[]>(initialRows);
   const [loaded, setLoaded] = useState(false);
@@ -272,6 +275,40 @@ export default function CrudManager({
     });
   }
 
+  function attachFile(row: Row) {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "*/*";
+    input.onchange = () => {
+      const file = input.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        const attachment = { name: file.name, data: reader.result as string };
+        setRows((prev) => prev.map((r) => (r.id === row.id ? { ...r, attachment } : r)));
+        // persist to API if available
+        if (apiMode && resource) {
+          fetch(`/api/portal/records/${resource}/${row.id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ ...row, attachment }),
+          }).catch(() => {});
+        }
+        setToast({ msg: `Attached ${file.name}`, kind: "success" });
+      };
+      reader.readAsDataURL(file);
+    };
+    input.click();
+  }
+
+  function downloadAttachment(row: Row) {
+    if (!row.attachment) return;
+    const a = document.createElement("a");
+    a.href = row.attachment.data;
+    a.download = row.attachment.name;
+    a.click();
+  }
+
   function exportCsv() {
     const header = columns.map((c) => c.label).join(",");
     const body = rows
@@ -357,11 +394,53 @@ export default function CrudManager({
           <thead>
             <tr className="border-b border-slate-100 bg-slate-50/60 text-xs uppercase tracking-wide text-slate-500">
               {avatarKey && <th className="px-4 py-3 font-bold">Photo</th>}
+              {allowAttachments && (
+                <div>
+                  <label className="form-label">Attachment (soft copy)</label>
+                  <div className="flex items-center gap-3">
+                    {form.attachment ? (
+                      <a
+                        href={form.attachment.data}
+                        download={form.attachment.name}
+                        className="inline-flex items-center gap-1.5 rounded-xl bg-emerald-50 px-3 py-2 text-xs font-bold text-emerald-700 hover:bg-emerald-100"
+                      >
+                        <Download size={13} /> {form.attachment.name}
+                      </a>
+                    ) : (
+                      <span className="text-xs text-slate-400">No file attached</span>
+                    )}
+                    <label className="cursor-pointer rounded-xl border border-dashed border-[#0070c9] bg-blue-50 px-3 py-2 text-xs font-bold text-[#0070c9] transition hover:bg-blue-100">
+                      <Paperclip size={13} className="inline mr-1" /> Upload
+                      <input
+                        type="file"
+                        className="hidden"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (!file) return;
+                          const reader = new FileReader();
+                          reader.onload = () => setForm((f) => ({ ...f, attachment: { name: file.name, data: reader.result as string } }));
+                          reader.readAsDataURL(file);
+                        }}
+                      />
+                    </label>
+                    {form.attachment && (
+                      <button
+                        type="button"
+                        onClick={() => setForm((f) => ({ ...f, attachment: null }))}
+                        className="text-xs font-bold text-red-500 hover:underline"
+                      >
+                        Remove
+                      </button>
+                    )}
+                  </div>
+                </div>
+              )}
               {columns.map((c) => (
                 <th key={c.key} className="px-4 py-3 font-bold">
                   {c.label}
                 </th>
               ))}
+              {allowAttachments && <th className="px-4 py-3 font-bold">Attachment</th>}
               <th className="px-4 py-3 text-right font-bold">Actions</th>
             </tr>
           </thead>
@@ -392,6 +471,21 @@ export default function CrudManager({
                       {String(row[c.key] ?? "—")}
                     </td>
                   ))}
+                  {allowAttachments && (
+                    <td className="px-4 py-3">
+                      {row.attachment ? (
+                        <a
+                          href={row.attachment.data}
+                          download={row.attachment.name}
+                          className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0070c9] hover:underline"
+                        >
+                          <Download size={13} /> {row.attachment.name}
+                        </a>
+                      ) : (
+                        <span className="text-xs text-slate-400">—</span>
+                      )}
+                    </td>
+                  )}
                   <td className="px-4 py-3">
                     <div className="flex justify-end gap-1.5">
                       {reorderable && (
@@ -412,6 +506,28 @@ export default function CrudManager({
                           >
                             ↓
                           </button>
+                        </>
+                      )}
+                      {allowAttachments && (
+                        <>
+                          <button
+                            onClick={() => attachFile(row)}
+                            className="grid h-8 w-8 place-items-center rounded-lg bg-indigo-50 text-indigo-600 transition hover:bg-indigo-500 hover:text-white"
+                            aria-label="Upload attachment"
+                            title="Upload soft copy"
+                          >
+                            <Paperclip size={15} />
+                          </button>
+                          {row.attachment && (
+                            <button
+                              onClick={() => downloadAttachment(row)}
+                              className="grid h-8 w-8 place-items-center rounded-lg bg-emerald-50 text-emerald-600 transition hover:bg-emerald-500 hover:text-white"
+                              aria-label="Download attachment"
+                              title="Download"
+                            >
+                              <Download size={15} />
+                            </button>
+                          )}
                         </>
                       )}
                       <button
