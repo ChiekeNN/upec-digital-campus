@@ -44,6 +44,7 @@ export default function CrudManager({
   reorderable = true,
   avatarKey,
   allowAttachments = true,
+  onChange,
 }: {
   title?: string;
   subtitle?: string;
@@ -60,6 +61,7 @@ export default function CrudManager({
   reorderable?: boolean;
   avatarKey?: string;
   allowAttachments?: boolean;
+  onChange?: (rows: Row[]) => void;
 }) {
   const [rows, setRows] = useState<Row[]>(initialRows);
   const [loaded, setLoaded] = useState(false);
@@ -82,7 +84,22 @@ export default function CrudManager({
           const json = await res.json();
           if (!cancelled) {
             if (json?.success && Array.isArray(json.rows)) {
-              let loadedRows = json.rows.length > 0 ? json.rows : initialRows;
+              let loadedRows = json.rows;
+              if (!loadedRows || loadedRows.length === 0) {
+                // fall back to local cache
+                try {
+                  const raw = localStorage.getItem(storageKey);
+                  if (raw) {
+                    const parsed = JSON.parse(raw);
+                    if (Array.isArray(parsed) && parsed.length) loadedRows = parsed;
+                    else loadedRows = initialRows;
+                  } else {
+                    loadedRows = initialRows;
+                  }
+                } catch {
+                  loadedRows = initialRows;
+                }
+              }
               try {
                 const orderRaw = localStorage.getItem(storageKey + "_order");
                 if (orderRaw) {
@@ -144,12 +161,19 @@ export default function CrudManager({
 
   // Persist to localStorage (only in local mode or as cache)
   useEffect(() => {
-    if (loaded && !apiMode) {
+    // Always cache rows locally so they survive refreshes / DB outages
+    if (loaded) {
       try {
         localStorage.setItem(storageKey, JSON.stringify(rows));
       } catch {}
     }
-  }, [rows, loaded, storageKey, apiMode]);
+  }, [rows, loaded, storageKey]);
+
+  useEffect(() => {
+    if (loaded && onChange) {
+      onChange(rows);
+    }
+  }, [rows, loaded, onChange]);
 
   useEffect(() => {
     if (!toast) return;
@@ -590,6 +614,18 @@ export default function CrudManager({
                   )}
                 </div>
               ))}
+              {form.attachment && (
+                <div>
+                  <label className="form-label">Attachment</label>
+                  <a
+                    href={form.attachment.data}
+                    download={form.attachment.name}
+                    className="inline-flex items-center gap-2 rounded-xl bg-emerald-50 px-4 py-3 text-sm font-bold text-emerald-700 hover:bg-emerald-100"
+                  >
+                    <Download size={15} /> {form.attachment.name}
+                  </a>
+                </div>
+              )}
             </div>
 
             {!isReadOnly && (
