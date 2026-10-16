@@ -396,7 +396,7 @@ export default function CrudManager({
               {avatarKey && <th className="px-4 py-3 font-bold">Photo</th>}
               {allowAttachments && (
                 <div>
-                  <label className="form-label">Attachment (soft copy)</label>
+                  <label className="form-label">Attachment</label>
                   <div className="flex items-center gap-3">
                     {form.attachment ? (
                       <a
@@ -440,7 +440,6 @@ export default function CrudManager({
                   {c.label}
                 </th>
               ))}
-              {allowAttachments && <th className="px-4 py-3 font-bold">Attachment</th>}
               <th className="px-4 py-3 text-right font-bold">Actions</th>
             </tr>
           </thead>
@@ -471,21 +470,6 @@ export default function CrudManager({
                       {String(row[c.key] ?? "—")}
                     </td>
                   ))}
-                  {allowAttachments && (
-                    <td className="px-4 py-3">
-                      {row.attachment ? (
-                        <a
-                          href={row.attachment.data}
-                          download={row.attachment.name}
-                          className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0070c9] hover:underline"
-                        >
-                          <Download size={13} /> {row.attachment.name}
-                        </a>
-                      ) : (
-                        <span className="text-xs text-slate-400">—</span>
-                      )}
-                    </td>
-                  )}
                   <td className="px-4 py-3">
                     <div className="flex justify-end gap-1.5">
                       {reorderable && (
