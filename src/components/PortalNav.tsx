@@ -6,6 +6,8 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import {
   LayoutDashboard,
+  Eye,
+  EyeOff,
   LogOut,
   KeyRound,
   Menu,
@@ -77,6 +79,8 @@ export default function PortalNav({
   const [newPw, setNewPw] = useState("");
   const [pwStatus, setPwStatus] = useState<"idle" | "loading" | "error" | "success">("idle");
   const [pwError, setPwError] = useState("");
+  const [showCurrentPw, setShowCurrentPw] = useState(false);
+  const [showNewPw, setShowNewPw] = useState(false);
   const links = linksByRole[role];
 
   async function handleChangePassword(e: React.FormEvent) {
@@ -233,24 +237,44 @@ export default function PortalNav({
             <form onSubmit={handleChangePassword} className="mt-5 space-y-4">
               <div>
                 <label className="form-label">Current Password</label>
-                <input
-                  type="password"
-                  required
-                  value={currentPw}
-                  onChange={(e) => setCurrentPw(e.target.value)}
-                  className="w-full rounded-xl border border-[#dbe4ef] bg-[#f8fafc] px-4 py-3 text-sm outline-none focus:border-[#003b73] focus:bg-white focus:ring-2 focus:ring-[#003b73]/20"
-                />
+                <div className="flex items-center gap-2 rounded-xl border border-[#dbe4ef] bg-[#f8fafc] px-3 focus-within:border-[#003b73] focus-within:bg-white focus-within:ring-2 focus-within:ring-[#003b73]/20">
+                  <input
+                    type={showCurrentPw ? "text" : "password"}
+                    required
+                    value={currentPw}
+                    onChange={(e) => setCurrentPw(e.target.value)}
+                    className="w-full bg-transparent py-3 text-sm text-[#122033] outline-none placeholder:text-slate-400"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowCurrentPw(!showCurrentPw)}
+                    aria-label={showCurrentPw ? "Hide password" : "Show password"}
+                    className="shrink-0 text-slate-400 transition hover:text-[#003b73]"
+                  >
+                    {showCurrentPw ? <EyeOff size={18} /> : <Eye size={18} />}
+                  </button>
+                </div>
               </div>
               <div>
                 <label className="form-label">New Password</label>
-                <input
-                  type="password"
-                  required
-                  minLength={6}
-                  value={newPw}
-                  onChange={(e) => setNewPw(e.target.value)}
-                  className="w-full rounded-xl border border-[#dbe4ef] bg-[#f8fafc] px-4 py-3 text-sm outline-none focus:border-[#003b73] focus:bg-white focus:ring-2 focus:ring-[#003b73]/20"
-                />
+                <div className="flex items-center gap-2 rounded-xl border border-[#dbe4ef] bg-[#f8fafc] px-3 focus-within:border-[#003b73] focus-within:bg-white focus-within:ring-2 focus-within:ring-[#003b73]/20">
+                  <input
+                    type={showNewPw ? "text" : "password"}
+                    required
+                    minLength={6}
+                    value={newPw}
+                    onChange={(e) => setNewPw(e.target.value)}
+                    className="w-full bg-transparent py-3 text-sm text-[#122033] outline-none placeholder:text-slate-400"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowNewPw(!showNewPw)}
+                    aria-label={showNewPw ? "Hide password" : "Show password"}
+                    className="shrink-0 text-slate-400 transition hover:text-[#003b73]"
+                  >
+                    {showNewPw ? <EyeOff size={18} /> : <Eye size={18} />}
+                  </button>
+                </div>
               </div>
               {pwStatus === "error" && (
                 <p className="rounded-xl bg-red-50 px-4 py-3 text-sm font-semibold text-red-600">{pwError}</p>
