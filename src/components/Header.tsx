@@ -87,7 +87,7 @@ export default function Header() {
 
           <button
             type="button"
-            aria-label="Toggle navigation menu"
+            aria-label="Toggle navigation menu" data-tooltip="Menu"
             onClick={() => setMenuOpen(!menuOpen)}
             className="grid h-11 w-11 place-items-center rounded-xl border border-slate-200 text-[#003b73] lg:hidden"
           >
