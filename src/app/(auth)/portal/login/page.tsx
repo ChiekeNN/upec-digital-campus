@@ -120,15 +120,6 @@ export default function PortalLoginPage() {
           </button>
         </form>
 
-        <div className="mt-6 rounded-xl bg-blue-50 px-4 py-3 text-xs text-[#003b73]">
-          <p className="font-bold">Demo credentials</p>
-          <ul className="mt-1 space-y-0.5">
-            <li>Director's Secretary — <code>secretary123</code></li>
-            <li>Administration — <code>admin123</code></li>
-            <li>IT (Site Admin) — <code>itadmin123</code></li>
-            <li>Finance Officer — <code>finance123</code></li>
-          </ul>
-        </div>
       </div>
     </main>
   );
