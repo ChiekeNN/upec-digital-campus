@@ -394,47 +394,6 @@ export default function CrudManager({
           <thead>
             <tr className="border-b border-slate-100 bg-slate-50/60 text-xs uppercase tracking-wide text-slate-500">
               {avatarKey && <th className="px-4 py-3 font-bold">Photo</th>}
-              {allowAttachments && (
-                <div>
-                  <label className="form-label">Attachment</label>
-                  <div className="flex items-center gap-3">
-                    {form.attachment ? (
-                      <a
-                        href={form.attachment.data}
-                        download={form.attachment.name}
-                        className="inline-flex items-center gap-1.5 rounded-xl bg-emerald-50 px-3 py-2 text-xs font-bold text-emerald-700 hover:bg-emerald-100"
-                      >
-                        <Download size={13} /> {form.attachment.name}
-                      </a>
-                    ) : (
-                      <span className="text-xs text-slate-400">No file attached</span>
-                    )}
-                    <label className="cursor-pointer rounded-xl border border-dashed border-[#0070c9] bg-blue-50 px-3 py-2 text-xs font-bold text-[#0070c9] transition hover:bg-blue-100">
-                      <Paperclip size={13} className="inline mr-1" /> Upload
-                      <input
-                        type="file"
-                        className="hidden"
-                        onChange={(e) => {
-                          const file = e.target.files?.[0];
-                          if (!file) return;
-                          const reader = new FileReader();
-                          reader.onload = () => setForm((f) => ({ ...f, attachment: { name: file.name, data: reader.result as string } }));
-                          reader.readAsDataURL(file);
-                        }}
-                      />
-                    </label>
-                    {form.attachment && (
-                      <button
-                        type="button"
-                        onClick={() => setForm((f) => ({ ...f, attachment: null }))}
-                        className="text-xs font-bold text-red-500 hover:underline"
-                      >
-                        Remove
-                      </button>
-                    )}
-                  </div>
-                </div>
-              )}
               {columns.map((c) => (
                 <th key={c.key} className="px-4 py-3 font-bold">
                   {c.label}
