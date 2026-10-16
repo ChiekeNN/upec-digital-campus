@@ -44,10 +44,11 @@ const minutesInitial = [
 ];
 
 const staffInitial = [
-  { id: 1, name: "Dr. Henry Wobo", role: "Acting Director", dept: "Director's Office", photo: "https://i.pravatar.cc/80?img=12" },
-  { id: 2, name: "Mrs. Gloria Chindah", role: "Registrar", dept: "Administration", photo: "https://i.pravatar.cc/80?img=47" },
-  { id: 3, name: "Mr. Chidi Okoro", role: "IT Officer", dept: "IT", photo: "https://i.pravatar.cc/80?img=33" },
-  { id: 4, name: "Ms. Amaka Nwosu", role: "Finance Officer", dept: "Finance", photo: "https://i.pravatar.cc/80?img=45" },
+  { id: 1, name: "Dr. Henry Wobo", role: "Acting Director", status: "Active", dept: "Director's Office", photo: "https://i.pravatar.cc/80?img=12" },
+  { id: 2, name: "Mrs. Gloria Chindah", role: "Registrar", status: "Active", dept: "Administration", photo: "https://i.pravatar.cc/80?img=47" },
+  { id: 3, name: "Mr. Chidi Okoro", role: "IT Officer", status: "On Leave", dept: "IT", photo: "https://i.pravatar.cc/80?img=33" },
+  { id: 4, name: "Ms. Amaka Nwosu", role: "Finance Officer", status: "Active", dept: "Finance", photo: "https://i.pravatar.cc/80?img=45" },
+  { id: 5, name: "Mr. Tunde Bakare", role: "Admin Officer", status: "Active", dept: "Administration", photo: "https://i.pravatar.cc/80?img=59" },
 ];
 
 const notificationsInitial = [
@@ -199,9 +200,9 @@ export default function SecretaryDashboard() {
             { key: "dept", label: "Department", type: "select", options: ["Director's Office", "Administration", "IT", "Finance", "Programmes"] },
           ]}
           initialRows={staffInitial}
-          storageKey="upec_secretary_staff"
+          storageKey="upec_admin_staff"
+          resource="admin-staff"
           avatarKey="photo"
-          resource="secretary-staff"
           accent="from-emerald-500 to-teal-500"
           addLabel="Add Staff"
         />

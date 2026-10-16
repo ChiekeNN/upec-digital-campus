@@ -16,11 +16,11 @@ import CrudManager from "@/components/CrudManager";
 import { BarChart, DonutChart } from "@/components/Charts";
 
 const staffInitial = [
-  { id: 1, name: "Dr. Henry Wobo", role: "Acting Director", status: "Active", photo: "https://i.pravatar.cc/80?img=12" },
-  { id: 2, name: "Mrs. Gloria Chindah", role: "Registrar", status: "Active", photo: "https://i.pravatar.cc/80?img=47" },
-  { id: 3, name: "Mr. Chidi Okoro", role: "IT Officer", status: "On Leave", photo: "https://i.pravatar.cc/80?img=33" },
-  { id: 4, name: "Ms. Amaka Nwosu", role: "Finance Officer", status: "Active", photo: "https://i.pravatar.cc/80?img=45" },
-  { id: 5, name: "Mr. Tunde Bakare", role: "Admin Officer", status: "Active", photo: "https://i.pravatar.cc/80?img=59" },
+  { id: 1, name: "Dr. Henry Wobo", role: "Acting Director", status: "Active", dept: "Director's Office", photo: "https://i.pravatar.cc/80?img=12" },
+  { id: 2, name: "Mrs. Gloria Chindah", role: "Registrar", status: "Active", dept: "Administration", photo: "https://i.pravatar.cc/80?img=47" },
+  { id: 3, name: "Mr. Chidi Okoro", role: "IT Officer", status: "On Leave", dept: "IT", photo: "https://i.pravatar.cc/80?img=33" },
+  { id: 4, name: "Ms. Amaka Nwosu", role: "Finance Officer", status: "Active", dept: "Finance", photo: "https://i.pravatar.cc/80?img=45" },
+  { id: 5, name: "Mr. Tunde Bakare", role: "Admin Officer", status: "Active", dept: "Administration", photo: "https://i.pravatar.cc/80?img=59" },
 ];
 
 const leaveInitial = [
