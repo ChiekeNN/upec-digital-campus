@@ -23,15 +23,30 @@ import {
 import {
   events,
   successStories,
+  programmes,
   postgraduateProgrammes,
   postgraduateInfo,
+  entrepreneurTrainingTracks,
 } from "@/data/site";
+import AnimatedCounter from "@/components/AnimatedCounter";
 
 const impactStats = [
-  { value: "10,000+", label: "Future-ready learners to serve" },
-  { value: "500+", label: "Entrepreneurs to support yearly" },
-  { value: "50+", label: "Industry & community partners" },
-  { value: "1", label: "Connected UPEC digital campus" },
+  {
+    value: entrepreneurTrainingTracks.length,
+    label: "Skills acquisition tracks — fashion, ICT, welding & more",
+  },
+  {
+    value: postgraduateProgrammes.length,
+    label: "Degree programmes: PGD & M.Sc in Entrepreneurship",
+  },
+  {
+    value: programmes.length,
+    label: "Professional certificate programmes",
+  },
+  {
+    value: programmes.reduce((total, programme) => total + programme.modules.length, 0),
+    label: "Practical training modules across programmes",
+  },
 ];
 
 const benefits = [
@@ -189,7 +204,7 @@ export default function Home() {
           {impactStats.map((stat) => (
             <div key={stat.label} className="px-5 py-8 sm:px-8">
               <p className="text-3xl font-black tracking-tight text-[#003b73]">
-                {stat.value}
+                <AnimatedCounter value={stat.value} />
               </p>
               <p className="mt-2 text-xs font-semibold leading-5 text-slate-500">
                 {stat.label}
