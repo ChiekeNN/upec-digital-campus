@@ -436,7 +436,7 @@ export default function CrudManager({
                           <button
                             onClick={() => moveRow(row, "up")}
                             className="grid h-8 w-8 place-items-center rounded-lg bg-slate-100 text-slate-600 transition hover:bg-slate-300"
-                            aria-label="Move up"
+                            aria-label="Move up" data-tooltip="Move up"
                             title="Move up"
                           >
                             ↑
@@ -444,7 +444,7 @@ export default function CrudManager({
                           <button
                             onClick={() => moveRow(row, "down")}
                             className="grid h-8 w-8 place-items-center rounded-lg bg-slate-100 text-slate-600 transition hover:bg-slate-300"
-                            aria-label="Move down"
+                            aria-label="Move down" data-tooltip="Move down"
                             title="Move down"
                           >
                             ↓
@@ -456,7 +456,7 @@ export default function CrudManager({
                           <button
                             onClick={() => attachFile(row)}
                             className="grid h-8 w-8 place-items-center rounded-lg bg-indigo-50 text-indigo-600 transition hover:bg-indigo-500 hover:text-white"
-                            aria-label="Upload attachment"
+                            aria-label="Upload attachment" data-tooltip="Upload file"
                             title="Upload soft copy"
                           >
                             <Paperclip size={15} />
@@ -465,7 +465,7 @@ export default function CrudManager({
                             <button
                               onClick={() => downloadAttachment(row)}
                               className="grid h-8 w-8 place-items-center rounded-lg bg-emerald-50 text-emerald-600 transition hover:bg-emerald-500 hover:text-white"
-                              aria-label="Download attachment"
+                              aria-label="Download attachment" data-tooltip="Download file"
                               title="Download"
                             >
                               <Download size={15} />
@@ -476,7 +476,7 @@ export default function CrudManager({
                       <button
                         onClick={() => openView(row)}
                         className="grid h-8 w-8 place-items-center rounded-lg bg-blue-50 text-[#0070c9] transition hover:bg-[#0070c9] hover:text-white"
-                        aria-label="View"
+                        aria-label="View" data-tooltip="View"
                       >
                         <Eye size={15} />
                       </button>
@@ -484,7 +484,7 @@ export default function CrudManager({
                         <button
                           onClick={() => openEdit(row)}
                           className="grid h-8 w-8 place-items-center rounded-lg bg-amber-50 text-amber-600 transition hover:bg-amber-500 hover:text-white"
-                          aria-label="Edit"
+                          aria-label="Edit" data-tooltip="Edit"
                         >
                           <Pencil size={15} />
                         </button>
@@ -493,7 +493,7 @@ export default function CrudManager({
                         <button
                           onClick={() => setConfirmDelete(row)}
                           className="grid h-8 w-8 place-items-center rounded-lg bg-red-50 text-red-600 transition hover:bg-red-500 hover:text-white"
-                          aria-label="Delete"
+                          aria-label="Delete" data-tooltip="Delete"
                         >
                           <Trash2 size={15} />
                         </button>

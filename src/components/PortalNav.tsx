@@ -87,7 +87,7 @@ export default function PortalNav({
         <div className="flex items-center gap-3">
           <button
             onClick={() => setOpen(true)}
-            aria-label="Open menu"
+            aria-label="Open menu" data-tooltip="Menu"
             className="grid h-10 w-10 place-items-center rounded-lg border border-slate-200 text-[#003b73] hover:bg-blue-50"
           >
             <Menu size={20} />
@@ -131,7 +131,7 @@ export default function PortalNav({
           </div>
           <button
             onClick={() => setOpen(false)}
-            aria-label="Close menu"
+            aria-label="Close menu" data-tooltip="Close"
             className="grid h-9 w-9 place-items-center rounded-lg text-slate-500 hover:bg-slate-100"
           >
             <X size={18} />
