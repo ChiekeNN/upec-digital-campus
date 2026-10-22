@@ -414,19 +414,19 @@ export const newsItems = events;
 
 export const entrepreneurTrainingTracks = [
   {
-    name: "Fashion and Designing",
+    name: "Fashion & Designing",
     category: "Creative & Garment Hub",
     description:
       "Pattern drafting, garment construction, industrial sewing, and fashion business management in UPEC's 100+ machine Fashion Hub.",
   },
   {
-    name: "Shoe making",
+    name: "Shoe Making",
     category: "Footwear & Leatherworks",
     description:
       "Handcrafted and machine-assisted footwear design, sole finishing, leather sourcing, and commercial footwear branding.",
   },
   {
-    name: "Catering",
+    name: "Catering & Baking",
     category: "Culinary & Food Enterprise",
     description:
       "Commercial catering, pastry & bakery arts, food hygiene standards, event costing, and hospitality management.",
@@ -444,34 +444,134 @@ export const entrepreneurTrainingTracks = [
       "Formulation and production of emulsion, gloss, textured, and industrial paints with quality control and packaging.",
   },
   {
-    name: "Soap making",
+    name: "Soap Making",
     category: "Cosmetics & Household Products",
     description:
       "Liquid multipurpose soap, bar soap, detergents, disinfectants, and NAFDAC-ready product packaging.",
   },
   {
-    name: "ICT",
+    name: "AI & Coding",
     category: "Digital & Technology Skills",
     description:
-      "Digital literacy, web & software fundamentals, digital marketing, e-commerce operations, and AI productivity tools.",
+      "Digital literacy, web & software fundamentals, digital marketing, e-commerce operations, AI productivity tools, and practical coding foundations.",
   },
   {
-    name: "Hair Dressing",
+    name: "Hair Dressing & Styling",
     category: "Beauty & Cosmetology",
     description:
       "Modern hair styling, braiding, wig making, salon management, customer retention, and beauty product retail.",
   },
   {
-    name: "Welding",
+    name: "Welding & Fabrication",
     category: "Technical & Metal Fabrication",
     description:
       "Arc and gas welding, structural metal fabrication, safety workshop practices, and technical contracting.",
   },
   {
-    name: "Perfume production",
+    name: "Perfume Production",
     category: "Fragrance & Essential Oils",
     description:
       "Oil and spray perfume blending, scent longevity formulation, bottle branding, and high-margin retail strategy.",
+  },
+  {
+    name: "Photography",
+    category: "Media & Creative Services",
+    description:
+      "Camera craft, lighting and composition, portrait and event coverage, photo editing, and running a profitable studio business.",
+  },
+  {
+    name: "Videography",
+    category: "Media & Creative Services",
+    description:
+      "Video shooting, framing and motion basics, sound capture, editing and post-production for events, brands, and digital platforms.",
+  },
+];
+
+// Official UPEC skill acquisition fee schedule (2 Months / 6 Months / 1 Year tiers)
+export const skillAcquisitionPricing = [
+  {
+    sn: 1,
+    programme: "Fashion & Designing",
+    twoMonths: "₦120,000",
+    sixMonths: "₦220,000",
+    oneYear: "₦170,000",
+  },
+  {
+    sn: 2,
+    programme: "Shoe Making",
+    twoMonths: "₦90,000",
+    sixMonths: "₦100,000",
+    oneYear: "₦170,000",
+  },
+  {
+    sn: 3,
+    programme: "Catering & Baking",
+    twoMonths: "₦95,000",
+    sixMonths: "₦120,000",
+    oneYear: "₦200,000",
+  },
+  {
+    sn: 4,
+    programme: "Driving",
+    twoMonths: "₦100,000",
+    sixMonths: "₦160,000",
+    oneYear: "₦220,000",
+  },
+  {
+    sn: 5,
+    programme: "Paint Production",
+    twoMonths: "NEGOTIATED",
+    sixMonths: "NEGOTIATED",
+    oneYear: "NEGOTIATED",
+  },
+  {
+    sn: 6,
+    programme: "Soap Making",
+    twoMonths: "₦70,000",
+    sixMonths: "₦100,000",
+    oneYear: "₦140,000",
+  },
+  {
+    sn: 7,
+    programme: "AI & Coding",
+    twoMonths: "₦100,000",
+    sixMonths: "₦180,000",
+    oneYear: "₦270,000",
+  },
+  {
+    sn: 8,
+    programme: "Hair Dressing & Styling",
+    twoMonths: "₦85,000",
+    sixMonths: "₦120,000",
+    oneYear: "₦160,000",
+  },
+  {
+    sn: 9,
+    programme: "Welding & Fabrication",
+    twoMonths: "NEGOTIATED",
+    sixMonths: "NEGOTIATED",
+    oneYear: "NEGOTIATED",
+  },
+  {
+    sn: 10,
+    programme: "Perfume Production",
+    twoMonths: "₦90,000",
+    sixMonths: "₦100,000",
+    oneYear: "₦140,000",
+  },
+  {
+    sn: 11,
+    programme: "Photography",
+    twoMonths: "₦100,000",
+    sixMonths: "₦160,000",
+    oneYear: "₦220,000",
+  },
+  {
+    sn: 12,
+    programme: "Videography",
+    twoMonths: "₦100,000",
+    sixMonths: "₦170,000",
+    oneYear: "₦240,000",
   },
 ];
 

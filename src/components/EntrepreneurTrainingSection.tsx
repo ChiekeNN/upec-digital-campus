@@ -14,10 +14,15 @@ import {
   MapPin,
   Phone,
   Sparkles,
+  Wallet,
   Wrench,
 } from "lucide-react";
 import EntrepreneurTrainingForm from "@/components/EntrepreneurTrainingForm";
-import { entrepreneurTrainingTracks, siteConfig } from "@/data/site";
+import {
+  entrepreneurTrainingTracks,
+  siteConfig,
+  skillAcquisitionPricing,
+} from "@/data/site";
 
 const pathwaySteps = [
   {
@@ -64,7 +69,7 @@ export default function EntrepreneurTrainingSection() {
             <div className="max-w-2xl">
               <span className="section-label">
                 <Wrench size={14} />
-                10+ Practical Skill Areas
+                12 Practical Skill Areas
               </span>
               <h2 className="mt-4 text-3xl font-black tracking-tight text-[#003b73] sm:text-4xl">
                 Areas of Training Interest
@@ -84,7 +89,7 @@ export default function EntrepreneurTrainingSection() {
             </a>
           </div>
 
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {entrepreneurTrainingTracks.map((track) => {
               const isSelected = selectedTrack === track.name;
               return (
@@ -120,6 +125,117 @@ export default function EntrepreneurTrainingSection() {
               );
             })}
           </div>
+        </div>
+      </section>
+
+      {/* OFFICIAL SKILL ACQUISITION PRICING */}
+      <section
+        id="pricing"
+        className="border-y border-blue-100/70 bg-[#f7fbff] py-16 sm:py-24"
+      >
+        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+          <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+            <div className="max-w-2xl">
+              <span className="section-label">
+                <Wallet size={14} />
+                Official Fee Schedule
+              </span>
+              <h2 className="mt-4 text-3xl font-black tracking-tight text-[#003b73] sm:text-4xl">
+                Skill Acquisition Pricing
+              </h2>
+              <p className="mt-3 text-base leading-7 text-slate-600">
+                Transparent tiered fees for every skill acquisition programme —
+                choose the 2 Months, 6 Months or 1 Year tier that fits your
+                training goal.
+              </p>
+            </div>
+            <a href="#register" className="btn-primary self-start lg:self-auto">
+              Register for a Programme
+              <ArrowDownRight size={17} />
+            </a>
+          </div>
+
+          <div className="mt-10 overflow-hidden rounded-3xl border border-blue-100 bg-white shadow-xs">
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[680px] border-collapse text-left">
+                <thead>
+                  <tr className="bg-[#003b73] text-white">
+                    <th
+                      scope="col"
+                      className="px-5 py-4 text-[11px] font-black uppercase tracking-wider"
+                    >
+                      S/N
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-5 py-4 text-[11px] font-black uppercase tracking-wider"
+                    >
+                      Skill Acquisition Program
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-5 py-4 text-right text-[11px] font-black uppercase tracking-wider"
+                    >
+                      2 Months Tier
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-5 py-4 text-right text-[11px] font-black uppercase tracking-wider"
+                    >
+                      6 Months Tier
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-5 py-4 text-right text-[11px] font-black uppercase tracking-wider"
+                    >
+                      1 Year Tier
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {skillAcquisitionPricing.map((row, i) => (
+                    <tr
+                      key={row.sn}
+                      className={i % 2 === 1 ? "bg-[#f7fbff]" : "bg-white"}
+                    >
+                      <td className="px-5 py-3.5 text-sm font-bold text-slate-400">
+                        {row.sn}
+                      </td>
+                      <td className="px-5 py-3.5 text-sm font-extrabold text-[#003b73]">
+                        {row.programme}
+                      </td>
+                      {[row.twoMonths, row.sixMonths, row.oneYear].map(
+                        (value, ti) => (
+                          <td
+                            key={ti}
+                            className={`px-5 py-3.5 text-right ${
+                              value === "NEGOTIATED"
+                                ? "text-xs font-black uppercase tracking-wide text-slate-500"
+                                : "text-sm font-black text-slate-800"
+                            }`}
+                          >
+                            {value}
+                          </td>
+                        ),
+                      )}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p className="mt-5 flex flex-wrap items-center gap-2 text-xs leading-6 text-slate-600">
+            <Phone size={14} className="shrink-0 text-[#0070c9]" />
+            <span>
+              Programmes marked{" "}
+              <strong className="text-[#003b73]">NEGOTIATED</strong> (Paint
+              Production, Welding &amp; Fabrication) are quoted per cohort or
+              partner arrangement — contact the UPEC Training Desk on{" "}
+              <strong className="text-[#003b73]">{siteConfig.phone}</strong> for
+              a custom fee.
+            </span>
+          </p>
         </div>
       </section>
 
@@ -218,7 +334,7 @@ export default function EntrepreneurTrainingSection() {
                   <BadgeCheck size={16} className="shrink-0 text-[#0070c9]" />
                   <span>
                     <strong className="text-[#003b73]">Section D:</strong> Areas
-                    of Training Interest (10+ Skills)
+                    of Training Interest (12 Skills)
                   </span>
                 </li>
                 <li className="flex items-center gap-2">
