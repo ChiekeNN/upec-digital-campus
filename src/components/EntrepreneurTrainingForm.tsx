@@ -75,16 +75,18 @@ const employmentStatuses = [
 ];
 
 export const trainingInterestOptions = [
-  "Fashion and Designing",
-  "Shoe making",
-  "Catering",
+  "Fashion & Designing",
+  "Shoe Making",
+  "Catering & Baking",
   "Driving",
   "Paint Production",
-  "Soap making",
-  "ICT",
-  "Hair Dressing",
-  "Welding",
-  "Perfume production",
+  "Soap Making",
+  "AI & Coding",
+  "Hair Dressing & Styling",
+  "Welding & Fabrication",
+  "Perfume Production",
+  "Photography",
+  "Videography",
   "Others",
 ];
 

@@ -14,13 +14,13 @@ export const metadata = {
   title:
     "Entrepreneur Training Registration | University of Port Harcourt Entrepreneurial Centre",
   description:
-    "Register for hands-on Entrepreneur Training and Skills Acquisition at UPEC — Fashion & Designing, Shoe Making, Catering, Driving, Paint Production, Soap Making, ICT, Hair Dressing, Welding, Perfume Production and more.",
+    "Register for hands-on Entrepreneur Training and Skills Acquisition at UPEC — Fashion & Designing, Shoe Making, Catering & Baking, Driving, Paint Production, Soap Making, AI & Coding, Hair Dressing & Styling, Welding & Fabrication, Perfume Production, Photography, Videography and more.",
 };
 
 const trainingHighlights = [
   {
     icon: Wrench,
-    title: "10+ Practical Skill Tracks",
+    title: "12 Practical Skill Tracks",
     text: "Hands-on vocational, technical, industrial and ICT skills taught in UPEC labs.",
   },
   {
@@ -73,7 +73,11 @@ export default function EntrepreneurTrainingPage() {
               Fill Registration Form
             </a>
             <a href="#tracks" className="btn-outline">
-              Explore 10+ Training Areas
+              Explore 12 Training Areas
+              <ArrowDownRight size={18} />
+            </a>
+            <a href="#pricing" className="btn-outline">
+              View Skill Pricing
               <ArrowDownRight size={18} />
             </a>
           </div>
