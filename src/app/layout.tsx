@@ -21,11 +21,10 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    url: "https://www.upecuniport.com.ng",
     siteName: "UPEC Digital Campus",
-    title: "UPEC | University of Port Harcourt Entrepreneurial Centre",
-    description:
-      "UPEC equips students, entrepreneurs and communities with practical entrepreneurship, innovation and future-work skills.",
+    // title / description intentionally omitted so they fall back to each
+    // page's own title & description — every route then shares a per-page
+    // accurate preview on WhatsApp, Facebook, Telegram, X, etc.
     images: [
       {
         // Absolute www URL: apex (upecuniport.com.ng) 308-redirects to www,
@@ -41,9 +40,6 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "UPEC | University of Port Harcourt Entrepreneurial Centre",
-    description:
-      "UPEC equips students, entrepreneurs and communities with practical entrepreneurship, innovation and future-work skills.",
     images: ["https://www.upecuniport.com.ng/twitter-image.png"],
   },
 };
